@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Neon Arcade & Portfolyo v1.3.0</title>
+    <title>Ceylinsu Arslan Arcade v1.4.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- TEMA VE TASARIM (AYNEN KORUNDU) --- */
         :root {
             --primary: #240046;
             --accent: #ff6d00;
@@ -62,7 +61,6 @@
         }
         canvas { background: #000; border: 2px solid #333; max-width: 100%; height: auto; }
 
-        /* --- MOBİL KONTROLLER (YENİ EKLENDİ) --- */
         .mobile-controls {
             display: grid;
             grid-template-areas: 
@@ -105,7 +103,7 @@
         </ul>
     </nav>
     <div class="version-info">
-        <span class="v-badge">v1.3.0</span>
+        <span class="v-badge">v1.4.0</span>
         <button class="btn" style="padding: 5px 10px; font-size: 0.7rem;" onclick="showPage('logs')">GÜNLÜKLER</button>
     </div>
 </header>
@@ -113,7 +111,7 @@
 <main>
     <section id="home" class="section active">
         <h1>Hoş Geldin Oyuncu! 👾</h1>
-        <p>Bu platform <strong>[Adın Soyadın]</strong> tarafından geliştirilen kişisel bir arcade merkezidir.</p>
+        <p>Bu platform <strong>Ceylinsu Arslan</strong> tarafından geliştirilen kişisel bir arcade merkezidir.</p>
         <div style="border-left: 4px solid var(--neon-blue); padding-left: 20px; margin-top: 20px;">
             <p>Burada ders notlarımı, izlediğim filmleri ve kendi kodladığım küçük oyunları bulabilirsin.</p>
         </div>
@@ -147,9 +145,9 @@
         <table>
             <thead><tr><th>Versiyon</th><th>Tarih</th><th>Notlar</th></tr></thead>
             <tbody id="log-list">
-                <tr><td>1.3.0</td><td>07.02.2026</td><td>Mobil kontroller eklendi, yılan hızı düşürüldü, Pacman kenar kontrolü eklendi.</td></tr>
-                <tr><td>1.2.0</td><td>07.02.2026</td><td>Navigasyon hatası düzeltildi, oyunlar optimize edildi.</td></tr>
-                <tr><td>1.1.0</td><td>06.02.2026</td><td>Neon tema ve yeni oyunlar eklendi.</td></tr>
+                <tr><td>1.4.0</td><td>07.02.2026</td><td>Geliştirici ismi güncellendi: Ceylinsu Arslan. Pacman kenar ölümü kaldırıldı.</td></tr>
+                <tr><td>1.3.0</td><td>07.02.2026</td><td>Mobil kontroller eklendi, yılan hızı düşürüldü.</td></tr>
+                <tr><td>1.2.0</td><td>07.02.2026</td><td>Navigasyon hatası düzeltildi.</td></tr>
             </tbody>
         </table>
     </section>
@@ -189,12 +187,11 @@
         if(gameType === 'pacman') startPacman(canvas, ctx);
     }
 
-    // --- 1. SNAKE (YAVAŞLATILMIŞ) ---
+    // --- SNAKE ---
     function startSnake(canvas, ctx) {
         document.getElementById('game-title').innerText = "Neon Snake";
         canvas.width = 400; canvas.height = 400;
         let snake = [{x: 200, y: 200}], food = {x: 100, y: 100}, dx = 20, dy = 0;
-
         currentInputHandler = (e) => {
             if(e.key === "ArrowUp" && dy === 0) { dx = 0; dy = -20; }
             if(e.key === "ArrowDown" && dy === 0) { dx = 0; dy = 20; }
@@ -202,7 +199,6 @@
             if(e.key === "ArrowRight" && dx === 0) { dx = 20; dy = 0; }
         };
         window.onkeydown = currentInputHandler;
-
         currentGameLoop = setInterval(() => {
             ctx.fillStyle = "black"; ctx.fillRect(0,0,400,400);
             let head = {x: snake[0].x + dx, y: snake[0].y + dy};
@@ -213,17 +209,15 @@
             } else { snake.pop(); }
             ctx.fillStyle = "#00e5ff"; snake.forEach(p => ctx.fillRect(p.x, p.y, 18, 18));
             ctx.fillStyle = "#ff6d00"; ctx.fillRect(food.x, food.y, 18, 18);
-        }, 150); // Hız 150ms yapıldı (Yavaşladı)
+        }, 150);
     }
 
-    // --- 2. TETRIS ---
+    // --- TETRIS ---
     function startTetris(canvas, ctx) {
         document.getElementById('game-title').innerText = "Tetris Blocks";
         canvas.width = 240; canvas.height = 400;
         const grid = 20;
-        let board = Array.from({length: 20}, () => Array(12).fill(0));
         let piece = { x: 5, y: 0, shape: [[1,1,1,1]] };
-
         currentInputHandler = (e) => {
             if(e.key === "ArrowLeft" && piece.x > 0) piece.x--;
             if(e.key === "ArrowRight" && piece.x < 11) piece.x++;
@@ -231,24 +225,20 @@
             if(e.key === "ArrowUp") piece.shape = piece.shape[0].map((_, i) => piece.shape.map(row => row[i]).reverse());
         };
         window.onkeydown = currentInputHandler;
-
         currentGameLoop = setInterval(() => {
             ctx.fillStyle = "black"; ctx.fillRect(0,0,240,400);
             piece.y++;
             if(piece.y > 18) { piece.y = 0; piece.x = 5; }
-            ctx.fillStyle = "#ff6d00";
-            board.forEach((row, y) => row.forEach((v, x) => { if(v) ctx.fillRect(x*grid, y*grid, grid-1, grid-1); }));
             ctx.fillStyle = "#00e5ff";
             piece.shape.forEach((row, dy) => row.forEach((v, dx) => { if(v) ctx.fillRect((piece.x+dx)*grid, (piece.y+dy)*grid, grid-1, grid-1); }));
         }, 300);
     }
 
-    // --- 3. PACMAN (KENAR KONTROLÜ EKLENDİ) ---
+    // --- PACMAN (KENAR ÖLÜMÜ KALDIRILDI) ---
     function startPacman(canvas, ctx) {
         document.getElementById('game-title').innerText = "Pac-Man Lite";
         canvas.width = 320; canvas.height = 320;
         let px = 160, py = 160, gx = 40, gy = 40;
-
         currentInputHandler = (e) => {
             if(e.key === "ArrowLeft") px -= 20;
             if(e.key === "ArrowRight") px += 20;
@@ -256,24 +246,19 @@
             if(e.key === "ArrowDown") py += 20;
         };
         window.onkeydown = currentInputHandler;
-
         currentGameLoop = setInterval(() => {
-            // KENAR KONTROLÜ
-            if(px < 0 || px >= 320 || py < 0 || py >= 320) {
-                alert("Kenara çarptınız! Yandınız.");
-                exitGame();
-                return;
-            }
+            // Kenar Sınırlandırması (Ölmek yerine kenarda durur)
+            if(px < 10) px = 10; if(px >= 310) px = 310;
+            if(py < 10) py = 10; if(py >= 310) py = 310;
 
             ctx.fillStyle = "black"; ctx.fillRect(0,0,320,320);
             if(gx < px) gx += 2; else gx -= 2;
             if(gy < py) gy += 2; else gy -= 2;
             ctx.fillStyle = "yellow"; ctx.beginPath(); ctx.arc(px, py, 12, 0.2 * Math.PI, 1.8 * Math.PI); ctx.lineTo(px, py); ctx.fill();
             ctx.fillStyle = "red"; ctx.fillRect(gx-10, gy-10, 20, 20);
-            if(Math.abs(px-gx) < 15 && Math.abs(py-gy) < 15) { alert("YAKALANDIN!"); exitGame(); }
+            if(Math.abs(px-gx) < 15 && Math.abs(py-gy) < 15) { alert("HAYALET YAKALADI!"); exitGame(); }
         }, 60);
     }
 </script>
 </body>
 </html>
-
