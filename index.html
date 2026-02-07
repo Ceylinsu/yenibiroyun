@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v1.5.0</title>
+    <title>Ceylinsu Arslan Arcade v1.6.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -103,7 +103,7 @@
         </ul>
     </nav>
     <div class="version-info">
-        <span class="v-badge">v1.5.0</span>
+        <span class="v-badge">v1.6.0</span>
         <button class="btn" style="padding: 5px 10px; font-size: 0.7rem;" onclick="showPage('logs')">GÜNLÜKLER</button>
     </div>
 </header>
@@ -130,7 +130,7 @@
             <canvas id="stage"></canvas>
             
             <div class="mobile-controls">
-                <div class="control-btn up" onclick="handleInput('ArrowUp')"><i class="fas fa-rotate"></i></div>
+                <div id="up-btn" class="control-btn up" onclick="handleInput('ArrowUp')"><i class="fas fa-chevron-up"></i></div>
                 <div class="control-btn left" onclick="handleInput('ArrowLeft')"><i class="fas fa-chevron-left"></i></div>
                 <div class="control-btn right" onclick="handleInput('ArrowRight')"><i class="fas fa-chevron-right"></i></div>
                 <div class="control-btn down" onclick="handleInput('ArrowDown')"><i class="fas fa-chevron-down"></i></div>
@@ -145,9 +145,13 @@
         <table>
             <thead><tr><th>Versiyon</th><th>Tarih</th><th>Notlar</th></tr></thead>
             <tbody id="log-list">
+                <tr><td>1.6.0</td><td>07.02.2026</td><td>Kontroller özelleştirildi: Sadece Tetris'te yukarı ok döndürür. Günlük geçmişi düzenlendi.</td></tr>
                 <tr><td>1.5.0</td><td>07.02.2026</td><td>Tetris tamamen yenilendi; blok dizme ve satır silme eklendi.</td></tr>
-                <tr><td>1.4.0</td><td>07.02.2026</td><td>Geliştirici ismi: Ceylinsu Arslan. Pacman kenar ölümü kaldırıldı.</td></tr>
-                <tr><td>1.3.0</td><td>07.02.2026</td><td>Mobil kontroller ve yılan yavaşlatma.</td></tr>
+                <tr><td>1.4.0</td><td>07.02.2026</td><td>Geliştirici ismi "Ceylinsu Arslan" yapıldı. Pacman kenar ölümü kaldırıldı.</td></tr>
+                <tr><td>1.3.0</td><td>07.02.2026</td><td>Mobil kontroller eklendi, yılan hızı düşürüldü.</td></tr>
+                <tr><td>1.2.0</td><td>07.02.2026</td><td>Navigasyon hatası ve sayfa geçişleri düzeltildi.</td></tr>
+                <tr><td>1.1.0</td><td>06.02.2026</td><td>Neon tema ve oyun modülleri eklendi.</td></tr>
+                <tr><td>1.0.0</td><td>05.02.2026</td><td>İlk yayın ve temel yapı oluşturuldu.</td></tr>
             </tbody>
         </table>
     </section>
@@ -182,6 +186,14 @@
         document.getElementById('arcade-container').style.display = 'flex';
         const canvas = document.getElementById('stage');
         const ctx = canvas.getContext('2d');
+        const upIcon = document.querySelector('#up-btn i');
+
+        if(gameType === 'tetris') {
+            upIcon.className = 'fas fa-rotate';
+        } else {
+            upIcon.className = 'fas fa-chevron-up';
+        }
+        
         if(gameType === 'snake') startSnake(canvas, ctx);
         if(gameType === 'tetris') startTetris(canvas, ctx);
         if(gameType === 'pacman') startPacman(canvas, ctx);
@@ -212,23 +224,13 @@
         }, 150);
     }
 
-    // --- YENİLENMİŞ TETRİS ---
+    // --- TETRİS ---
     function startTetris(canvas, ctx) {
         document.getElementById('game-title').innerText = "Tetris Blocks";
         canvas.width = 240; canvas.height = 400;
-        const grid = 20;
-        const cols = 12;
-        const rows = 20;
+        const grid = 20; const cols = 12; const rows = 20;
         let board = Array.from({length: rows}, () => Array(cols).fill(0));
-        
-        const shapes = [
-            [[1, 1, 1, 1]], // I
-            [[1, 1], [1, 1]], // O
-            [[0, 1, 0], [1, 1, 1]], // T
-            [[1, 0, 0], [1, 1, 1]], // L
-            [[0, 0, 1], [1, 1, 1]]  // J
-        ];
-
+        const shapes = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[1, 0, 0], [1, 1, 1]]];
         let cur = { x: 4, y: 0, shape: shapes[Math.floor(Math.random()*shapes.length)] };
 
         function collide(nx, ny, ns) {
@@ -255,25 +257,15 @@
 
         currentGameLoop = setInterval(() => {
             ctx.fillStyle = "black"; ctx.fillRect(0, 0, 240, 400);
-            
-            if (!collide(cur.x, cur.y + 1, cur.shape)) {
-                cur.y++;
-            } else {
-                // Kilitli blokları tahtaya yaz
-                cur.shape.forEach((r, dy) => r.forEach((v, dx) => {
-                    if (v) board[cur.y + dy][cur.x + dx] = 1;
-                }));
-                // Satır silme
+            if (!collide(cur.x, cur.y + 1, cur.shape)) { cur.y++; } 
+            else {
+                cur.shape.forEach((r, dy) => r.forEach((v, dx) => { if (v) board[cur.y + dy][cur.x + dx] = 1; }));
                 board = board.filter(row => row.some(v => v === 0));
                 while (board.length < rows) board.unshift(Array(cols).fill(0));
-                // Yeni parça
                 cur = { x: 4, y: 0, shape: shapes[Math.floor(Math.random()*shapes.length)] };
                 if (collide(cur.x, cur.y, cur.shape)) { alert("Oyun Bitti!"); exitGame(); }
             }
-
-            // Çizim
-            ctx.fillStyle = "#333";
-            board.forEach((r, y) => r.forEach((v, x) => { if (v) ctx.fillRect(x*grid, y*grid, grid-1, grid-1); }));
+            board.forEach((r, y) => r.forEach((v, x) => { if (v) { ctx.fillStyle = "#333"; ctx.fillRect(x*grid, y*grid, grid-1, grid-1); } }));
             ctx.fillStyle = "#00e5ff";
             cur.shape.forEach((r, dy) => r.forEach((v, dx) => { if (v) ctx.fillRect((cur.x+dx)*grid, (cur.y+dy)*grid, grid-1, grid-1); }));
         }, 300);
