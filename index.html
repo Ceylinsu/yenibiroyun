@@ -145,10 +145,14 @@
         <table>
             <thead><tr><th>Versiyon</th><th>Tarih</th><th>Notlar</th></tr></thead>
             <tbody id="log-list">
-                <tr><td>1.7.0</td><td>07.02.2026</td><td>Yön tuşlarıyla oynarken sayfanın kayması engellendi.</td></tr>
-                <tr><td>1.6.0</td><td>07.02.2026</td><td>Kontroller özelleştirildi ve tüm versiyon geçmişi eklendi.</td></tr>
-                <tr><td>1.5.0</td><td>07.02.2026</td><td>Tetris blok dizme ve satır silme mekaniği eklendi.</td></tr>
-                <tr><td>1.4.0</td><td>07.02.2026</td><td>Geliştirici ismi: Ceylinsu Arslan. Pacman kenar ölümü kaldırıldı.</td></tr>
+                <tr><td>1.7.0</td><td>07.02.2026</td><td>Bilgisayar yön tuşları için ekran kayması engellendi.</td></tr>
+                <tr><td>1.6.0</td><td>07.02.2026</td><td>Kontroller oyuna göre özelleştirildi (Tetris: Döndürme, Diğer: Yukarı).</td></tr>
+                <tr><td>1.5.0</td><td>07.02.2026</td><td>Tetris mekaniği sıfırdan yazıldı; blok dizme ve satır silme eklendi.</td></tr>
+                <tr><td>1.4.0</td><td>07.02.2026</td><td>İsim "Ceylinsu Arslan" olarak güncellendi. Pacman kenar ölümü kaldırıldı.</td></tr>
+                <tr><td>1.3.0</td><td>07.02.2026</td><td>Mobil kontrol butonları eklendi ve yılan hızı dengelendi.</td></tr>
+                <tr><td>1.2.0</td><td>07.02.2026</td><td>Navigasyon menüsü hataları giderildi.</td></tr>
+                <tr><td>1.1.0</td><td>06.02.2026</td><td>Neon Arcade teması ve renk paleti uygulandı.</td></tr>
+                <tr><td>1.0.0</td><td>05.02.2026</td><td>Projenin ilk sürümü yayına alındı.</td></tr>
             </tbody>
         </table>
     </section>
@@ -161,7 +165,7 @@
     let currentGameLoop = null;
     let currentInputHandler = null;
 
-    // --- EKRAN KAYMASINI ENGELLEME ---
+    // Yön tuşları ile sayfanın kaymasını engelle
     window.addEventListener("keydown", function(e) {
         if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
             e.preventDefault();
