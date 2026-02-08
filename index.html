@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v2.7.0</title>
+    <title>Ceylinsu Arslan Arcade v2.8.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #240046; --accent: #ff6d00; --neon-blue: #00e5ff;
@@ -23,11 +23,23 @@
         nav ul { display: flex; gap: 15px; list-style: none; margin: 0; padding: 0; }
         nav a { color: white; text-decoration: none; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
         .v-badge { background: var(--accent); color: #000; padding: 4px 10px; border-radius: 4px; font-weight: 700; }
+        
         main { padding: 40px 5%; max-width: 1200px; margin: auto; }
         .section { display: none; animation: fadeIn 0.4s ease; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
+
+        /* Ana Sayfa Geliştirmeleri */
+        .profile-card {
+            background: linear-gradient(135deg, var(--panel), #2b0052);
+            border: 2px solid var(--neon-blue); border-radius: 20px; padding: 30px;
+            margin-top: 20px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .stat-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid var(--accent); }
+        .stat-box span { display: block; font-size: 0.7rem; color: var(--accent); }
+        .stat-box strong { font-size: 1.1rem; color: #fff; }
+
         .game-grid, .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .card { 
             background: var(--panel); border: 2px solid var(--neon-blue); padding: 25px; 
@@ -50,9 +62,8 @@
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 10px; border: 1px solid var(--accent); margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 15px; border-bottom: 1px solid #3d0066; text-align: left; }
-        th { background: #2b0052; color: var(--neon-blue); text-transform: uppercase; font-size: 0.9rem; }
+        th { background: #2b0052; color: var(--neon-blue); }
         .v-text { color: var(--accent); font-weight: bold; }
-
         .btn { background: var(--neon-blue); border: none; padding: 12px 24px; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; width: 100%; margin-top: 15px; }
     </style>
 </head>
@@ -68,23 +79,34 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v2.7.0</span>
+    <span class="v-badge">v2.8.0</span>
 </header>
 
 <main>
     <section id="home" class="section active">
-        <h1>Hoş Geldin Oyuncu! 👾</h1>
-        <p>Geliştirici: <strong>Ceylinsu Arslan</strong></p>
-        <div style="background: rgba(123, 31, 162, 0.2); padding: 20px; border-radius: 10px; border-left: 5px solid var(--neon-blue);">
-            <p>Bu arcade salonunda nostaljik oyunları modern neon tasarımıyla oynayabilirsin.</p>
+        <h1>Sisteme Hoş Geldin, Ceylinsu! 👾</h1>
+        
+        <div class="profile-card">
+            <h3 style="color: var(--neon-blue); margin-top: 0;"><i class="fas fa-terminal"></i> Geliştirici Profili: Ceylinsu Arslan</h3>
+            <p style="font-family: 'Rajdhani'; line-height: 1.6;">
+                Konuşmalarımızdan öğrendiğim kadarıyla; detaylara önem veren, hataları çözene kadar pes etmeyen bir geliştiricisin. 
+                Arcade dünyasındaki neon estetiğini seviyor, sistem günlüklerini (logs) düzenli tutmaya önem veriyorsun. 
+                Matematik ve Fizik gibi analitik derslerle ilgileniyor, bilim kurgu atmosferini seviyorsun.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-box"><span>UZMANLIK</span><strong>Neon Arcade</strong></div>
+                <div class="stat-box"><span>İLGİ ALANI</span><strong>Bilim Kurgu</strong></div>
+                <div class="stat-box"><span>SİSTEM DURUMU</span><strong>Stabil v2.8.0</strong></div>
+                <div class="stat-box"><span>MİSYON</span><strong>Sıfır Hata</strong></div>
+            </div>
         </div>
     </section>
 
     <section id="games" class="section">
         <div id="game-selection" class="game-grid">
-            <div class="card" onclick="initGame('snake')"><i class="fas fa-worm"></i><h3>NEON SNAKE</h3><p>Yemleri topla, hayatta kal.</p></div>
-            <div class="card" onclick="initGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS</h3><p>Blokları diz ve satırları yok et.</p></div>
-            <div class="card" onclick="initGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN</h3><p>Hayaletten kaç, puanları topla.</p></div>
+            <div class="card" onclick="initGame('snake')"><i class="fas fa-worm"></i><h3>NEON SNAKE</h3><p>Hız ve refleks testi.</p></div>
+            <div class="card" onclick="initGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS</h3><p>Mantık ve düzen.</p></div>
+            <div class="card" onclick="initGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN</h3><p>Stratejik kovalamaca.</p></div>
         </div>
         <div id="arcade-container">
             <div id="score-display" style="font-size: 1.5rem; color: var(--neon-blue); margin-bottom: 10px;">Skor: 0</div>
@@ -100,27 +122,33 @@
     </section>
 
     <section id="notes" class="section">
-        <h2>📚 Ders Notları</h2>
-        <div class="info-grid"><div class="card"><h3>Matematik</h3><p>Logaritma ve Diziler</p></div><div class="card"><h3>Fizik</h3><p>Dalgalar ve Optik</p></div></div>
+        <h2>📚 Akademik Notlar</h2>
+        <div class="info-grid">
+            <div class="card"><h3>Matematik</h3><p>Diziler ve Limit Konuları</p></div>
+            <div class="card"><h3>Fizik</h3><p>Elektromanyetizma ve Optik</p></div>
+        </div>
     </section>
 
     <section id="movies" class="section">
-        <h2>🎬 Film Listesi</h2>
-        <div class="info-grid"><div class="card"><h3>Interstellar</h3><p>Bilim Kurgu</p></div><div class="card"><h3>The Dark Knight</h3><p>Aksiyon</p></div></div>
+        <h2>🎬 Ceylinsu'nun Seçimleri</h2>
+        <div class="info-grid">
+            <div class="card"><h3>Inception</h3><p>Zihin Labirentleri</p></div>
+            <div class="card"><h3>Interstellar</h3><p>Uzay ve Zaman</p></div>
+        </div>
     </section>
 
     <section id="logs" class="section">
         <h2>📜 Tüm Sistem Günlükleri</h2>
         <div class="log-container">
             <table>
-                <thead><tr><th>Versiyon</th><th>Yapılan Güncelleme Detayları</th></tr></thead>
+                <thead><tr><th>Versiyon</th><th>Detay</th></tr></thead>
                 <tbody>
-                    <tr><td><span class="v-text">v2.7.0</span></td><td>Pac-Man hayalet hareket algoritması düzeltildi (donma giderildi). Tüm yemler toplandığında "KAZANDINIZ" mesajı eklendi.</td></tr>
-                    <tr><td><span class="v-text">v2.6.0</span></td><td>Pac-Man hayalet duvar fiziği. Tetris yukarı ok döndürme işlevi. Oyunlara ikonlar ve ana sayfa restorasyonu.</td></tr>
-                    <tr><td><span class="v-text">v2.5.0</span></td><td>Tetris tamiri ve Pac-Man'e kovalayan hayalet eklenmesi.</td></tr>
-                    <tr><td><span class="v-text">v2.4.0</span></td><td>Ders Notları ve Filmler menü entegrasyonu.</td></tr>
-                    <tr><td><span class="v-text">v2.0.0 - v2.3.0</span></td><td>Stabilite güncellemeleri, Neon tema sabitleme ve versiyon takibi.</td></tr>
-                    <tr><td><span class="v-text">v1.0.0 - v1.9.0</span></td><td>Arcade motoru inşası ve mobil kontroller.</td></tr>
+                    <tr><td><span class="v-text">v2.8.0</span></td><td>Pac-Man Hayalet AI yenilendi (Akıllı yön bulma). Ana sayfa geliştirici profili eklendi.</td></tr>
+                    <tr><td><span class="v-text">v2.7.0</span></td><td>Pac-Man zafer durumu ve yem toplama kontrolü eklendi.</td></tr>
+                    <tr><td><span class="v-text">v2.6.0</span></td><td>Tetris döndürme (Yukarı Ok) eklendi. Oyunlara logolar (ikonlar) yerleştirildi.</td></tr>
+                    <tr><td><span class="v-text">v2.5.0</span></td><td>Tetris tamiri ve Pac-Man ilk hayalet entegrasyonu.</td></tr>
+                    <tr><td><span class="v-text">v2.0.0 - v2.4.0</span></td><td>Notlar/Filmler menüsü ve stabilite yamaları.</td></tr>
+                    <tr><td><span class="v-text">v1.0.0 - v1.9.0</span></td><td>Temel motor inşası ve neon tasarımın başlangıcı.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -159,7 +187,7 @@
         if(type === 'pacman') startPacman(cvs, ctx);
     }
 
-    // --- SNAKE ---
+    // --- SNAKE & TETRIS (Korunan Bölümler) ---
     function startSnake(cvs, ctx) {
         cvs.width = 300; cvs.height = 300;
         let snake = [{x:140, y:140}], dx=20, dy=0, food={x:60,y:60}, score=0;
@@ -183,7 +211,6 @@
         }, 150);
     }
 
-    // --- TETRIS ---
     function startTetris(cvs, ctx) {
         cvs.width = 240; cvs.height = 400;
         const grid = 20, rows = 20, cols = 12;
@@ -219,7 +246,7 @@
         }, 400);
     }
 
-    // --- PAC-MAN ---
+    // --- PAC-MAN (Geliştirilmiş AI) ---
     function startPacman(cvs, ctx) {
         cvs.width = 320; cvs.height = 320;
         let px=40, py=40, gx=240, gy=240, score=0, dir=0;
@@ -245,34 +272,40 @@
             for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===1) ctx.fillRect(c*40, r*40, 39, 39);
             
             ctx.fillStyle='white';
-            let remainingDots = 0;
+            let remaining = 0;
             dots.forEach(d => { if(d.e){ 
-                remainingDots++;
-                ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.28); ctx.fill();
+                remaining++; ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.28); ctx.fill();
                 if(Math.abs(px+20-d.x)<15 && Math.abs(py+20-d.y)<15){d.e=false; score+=10; document.getElementById('score-display').innerText='Skor: '+score;}
             }});
 
-            if(remainingDots === 0) { alert('KAZANDINIZ! Skor: ' + score); exitGame(); return; }
+            if(remaining === 0) { alert('TEBRİKLER CEYLİNSU! KAZANDIN! Skor: ' + score); exitGame(); return; }
 
-            // Ghost AI (Improved Movement)
-            let gnx = gx, gny = gy;
-            if(gx < px) gnx += 2; else if(gx > px) gx -= 2;
-            if(gy < py) gny += 2; else if(gy > py) gny -= 2;
+            // Ghost AI (Improved Pathfinding)
+            let gNextX = gx, gNextY = gy;
+            if(Math.abs(px - gx) > Math.abs(py - gy)) {
+                gNextX += (gx < px) ? 2 : -2;
+            } else {
+                gNextY += (gy < py) ? 2 : -2;
+            }
 
-            // Wall detection for ghost
-            if(maze[Math.floor((gny+10)/40)][Math.floor((gnx+10)/40)] === 0) { gx = gnx; gy = gny; }
-            else {
-                // Eğer doğrudan gidemiyorsa kaydırarak hareket et
-                if(maze[Math.floor((gy+10)/40)][Math.floor((gnx+10)/40)] === 0) gx = gnx;
-                else if(maze[Math.floor((gny+10)/40)][Math.floor((gx+10)/40)] === 0) gy = gny;
+            // Wall Check & Slide Logic (Donma Engelleme)
+            let cellX = Math.floor((gNextX + 20) / 40);
+            let cellY = Math.floor((gNextY + 20) / 40);
+
+            if(maze[cellY][cellX] === 0) {
+                gx = gNextX; gy = gNextY;
+            } else {
+                // Eğer ana yönde takılırsa alternatif yöne bak
+                if(gx < px) gx += 1; else if(gx > px) gx -= 1;
+                if(gy < py) gy += 1; else if (gy > py) gy -= 1;
             }
             
             ctx.fillStyle='red'; ctx.fillRect(gx+5, gy+5, 30, 30);
-            if(Math.abs(px-gx)<25 && Math.abs(py-gy)<25){alert('HAYALET YAKALADI! Oyun Bitti.'); exitGame();}
+            if(Math.abs(px-gx)<25 && Math.abs(py-gy)<25){alert('HAYALET YAKALADI!'); exitGame();}
             
             ctx.fillStyle='yellow'; ctx.beginPath();
             ctx.arc(px+20, py+20, 15, dir+0.2, dir+6.1); ctx.lineTo(px+20, py+20); ctx.fill();
-        }, 80);
+        }, 50);
     }
 </script>
 </body>
