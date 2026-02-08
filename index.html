@@ -1,71 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v2.4.0</title>
+    <title>Ceylinsu Arslan Arcade v2.5.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #240046;
-            --accent: #ff6d00;
-            --neon-blue: #00e5ff;
-            --text: #e1bee7;
-            --bg: #0d001a;
-            --panel: #1a0033;
+            --primary: #240046; --accent: #ff6d00; --neon-blue: #00e5ff;
+            --text: #e1bee7; --bg: #0d001a; --panel: #1a0033;
         }
-
         body {
-            font-family: 'Orbitron', sans-serif;
-            margin: 0; background-color: var(--bg); color: var(--text);
+            font-family: 'Orbitron', sans-serif; margin: 0; background-color: var(--bg); color: var(--text);
             overflow-x: hidden; touch-action: manipulation;
         }
-
         header {
-            background: linear-gradient(90deg, #240046, #7b1fa2);
-            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(90deg, #240046, #7b1fa2); padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
             border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 9999;
         }
-
         nav ul { display: flex; gap: 15px; list-style: none; margin: 0; padding: 0; }
-        nav a { color: white; text-decoration: none; cursor: pointer; font-weight: bold; font-size: 0.8rem; transition: 0.3s; }
-        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-
-        .v-badge { background: var(--accent); color: #000; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; }
-
+        nav a { color: white; text-decoration: none; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+        .v-badge { background: var(--accent); color: #000; padding: 4px 10px; border-radius: 4px; font-weight: 700; }
         main { padding: 40px 5%; max-width: 1200px; margin: auto; }
         .section { display: none; animation: fadeIn 0.4s ease; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .game-grid, .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .game-grid, .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .card { 
             background: var(--panel); border: 2px solid var(--neon-blue); padding: 25px; 
             border-radius: 15px; text-align: center; cursor: pointer; transition: 0.3s;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--neon-blue); }
-        .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 10px; }
-
         #arcade-container { 
             display: none; flex-direction: column; align-items: center; 
             background: #000; padding: 20px; border-radius: 15px; border: 3px solid var(--accent);
         }
         canvas { background: #000; border: 2px solid #333; max-width: 100%; height: auto; }
-
         .mobile-controls { display: grid; grid-template-areas: ". up ." "left . right" ". down ."; gap: 12px; margin-top: 20px; }
         .control-btn {
-            width: 65px; height: 65px; background: rgba(0, 229, 255, 0.1);
-            border: 2px solid var(--neon-blue); color: var(--neon-blue); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+            width: 60px; height: 60px; background: rgba(0, 229, 255, 0.1); border: 2px solid var(--neon-blue);
+            color: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
         }
-
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 10px; border: 1px solid var(--accent); }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 15px; border-bottom: 1px solid #3d0066; text-align: left; }
+        th, td { padding: 12px; border-bottom: 1px solid #3d0066; text-align: left; font-size: 0.85rem; }
         th { background: #2b0052; color: var(--neon-blue); }
-
-        .btn { background: var(--neon-blue); border: none; padding: 12px 24px; color: #000; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        .btn { background: var(--neon-blue); border: none; padding: 12px 24px; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; width: 100%; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -80,66 +63,56 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v2.4.0</span>
+    <span class="v-badge">v2.5.0</span>
 </header>
 
 <main>
     <section id="home" class="section active">
-        <h1>Hoş Geldin Ceylinsu! 👾</h1>
-        <p>Arcade salonun v2.4.0 sürümüyle tamamen güncellendi.</p>
-        <div class="card" style="max-width: 400px; margin: 20px 0; text-align: left;">
-            <p><i class="fas fa-user-ninja" style="font-size: 1rem;"></i> Geliştirici: Ceylinsu Arslan</p>
-            <p><i class="fas fa-code-branch" style="font-size: 1rem;"></i> Durum: Stabil Arcade Modu</p>
-        </div>
+        <h1>Ceylinsu Arslan Arcade v2.5.0</h1>
+        <p>Tetris ve Pac-Man hataları giderildi, salon tam kapasite yayında!</p>
     </section>
 
     <section id="games" class="section">
         <div id="game-selection" class="game-grid">
-            <div class="card" onclick="initGame('snake')"><i class="fas fa-worm"></i><h3>SNAKE</h3></div>
-            <div class="card" onclick="initGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS</h3></div>
-            <div class="card" onclick="initGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN</h3></div>
+            <div class="card" onclick="initGame('snake')"><h3>SNAKE</h3></div>
+            <div class="card" onclick="initGame('tetris')"><h3>TETRIS</h3></div>
+            <div class="card" onclick="initGame('pacman')"><h3>PAC-MAN</h3></div>
         </div>
         <div id="arcade-container">
             <div id="score-display" style="font-size: 1.5rem; color: var(--neon-blue); margin-bottom: 10px;">Skor: 0</div>
             <canvas id="stage"></canvas>
             <div class="mobile-controls">
-                <div class="control-btn" style="grid-area: up" onclick="handleInput('ArrowUp')"><i class="fas fa-arrow-up"></i></div>
-                <div class="control-btn" style="grid-area: left" onclick="handleInput('ArrowLeft')"><i class="fas fa-arrow-left"></i></div>
-                <div class="control-btn" style="grid-area: right" onclick="handleInput('ArrowRight')"><i class="fas fa-arrow-right"></i></div>
-                <div class="control-btn" style="grid-area: down" onclick="handleInput('ArrowDown')"><i class="fas fa-arrow-down"></i></div>
+                <div class="control-btn" style="grid-area: up" onclick="handleInput('ArrowUp')">▲</div>
+                <div class="control-btn" style="grid-area: left" onclick="handleInput('ArrowLeft')">◀</div>
+                <div class="control-btn" style="grid-area: right" onclick="handleInput('ArrowRight')">▶</div>
+                <div class="control-btn" style="grid-area: down" onclick="handleInput('ArrowDown')">▼</div>
             </div>
-            <button class="btn" onclick="exitGame()" style="background:#ff0055; width:100%; margin-top:20px; color:#fff">OYUNDAN ÇIK</button>
+            <button class="btn" onclick="exitGame()" style="background:#ff0055; color:#fff">OYUNDAN ÇIK</button>
         </div>
     </section>
 
     <section id="notes" class="section">
         <h2>📚 Ders Notları</h2>
-        <div class="info-grid">
-            <div class="card"><h3>Matematik</h3><p>Fonksiyonlar ve Denklemler</p></div>
-            <div class="card"><h3>Edebiyat</h3><p>Cumhuriyet Dönemi Yazarları</p></div>
-            <div class="card"><h3>Biyoloji</h3><p>Hücre Bölünmeleri</p></div>
-        </div>
+        <div class="info-grid"><div class="card"><h3>Matematik</h3><p>Logaritma Konusu</p></div><div class="card"><h3>Fizik</h3><p>Optik Ünitesi</p></div></div>
     </section>
 
     <section id="movies" class="section">
         <h2>🎬 Film Arşivi</h2>
-        <div class="info-grid">
-            <div class="card"><h3>Inception</h3><p>Bilim Kurgu / Aksiyon</p></div>
-            <div class="card"><h3>Spider-Man</h3><p>Animasyon / Macera</p></div>
-            <div class="card"><h3>Interstellar</h3><p>Uzay Dramı</p></div>
-        </div>
+        <div class="info-grid"><div class="card"><h3>Matrix</h3><p>Aksiyon</p></div><div class="card"><h3>Avatar</h3><p>Bilim Kurgu</p></div></div>
     </section>
 
     <section id="logs" class="section">
         <h2>📜 Sistem Günlükleri</h2>
         <div class="log-container">
             <table>
-                <thead><tr><th>Versiyon</th><th>Tarih</th><th>Değişiklikler</th></tr></thead>
+                <thead><tr><th>Versiyon</th><th>Detaylı Açıklama</th></tr></thead>
                 <tbody>
-                    <tr><td>v2.4.0</td><td>08.02.2026</td><td>Ders Notları ve Filmler menüsü v2.0.0 temeline eklendi.</td></tr>
-                    <tr><td>v2.3.0</td><td>08.02.2026</td><td>Sayfa donma ve tıklama sorunları giderildi.</td></tr>
-                    <tr><td>v2.0.0</td><td>08.02.2026</td><td>Pac-Man labirent duvarları ve Snake skor sistemi inşası.</td></tr>
-                    <tr><td>v1.5.0</td><td>07.02.2026</td><td>Tetris mekanikleri ve mobil kontroller optimize edildi.</td></tr>
+                    <tr><td>v2.5.0</td><td>Tetris tamir edildi, Pac-Man'e kovalayan kırmızı hayalet eklendi.</td></tr>
+                    <tr><td>v2.4.0</td><td>Ders Notları ve Filmler bölümleri ana menüye eklendi.</td></tr>
+                    <tr><td>v2.3.0</td><td>Sayfa kilitlenmesi ve buton basmama sorunları giderildi.</td></tr>
+                    <tr><td>v2.2.0</td><td>Snake skor sistemi ve Pac-Man duvar fiziği güncellendi.</td></tr>
+                    <tr><td>v2.0.0</td><td>Arcade Pro mimarisine geçiş ve neon tema sabitlendi.</td></tr>
+                    <tr><td>v1.0.0-v1.9.0</td><td>Temel oyunların inşası ve versiyon takip sisteminin kuruluşu.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -147,13 +120,10 @@
 </main>
 
 <script>
-    let loop = null;
-    let currentHandler = null;
-
-    // Sayfa Kaymasını Engelle
+    let loop = null, currentInput = null;
     window.addEventListener("keydown", (e) => {
         if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code)) e.preventDefault();
-        if(currentHandler) currentHandler({key: e.key});
+        if(currentInput) currentInput({key: e.key});
     });
 
     function showPage(id) {
@@ -162,20 +132,19 @@
         document.getElementById(id).classList.add('active');
     }
 
-    function handleInput(k) { if(currentHandler) currentHandler({key: k}); }
+    function handleInput(k) { if(currentInput) currentInput({key: k}); }
 
     function exitGame() {
         if(loop) clearInterval(loop);
         document.getElementById('arcade-container').style.display = 'none';
         document.getElementById('game-selection').style.display = 'grid';
-        currentHandler = null;
+        currentInput = null;
     }
 
     function initGame(type) {
         document.getElementById('game-selection').style.display = 'none';
         document.getElementById('arcade-container').style.display = 'flex';
-        const cvs = document.getElementById('stage');
-        const ctx = cvs.getContext('2d');
+        const cvs = document.getElementById('stage'), ctx = cvs.getContext('2d');
         if(type === 'snake') startSnake(cvs, ctx);
         if(type === 'tetris') startTetris(cvs, ctx);
         if(type === 'pacman') startPacman(cvs, ctx);
@@ -184,11 +153,11 @@
     function startSnake(cvs, ctx) {
         cvs.width = 300; cvs.height = 300;
         let snake = [{x:140, y:140}], dx=20, dy=0, food={x:60,y:60}, score=0;
-        currentHandler = (e) => {
+        currentInput = (e) => {
             if(e.key==='ArrowUp' && dy===0){dx=0; dy=-20}
-            if(e.key==='ArrowDown' && dy===0){dx=0; dy=20}
-            if(e.key==='ArrowLeft' && dx===0){dx=-20; dy=0}
-            if(e.key==='ArrowRight' && dx===0){dx=20; dy=0}
+            else if(e.key==='ArrowDown' && dy===0){dx=0; dy=20}
+            else if(e.key==='ArrowLeft' && dx===0){dx=-20; dy=0}
+            else if(e.key==='ArrowRight' && dx===0){dx=20; dy=0}
         };
         loop = setInterval(() => {
             ctx.fillStyle='black'; ctx.fillRect(0,0,300,300);
@@ -206,19 +175,49 @@
 
     function startTetris(cvs, ctx) {
         cvs.width = 240; cvs.height = 400;
-        ctx.fillStyle='white'; ctx.fillText("Tetris Aktif...", 50, 200);
+        const grid = 20, rows = 20, cols = 12;
+        let board = Array.from({length: rows}, () => Array(cols).fill(0)), score=0;
+        const shapes = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]]];
+        let cur = { x: 4, y: 0, s: shapes[Math.floor(Math.random()*shapes.length)] };
+        function collide(nx, ny, ns) {
+            for(let r=0; r<ns.length; r++) for(let c=0; c<ns[r].length; c++)
+                if(ns[r][c] && (ny+r>=rows || nx+c<0 || nx+c>=cols || board[ny+r][nx+c])) return true;
+            return false;
+        }
+        currentInput = (e) => {
+            if(e.key==='ArrowLeft' && !collide(cur.x-1, cur.y, cur.s)) cur.x--;
+            if(e.key==='ArrowRight' && !collide(cur.x+1, cur.y, cur.s)) cur.x++;
+            if(e.key==='ArrowDown' && !collide(cur.x, cur.y+1, cur.s)) cur.y++;
+            if(e.key==='ArrowUp'){
+                let r = cur.s[0].map((_,i)=>cur.s.map(row=>row[i]).reverse());
+                if(!collide(cur.x, cur.y, r)) cur.s = r;
+            }
+        };
+        loop = setInterval(() => {
+            ctx.fillStyle='black'; ctx.fillRect(0,0,240,400);
+            if(!collide(cur.x, cur.y+1, cur.s)) cur.y++;
+            else {
+                cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) board[cur.y+dy][cur.x+dx]=1; }));
+                board = board.filter(r => r.some(v=>v===0));
+                while(board.length < rows){ board.unshift(Array(cols).fill(0)); score+=100; document.getElementById('score-display').innerText='Skor: '+score;}
+                cur = { x: 4, y: 0, s: shapes[Math.floor(Math.random()*shapes.length)] };
+                if(collide(cur.x, cur.y, cur.s)) exitGame();
+            }
+            board.forEach((r,y)=>r.forEach((v,x)=>{ if(v){ctx.fillStyle='#333'; ctx.fillRect(x*20,y*20,19,19);} }));
+            ctx.fillStyle='#00e5ff'; cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) ctx.fillRect((cur.x+dx)*20,(cur.y+dy)*20,19,19); }));
+        }, 400);
     }
 
     function startPacman(cvs, ctx) {
         cvs.width = 320; cvs.height = 320;
-        let px=40, py=40, score=0, dir=0;
+        let px=40, py=40, gx=240, gy=240, score=0, dir=0;
         const maze = [
             [1,1,1,1,1,1,1,1], [1,0,0,0,1,0,0,1], [1,0,1,0,1,0,1,1], [1,0,0,0,0,0,0,1],
             [1,1,0,1,1,1,0,1], [1,0,0,0,0,1,0,1], [1,0,1,1,0,0,0,1], [1,1,1,1,1,1,1,1]
         ];
         let dots = [];
         for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===0) dots.push({x: c*40+20, y: r*40+20, e: true});
-        currentHandler = (e) => {
+        currentInput = (e) => {
             let nx=px, ny=py;
             if(e.key==='ArrowRight'){nx+=40; dir=0}
             if(e.key==='ArrowLeft'){nx-=40; dir=Math.PI}
@@ -231,12 +230,16 @@
             ctx.fillStyle='blue';
             for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===1) ctx.fillRect(c*40, r*40, 39, 39);
             ctx.fillStyle='white';
-            dots.forEach(d => {
-                if(d.e){
-                    ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.28); ctx.fill();
-                    if(Math.abs(px+20-d.x)<15 && Math.abs(py+20-d.y)<15){d.e=false; score+=10; document.getElementById('score-display').innerText='Skor: '+score;}
-                }
-            });
+            dots.forEach(d => { if(d.e){ 
+                ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.28); ctx.fill();
+                if(Math.abs(px+20-d.x)<15 && Math.abs(py+20-d.y)<15){d.e=false; score+=10; document.getElementById('score-display').innerText='Skor: '+score;}
+            }});
+            // Ghost AI
+            if(gx < px) gx += 2; else if(gx > px) gx -= 2;
+            if(gy < py) gy += 2; else if(gy > py) gy -= 2;
+            ctx.fillStyle='red'; ctx.fillRect(gx+10, gy+10, 20, 20);
+            if(Math.abs(px-gx)<20 && Math.abs(py-gy)<20){alert('Hayalet Yakaladı!'); exitGame();}
+            // Pacman
             ctx.fillStyle='yellow'; ctx.beginPath();
             ctx.arc(px+20, py+20, 15, dir+0.2, dir+6.1); ctx.lineTo(px+20, py+20); ctx.fill();
         }, 100);
