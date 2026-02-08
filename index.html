@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v3.1.0</title>
+    <title>Ceylinsu Arslan Arcade v3.2.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
@@ -45,7 +46,7 @@
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--neon-blue); }
 
-        /* Arcade & Start Screen */
+        /* Arcade & UI */
         #arcade-container { 
             display: none; flex-direction: column; align-items: center; 
             background: #000; padding: 20px; border-radius: 15px; border: 3px solid var(--accent);
@@ -67,7 +68,8 @@
         
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 10px; border: 2px solid var(--accent); margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 18px; border-bottom: 1px solid #3d0066; text-align: left; }
+        th, td { padding: 15px; border-bottom: 1px solid #3d0066; text-align: left; }
+        th { background: #2b0052; color: var(--neon-blue); }
         
         .btn { background: var(--neon-blue); border: none; padding: 15px 30px; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; font-family: 'Orbitron'; }
         .exit-btn { background: #ff0055; color: #fff; margin-top: 15px; width: 100%; padding: 10px; border: none; font-weight: bold; cursor: pointer; }
@@ -85,36 +87,38 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v3.1.0</span>
+    <span class="v-badge">v3.2.0</span>
 </header>
 
 <main>
     <section id="home" class="section active">
         <div class="profile-card">
             <h1>Merhaba, Ben Ceylinsu Arslan! 👾</h1>
-            <p style="font-family: 'Rajdhani'; font-size: 1.2rem;">
+            <p style="font-family: 'Rajdhani'; font-size: 1.2rem; line-height: 1.6;">
                 Dijital dünyaya olan tutkumla inşa ettiğim kişisel arcade salonuma hoş geldiniz. 
                 Burada gördüğünüz her oyun, titizlikle geliştirdiğim bir sürecin ürünüdür. 
                 Analitik bakış açımı neon estetiğiyle birleştirerek size en iyi deneyimi sunmaya çalışıyorum.
+                Sistemdeki hataları tek tek ayıklıyor, her sürümde daha stabil bir yapı inşa ediyorum.
             </p>
             <div class="stats-grid">
                 <div class="stat-box"><span>GELİŞTİRİCİ</span><strong>Ceylinsu Arslan</strong></div>
-                <div class="stat-box"><span>SİSTEM</span><strong>v3.1.0 Stable</strong></div>
+                <div class="stat-box"><span>UZMANLIK</span><strong>Analitik Yazılım</strong></div>
+                <div class="stat-box"><span>DURUM</span><strong>v3.2.0 Stable</strong></div>
             </div>
         </div>
     </section>
 
     <section id="games" class="section">
         <div id="game-selection" class="game-grid">
-            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm" style="font-size:3rem; color:var(--accent)"></i><h3>CLASSIC SNAKE</h3><p>Gerçek elmalı yılan.</p></div>
-            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes" style="font-size:3rem; color:var(--accent)"></i><h3>ADVANCED TETRIS</h3><p>Renkli ve tam sürüm.</p></div>
-            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost" style="font-size:3rem; color:var(--accent)"></i><h3>PAC-MAN AI</h3><p>Zeki kovalayıcı.</p></div>
+            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm" style="font-size:3rem; color:var(--accent)"></i><h3>CLASSIC SNAKE</h3><p>Hızı optimize edildi.</p></div>
+            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes" style="font-size:3rem; color:var(--accent)"></i><h3>ADVANCED TETRIS</h3><p>7 Parça & Renkli Neon.</p></div>
+            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost" style="font-size:3rem; color:var(--accent)"></i><h3>PAC-MAN AI</h3><p>Akıllı Hayalet Sistemi.</p></div>
         </div>
 
         <div id="arcade-container">
             <div id="start-screen">
-                <h2 id="start-title" style="color:var(--neon-blue)">OYUN ADI</h2>
-                <p id="start-desc" style="font-family:'Rajdhani'">Kontroller: Ok tuşları veya butonlar.</p>
+                <h2 id="start-title" style="color:var(--neon-blue)">OYUN</h2>
+                <p id="start-desc" style="font-family:'Rajdhani'">Ok tuşlarını veya ekran butonlarını kullanabilirsin.</p>
                 <button class="btn" id="actual-start-btn">OYUNU BAŞLAT</button>
             </div>
             <div id="score-display" style="font-size: 1.5rem; color: var(--neon-blue); margin-bottom: 10px;">Skor: 0</div>
@@ -129,18 +133,38 @@
         </div>
     </section>
 
-    <section id="notes" class="section"><h2>📚 Akademik Arşiv</h2><div class="game-grid"><div class="card"><h3>Matematik</h3><p>Diziler & Limit</p></div><div class="card"><h3>Fizik</h3><p>Optik & Dalgalar</p></div></div></section>
-    <section id="movies" class="section"><h2>🎬 Favorilerim</h2><div class="game-grid"><div class="card"><h3>Interstellar</h3><p>Bilim Kurgu</p></div><div class="card"><h3>Inception</h3><p>Rüya Katmanları</p></div></div></section>
-    
+    <section id="notes" class="section">
+        <h2>📚 Akademik Arşivim</h2>
+        <div class="game-grid">
+            <div class="card"><h3>Matematik</h3><p>Limit, Türev ve Diziler.</p></div>
+            <div class="card"><h3>Fizik</h3><p>Elektromanyetizma ve Optik.</p></div>
+        </div>
+    </section>
+
+    <section id="movies" class="section">
+        <h2>🎬 Favori Filmlerim</h2>
+        <div class="game-grid">
+            <div class="card"><h3>Interstellar</h3><p>Uzay-Zaman Paradoksu.</p></div>
+            <div class="card"><h3>Inception</h3><p>Bilinçaltı Mimarisi.</p></div>
+        </div>
+    </section>
+
     <section id="logs" class="section">
-        <h2>📜 Geliştirme Günlükleri</h2>
+        <h2>📜 Tam Sistem Geçmişi</h2>
         <div class="log-container">
             <table>
-                <thead><tr><th>Versiyon</th><th>Detay</th></tr></thead>
+                <thead><tr><th>Versiyon</th><th>Güncelleme Detayları</th></tr></thead>
                 <tbody>
-                    <tr><td style="color:var(--accent)">v3.1.0</td><td>Oyun öncesi "BAŞLA" butonu eklendi. Tetris 7 şekil ve renkli neon bloklarla geliştirildi.</td></tr>
-                    <tr><td style="color:var(--accent)">v3.0.0</td><td>Ana sayfa Ceylinsu'nun ağzından yazıldı. Snake klasik elmalı görünüme kavuştu.</td></tr>
-                    <tr><td style="color:var(--accent)">v2.9.0</td><td>Snake skoru sıfırlama fix ve Log tablosu düzeni.</td></tr>
+                    <tr><td style="color:var(--accent)">v3.2.0</td><td>Klavye yön tuşu bağlantı hatası düzeltildi. Snake hızı optimize edildi. Günlükler tam geçmişi içerecek şekilde güncellendi.</td></tr>
+                    <tr><td style="color:var(--accent)">v3.1.0</td><td>Oyun öncesi "Start Screen" (Başlat Ekranı) eklendi. Tetris'e 7 klasik parça ve neon renkler eklendi.</td></tr>
+                    <tr><td style="color:var(--accent)">v3.0.0</td><td>Ana sayfa Ceylinsu'nun ağzından yeniden yazıldı. Snake oyunu elma ve klasik gövde yapısıyla modernize edildi.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.9.0</td><td>Snake skoru her başlangıçta sıfırlanma özelliği eklendi. Günlükler tablosu simetrik yapıya kavuştu.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.8.0</td><td>Pac-Man Hayalet AI (Akıllı Yön Bulma) sistemi geliştirildi. Ana sayfaya geliştirici profili eklendi.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.7.0</td><td>Pac-Man zafer/yem toplama mantığı eklendi.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.6.0</td><td>Tetris yukarı ok ile döndürme ve oyun ikonları eklendi.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.5.0</td><td>Tetris mekaniği tamir edildi, Pac-Man ilk hayalet entegrasyonu sağlandı.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.0.0</td><td>Notlar ve Filmler menüleri sisteme eklendi.</td></tr>
+                    <tr><td style="color:var(--accent)">v1.0.0</td><td>Arcade motoru ve mobil uyumlu temel tasarımın inşası.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -149,6 +173,15 @@
 
 <script>
     let loop = null, currentInput = null, activeGame = null;
+
+    // --- KLAVYE FIX ---
+    window.addEventListener("keydown", (e) => {
+        const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "];
+        if(keys.includes(e.key) || keys.includes(e.code)) {
+            e.preventDefault(); 
+            if(currentInput) currentInput({key: e.key || e.code});
+        }
+    }, { passive: false });
 
     function showPage(id) {
         exitGame();
@@ -174,6 +207,7 @@
 
     function initGame(type) {
         const cvs = document.getElementById('stage'), ctx = cvs.getContext('2d');
+        document.getElementById('score-display').innerText = 'Skor: 0';
         if(type === 'snake') startSnake(cvs, ctx);
         if(type === 'tetris') startTetris(cvs, ctx);
         if(type === 'pacman') startPacman(cvs, ctx);
@@ -188,34 +222,49 @@
         currentInput = null;
     }
 
-    // --- GELİŞMİŞ TETRİS (v3.1.0) ---
+    // --- SNAKE (Optimize Hız: 180ms) ---
+    function startSnake(cvs, ctx) {
+        cvs.width = 320; cvs.height = 320;
+        let snake = [{x:160, y:160}, {x:140, y:160}], dx=20, dy=0, food={x:60,y:60}, score=0;
+        currentInput = (e) => {
+            if((e.key==='ArrowUp' || e.key==='Up') && dy===0){dx=0; dy=-20}
+            else if((e.key==='ArrowDown' || e.key==='Down') && dy===0){dx=0; dy=20}
+            else if((e.key==='ArrowLeft' || e.key==='Left') && dx===0){dx=-20; dy=0}
+            else if((e.key==='ArrowRight' || e.key==='Right') && dx===0){dx=20; dy=0}
+        };
+        loop = setInterval(() => {
+            ctx.fillStyle='#000'; ctx.fillRect(0,0,320,320);
+            let head = {x: snake[0].x+dx, y: snake[0].y+dy};
+            if(head.x<0||head.x>=320||head.y<0||head.y>=320||snake.some(s=>s.x===head.x && s.y===head.y)){ 
+                alert('Oyun Bitti! Skor: '+score); exitGame(); return; 
+            }
+            snake.unshift(head);
+            if(head.x===food.x && head.y===food.y){
+                score+=10; document.getElementById('score-display').innerText='Skor: '+score;
+                food={x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20};
+            } else snake.pop();
+            ctx.fillStyle='red'; ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, 7); ctx.fill();
+            snake.forEach((s,i)=>{ ctx.fillStyle=(i===0)?'#00e5ff':'#0097a7'; ctx.fillRect(s.x+1,s.y+1,18,18); });
+        }, 180); 
+    }
+
+    // --- TETRIS (v3.1 Stable) ---
     function startTetris(cvs, ctx) {
         cvs.width = 240; cvs.height = 400;
         const grid = 20, rows = 20, cols = 12;
         let board = Array.from({length: rows}, () => Array(cols).fill(0)), score = 0;
-        
         const PIECES = [
-            { s: [[1,1,1,1]], c: '#00e5ff' }, // I
-            { s: [[1,1],[1,1]], c: '#ffff00' }, // O
-            { s: [[0,1,0],[1,1,1]], c: '#a020f0' }, // T
-            { s: [[0,1,1],[1,1,0]], c: '#00ff00' }, // S
-            { s: [[1,1,0],[0,1,1]], c: '#ff0000' }, // Z
-            { s: [[1,0,0],[1,1,1]], c: '#0000ff' }, // J
-            { s: [[0,0,1],[1,1,1]], c: '#ffa500' }  // L
+            { s: [[1,1,1,1]], c: '#00e5ff' }, { s: [[1,1],[1,1]], c: '#ffff00' },
+            { s: [[0,1,0],[1,1,1]], c: '#a020f0' }, { s: [[0,1,1],[1,1,0]], c: '#00ff00' },
+            { s: [[1,1,0],[0,1,1]], c: '#ff0000' }, { s: [[1,0,0],[1,1,1]], c: '#0000ff' },
+            { s: [[0,0,1],[1,1,1]], c: '#ffa500' }
         ];
-
-        let cur = createPiece();
-        function createPiece() {
-            const p = PIECES[Math.floor(Math.random()*PIECES.length)];
-            return { x: 4, y: 0, s: p.s, c: p.c };
-        }
-
+        let cur = {...PIECES[Math.floor(Math.random()*7)], x:4, y:0};
         function collide(nx, ny, ns) {
             for(let r=0; r<ns.length; r++) for(let c=0; c<ns[r].length; c++)
                 if(ns[r][c] && (ny+r>=rows || nx+c<0 || nx+c>=cols || board[ny+r][nx+c])) return true;
             return false;
         }
-
         currentInput = (e) => {
             if(e.key==='ArrowLeft' && !collide(cur.x-1, cur.y, cur.s)) cur.x--;
             if(e.key==='ArrowRight' && !collide(cur.x+1, cur.y, cur.s)) cur.x++;
@@ -225,7 +274,6 @@
                 if(!collide(cur.x, cur.y, r)) cur.s = r;
             }
         };
-
         loop = setInterval(() => {
             ctx.fillStyle='black'; ctx.fillRect(0,0,240,400);
             if(!collide(cur.x, cur.y+1, cur.s)) cur.y++;
@@ -233,36 +281,15 @@
                 cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) board[cur.y+dy][cur.x+dx]=cur.c; }));
                 board = board.filter(r => r.some(v=>v===0));
                 while(board.length < rows){ board.unshift(Array(cols).fill(0)); score+=100; document.getElementById('score-display').innerText='Skor: '+score;}
-                cur = createPiece();
-                if(collide(cur.x, cur.y, cur.s)) { alert('Oyun Bitti! Skor: ' + score); exitGame(); }
+                cur = {...PIECES[Math.floor(Math.random()*7)], x:4, y:0};
+                if(collide(cur.x, cur.y, cur.s)) exitGame();
             }
-            board.forEach((r,y)=>r.forEach((v,x)=>{ if(v){ctx.fillStyle=v; ctx.fillRect(x*20,y*20,19,19); ctx.strokeStyle='rgba(255,255,255,0.1)'; ctx.strokeRect(x*20,y*20,19,19);} }));
+            board.forEach((r,y)=>r.forEach((v,x)=>{ if(v){ctx.fillStyle=v; ctx.fillRect(x*20,y*20,19,19);} }));
             ctx.fillStyle=cur.c; cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) ctx.fillRect((cur.x+dx)*20,(cur.y+dy)*20,19,19); }));
-        }, 300);
+        }, 350);
     }
 
-    // --- SNAKE & PACMAN (v3.0'dan Korundu) ---
-    function startSnake(cvs, ctx) {
-        cvs.width = 320; cvs.height = 320;
-        let snake = [{x:160, y:160}, {x:140, y:160}], dx=20, dy=0, food={x:60,y:60}, score=0;
-        currentInput = (e) => {
-            if(e.key==='ArrowUp' && dy===0){dx=0; dy=-20} else if(e.key==='ArrowDown' && dy===0){dx=0; dy=20}
-            else if(e.key==='ArrowLeft' && dx===0){dx=-20; dy=0} else if(e.key==='ArrowRight' && dx===0){dx=20; dy=0}
-        };
-        loop = setInterval(() => {
-            ctx.fillStyle='#000'; ctx.fillRect(0,0,320,320);
-            let head = {x: snake[0].x+dx, y: snake[0].y+dy};
-            if(head.x<0||head.x>=320||head.y<0||head.y>=320||snake.some(s=>s.x===head.x && s.y===head.y)){ exitGame(); return; }
-            snake.unshift(head);
-            if(head.x===food.x && head.y===food.y){
-                score+=10; document.getElementById('score-display').innerText='Skor: '+score;
-                food={x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20};
-            } else snake.pop();
-            ctx.fillStyle='red'; ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, 7); ctx.fill();
-            snake.forEach((s,i)=>{ ctx.fillStyle=(i===0)?'#00e5ff':'#0097a7'; ctx.fillRect(s.x+1,s.y+1,18,18); });
-        }, 120);
-    }
-
+    // --- PACMAN (v3.1 Stable) ---
     function startPacman(cvs, ctx) {
         cvs.width=320; cvs.height=320;
         let px=40, py=40, gx=240, gy=240, score=0, dir=0;
@@ -270,8 +297,8 @@
         let dots = []; for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===0) dots.push({x:c*40+20, y:r*40+20, e:true});
         currentInput = (e) => {
             let nx=px, ny=py;
-            if(e.key==='ArrowRight'){nx+=40; dir=0} if(e.key==='ArrowLeft'){nx-=40; dir=Math.PI}
-            if(e.key==='ArrowUp'){ny-=40; dir=1.5*Math.PI} if(e.key==='ArrowDown'){ny+=40; dir=0.5*Math.PI}
+            if(e.key==='ArrowRight') {nx+=40; dir=0} if(e.key==='ArrowLeft') {nx-=40; dir=Math.PI}
+            if(e.key==='ArrowUp') {ny-=40; dir=1.5*Math.PI} if(e.key==='ArrowDown') {ny+=40; dir=0.5*Math.PI}
             if(maze[Math.floor(ny/40)][Math.floor(nx/40)]===0){px=nx; py=ny}
         };
         loop = setInterval(() => {
@@ -289,4 +316,3 @@
 </script>
 </body>
 </html>
-
