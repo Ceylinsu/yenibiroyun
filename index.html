@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v1.7.0</title>
+    <title>Ceylinsu Arslan Arcade v1.8.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -103,7 +103,7 @@
         </ul>
     </nav>
     <div class="version-info">
-        <span class="v-badge">v1.7.0</span>
+        <span class="v-badge">v1.8.0</span>
         <button class="btn" style="padding: 5px 10px; font-size: 0.7rem;" onclick="showPage('logs')">GÜNLÜKLER</button>
     </div>
 </header>
@@ -122,11 +122,12 @@
         <div id="game-selection" class="game-grid">
             <div class="card" onclick="initGame('snake')"><i class="fas fa-worm"></i><h3>NEON SNAKE</h3><p>Klasik yılan oyunu.</p></div>
             <div class="card" onclick="initGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS</h3><p>Blokları diz, satırları patlat.</p></div>
-            <div class="card" onclick="initGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN LITE</h3><p>Labirentten kaçış.</p></div>
+            <div class="card" onclick="initGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN PRO</h3><p>Gerçekçi arcade deneyimi.</p></div>
         </div>
 
         <div id="arcade-container">
             <h3 id="game-title" style="color: var(--neon-blue);"></h3>
+            <div id="score-display" style="color: white; margin-bottom: 10px; font-size: 1.2rem;">Skor: 0</div>
             <canvas id="stage"></canvas>
             
             <div class="mobile-controls">
@@ -145,14 +146,12 @@
         <table>
             <thead><tr><th>Versiyon</th><th>Tarih</th><th>Notlar</th></tr></thead>
             <tbody id="log-list">
+                <tr><td>1.8.0</td><td>08.02.2026</td><td>Pac-Man Pro: Yem toplama, puanlama ve geliştirilmiş animasyonlar eklendi.</td></tr>
                 <tr><td>1.7.0</td><td>07.02.2026</td><td>Bilgisayar yön tuşları için ekran kayması engellendi.</td></tr>
-                <tr><td>1.6.0</td><td>07.02.2026</td><td>Kontroller oyuna göre özelleştirildi (Tetris: Döndürme, Diğer: Yukarı).</td></tr>
-                <tr><td>1.5.0</td><td>07.02.2026</td><td>Tetris mekaniği sıfırdan yazıldı; blok dizme ve satır silme eklendi.</td></tr>
-                <tr><td>1.4.0</td><td>07.02.2026</td><td>İsim "Ceylinsu Arslan" olarak güncellendi. Pacman kenar ölümü kaldırıldı.</td></tr>
-                <tr><td>1.3.0</td><td>07.02.2026</td><td>Mobil kontrol butonları eklendi ve yılan hızı dengelendi.</td></tr>
-                <tr><td>1.2.0</td><td>07.02.2026</td><td>Navigasyon menüsü hataları giderildi.</td></tr>
-                <tr><td>1.1.0</td><td>06.02.2026</td><td>Neon Arcade teması ve renk paleti uygulandı.</td></tr>
-                <tr><td>1.0.0</td><td>05.02.2026</td><td>Projenin ilk sürümü yayına alındı.</td></tr>
+                <tr><td>1.6.0</td><td>07.02.2026</td><td>Kontroller oyuna göre özelleştirildi ve tam geçmiş eklendi.</td></tr>
+                <tr><td>1.5.0</td><td>07.02.2026</td><td>Tetris blok dizme ve satır silme mekaniği eklendi.</td></tr>
+                <tr><td>1.4.0</td><td>07.02.2026</td><td>Geliştirici ismi: Ceylinsu Arslan. Pacman kenar ölümü kaldırıldı.</td></tr>
+                <tr><td>1.0.0-1.3.0</td><td>05-07.02</td><td>Temel arcade yapısı, mobil butonlar ve neon tema.</td></tr>
             </tbody>
         </table>
     </section>
@@ -165,7 +164,6 @@
     let currentGameLoop = null;
     let currentInputHandler = null;
 
-    // Yön tuşları ile sayfanın kaymasını engelle
     window.addEventListener("keydown", function(e) {
         if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
             e.preventDefault();
@@ -195,8 +193,8 @@
         const ctx = canvas.getContext('2d');
         const upIcon = document.querySelector('#up-btn i');
 
-        if(gameType === 'tetris') { upIcon.className = 'fas fa-rotate'; } 
-        else { upIcon.className = 'fas fa-chevron-up'; }
+        if(gameType === 'tetris') upIcon.className = 'fas fa-rotate';
+        else upIcon.className = 'fas fa-chevron-up';
         
         if(gameType === 'snake') startSnake(canvas, ctx);
         if(gameType === 'tetris') startTetris(canvas, ctx);
@@ -236,7 +234,6 @@
         let board = Array.from({length: rows}, () => Array(cols).fill(0));
         const shapes = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[1, 0, 0], [1, 1, 1]]];
         let cur = { x: 4, y: 0, shape: shapes[Math.floor(Math.random()*shapes.length)] };
-
         function collide(nx, ny, ns) {
             for (let r = 0; r < ns.length; r++) {
                 for (let c = 0; c < ns[r].length; c++) {
@@ -247,7 +244,6 @@
             }
             return false;
         }
-
         currentInputHandler = (e) => {
             if (e.key === "ArrowLeft" && !collide(cur.x - 1, cur.y, cur.shape)) cur.x--;
             if (e.key === "ArrowRight" && !collide(cur.x + 1, cur.y, cur.shape)) cur.x++;
@@ -258,7 +254,6 @@
             }
         };
         window.onkeydown = currentInputHandler;
-
         currentGameLoop = setInterval(() => {
             ctx.fillStyle = "black"; ctx.fillRect(0, 0, 240, 400);
             if (!collide(cur.x, cur.y + 1, cur.shape)) { cur.y++; } 
@@ -275,28 +270,60 @@
         }, 300);
     }
 
-    // --- PACMAN ---
+    // --- PACMAN PRO (YENİLENMİŞ) ---
     function startPacman(canvas, ctx) {
-        document.getElementById('game-title').innerText = "Pac-Man Lite";
+        document.getElementById('game-title').innerText = "Pac-Man Pro";
         canvas.width = 320; canvas.height = 320;
-        let px = 160, py = 160, gx = 40, gy = 40;
+        let px = 160, py = 160, score = 0, mouth = 0, dir = 0;
+        let gx = 40, gy = 40;
+        let dots = [];
+        for(let i=20; i<320; i+=40) for(let j=20; j<320; j+=40) dots.push({x: i, y: j, e: true});
+
         currentInputHandler = (e) => {
-            if(e.key === "ArrowLeft") px -= 20;
-            if(e.key === "ArrowRight") px += 20;
-            if(e.key === "ArrowUp") py -= 20;
-            if(e.key === "ArrowDown") py += 20;
+            if(e.key === "ArrowLeft") dir = Math.PI;
+            if(e.key === "ArrowRight") dir = 0;
+            if(e.key === "ArrowUp") dir = 1.5 * Math.PI;
+            if(e.key === "ArrowDown") dir = 0.5 * Math.PI;
         };
         window.onkeydown = currentInputHandler;
+
         currentGameLoop = setInterval(() => {
-            if(px < 10) px = 10; if(px >= 310) px = 310;
-            if(py < 10) py = 10; if(py >= 310) py = 310;
+            // Hareket
+            if(dir === 0) px += 4; if(dir === Math.PI) px -= 4;
+            if(dir === 1.5 * Math.PI) py -= 4; if(dir === 0.5 * Math.PI) py += 4;
+            
+            // Kenar Koruması (v1.4'ten miras)
+            if(px < 15) px = 15; if(px > 305) px = 305;
+            if(py < 15) py = 15; if(py > 305) py = 305;
+
+            // Yem toplama
+            dots.forEach(d => {
+                if(d.e && Math.abs(px-d.x)<15 && Math.abs(py-d.y)<15) { d.e = false; score += 10; }
+            });
+            document.getElementById('score-display').innerText = "Skor: " + score;
+
+            // Çizim
             ctx.fillStyle = "black"; ctx.fillRect(0,0,320,320);
-            if(gx < px) gx += 2; else gx -= 2;
-            if(gy < py) gy += 2; else gy -= 2;
-            ctx.fillStyle = "yellow"; ctx.beginPath(); ctx.arc(px, py, 12, 0.2 * Math.PI, 1.8 * Math.PI); ctx.lineTo(px, py); ctx.fill();
+            
+            // Yemleri çiz
+            ctx.fillStyle = "white";
+            dots.forEach(d => { if(d.e) ctx.fillRect(d.x, d.y, 4, 4); });
+
+            // Pacman çiz (Ağız animasyonu)
+            mouth = (mouth + 0.1) % 0.5;
+            ctx.fillStyle = "yellow"; ctx.beginPath();
+            ctx.arc(px, py, 13, dir + mouth, dir + 2 * Math.PI - mouth);
+            ctx.lineTo(px, py); ctx.fill();
+
+            // Hayalet
+            if(gx < px) gx += 1.5; else gx -= 1.5;
+            if(gy < py) gy += 1.5; else gy -= 1.5;
             ctx.fillStyle = "red"; ctx.fillRect(gx-10, gy-10, 20, 20);
-            if(Math.abs(px-gx) < 15 && Math.abs(py-gy) < 15) { alert("YAKALANDIN!"); exitGame(); }
-        }, 60);
+            ctx.fillStyle = "white"; ctx.fillRect(gx-6, gy-6, 4, 4); ctx.fillRect(gx+2, gy-6, 4, 4);
+
+            if(Math.abs(px-gx) < 18 && Math.abs(py-gy) < 18) { alert("YAKALANDIN! Skorun: " + score); exitGame(); }
+            if(!dots.some(d => d.e)) { alert("TEBRİKLER! Tüm yemleri topladın!"); exitGame(); }
+        }, 40);
     }
 </script>
 </body>
