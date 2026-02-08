@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v3.3.0</title>
+    <title>Ceylinsu Arslan Arcade v3.4.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -17,16 +17,28 @@
         }
         h1, h2, h3, .brand-font { font-family: 'Orbitron', sans-serif; }
         
+        /* HEADER & NAV GÜNCELLEMESİ (Daha Büyük) */
         header {
-            background: linear-gradient(90deg, #240046, #4a148c); padding: 1rem 5%;
+            background: linear-gradient(90deg, #240046, #4a148c); padding: 1.2rem 5%;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 9999;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-        nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
-        nav a { color: white; text-decoration: none; cursor: pointer; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; transition: 0.3s; }
-        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-        .v-badge { background: var(--accent); color: #000; padding: 4px 12px; border-radius: 4px; font-weight: 800; font-family: 'Orbitron'; font-size: 0.8rem; }
+        nav ul { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
+        nav a { 
+            color: white; text-decoration: none; cursor: pointer; 
+            font-weight: 800; font-size: 1.1rem; /* Büyütüldü */
+            letter-spacing: 1px; transition: 0.3s; 
+            font-family: 'Orbitron', sans-serif;
+        }
+        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
+        
+        .v-badge { 
+            background: var(--accent); color: #000; padding: 6px 15px; 
+            border-radius: 6px; font-weight: 900; font-family: 'Orbitron'; 
+            font-size: 1.2rem; /* Versiyon yazısı büyütüldü */
+            box-shadow: 0 0 10px var(--accent);
+        }
         
         main { padding: 40px 5%; max-width: 1200px; margin: auto; }
         .section { display: none; animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -47,7 +59,6 @@
             background: rgba(0, 229, 255, 0.05); padding: 20px; border-radius: 12px; text-align: center; 
             border: 1px solid rgba(0, 229, 255, 0.3); transition: 0.3s;
         }
-        .stat-box:hover { background: rgba(0, 229, 255, 0.1); transform: scale(1.05); }
 
         /* Oyun Kartları */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
@@ -59,7 +70,7 @@
         .card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 5px var(--accent)); }
         .card h3 { margin: 10px 0; color: #fff; letter-spacing: 1px; }
 
-        /* Arcade Konteyner & Yeni Start Screen */
+        /* Arcade & Start Screen */
         #arcade-container { 
             display: none; flex-direction: column; align-items: center; 
             background: #000; padding: 20px; border-radius: 20px; border: 4px solid var(--panel);
@@ -70,7 +81,7 @@
         #start-screen {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(13, 0, 26, 0.85); z-index: 10;
-            backdrop-filter: blur(8px); /* Buzlu cam efekti */
+            backdrop-filter: blur(8px);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             border-radius: 16px;
         }
@@ -80,9 +91,8 @@
             text-align: center; box-shadow: 0 0 40px rgba(0, 229, 255, 0.2);
             max-width: 80%; width: 300px;
         }
-        .start-modal h2 { color: var(--neon-blue); font-size: 2rem; margin: 0 0 10px 0; text-transform: uppercase; }
+        .start-modal h2 { color: var(--neon-blue); font-size: 2rem; margin: 0 0 10px 0; }
         .start-modal p { font-size: 1.1rem; color: #aaa; margin-bottom: 25px; }
-        
         .play-btn {
             background: var(--neon-blue); color: #000; border: none; padding: 15px 40px;
             font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 50px;
@@ -91,27 +101,32 @@
         }
         .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--neon-blue); background: #fff; }
 
+        /* SKOR GÖSTERGESİ (Font Okunabilirliği) */
+        #score-display { 
+            font-family: 'Verdana', sans-serif; /* 0 Rakamı net okunsun diye */
+            font-weight: bold;
+            font-size: 2rem; 
+            color: var(--neon-blue); 
+            margin-bottom: 15px; 
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
         canvas { background: #000; border: 2px solid #333; max-width: 100%; height: auto; border-radius: 4px; }
         
         .mobile-controls { display: grid; grid-template-areas: ". up ." "left . right" ". down ."; gap: 15px; margin-top: 25px; }
         .control-btn {
             width: 70px; height: 70px; background: rgba(255, 255, 255, 0.05); border: 2px solid var(--neon-blue);
             color: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-            transition: 0.2s;
         }
         .control-btn:active { background: var(--neon-blue); color: #000; }
         
-        /* Günlükler */
-        .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th, td { padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: left; }
-        th { background: #240046; color: var(--neon-blue); font-family: 'Orbitron'; letter-spacing: 1px; }
-        tr:hover { background: rgba(255,255,255,0.02); }
+        th { background: #240046; color: var(--neon-blue); font-family: 'Orbitron'; }
         .v-cell { color: var(--accent); font-weight: 700; font-family: 'Orbitron'; font-size: 1.1rem; }
-        .d-cell { font-size: 1.1rem; color: #e1bee7; line-height: 1.5; }
-
-        .exit-btn { background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 20px; width: 100%; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Orbitron'; transition: 0.3s; }
-        .exit-btn:hover { background: var(--neon-pink); color: white; }
+        .d-cell { font-size: 1.1rem; color: #e1bee7; }
+        .exit-btn { background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 20px; width: 100%; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Orbitron'; }
     </style>
 </head>
 <body>
@@ -126,7 +141,7 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v3.3.0</span>
+    <span class="v-badge">v3.4.0</span>
 </header>
 
 <main>
@@ -136,22 +151,21 @@
             <p>
                 Dijital dünyaya olan tutkumla inşa ettiğim kişisel arcade salonuma hoş geldiniz. 
                 Burada gördüğünüz her oyun, titizlikle geliştirdiğim bir sürecin ürünüdür. 
-                Analitik bakış açımı neon estetiğiyle birleştirerek size en iyi deneyimi sunmaya çalışıyorum.
-                Sistemdeki hataları tek tek ayıklıyor, her sürümde daha stabil ve akıllı bir yapı inşa ediyorum.
+                Sistem her geçen gün daha stabil ve kullanıcı dostu hale geliyor.
+                Son güncellemeyle birlikte okunabilirliği artırdım ve oyun mekaniklerini dengeledim.
             </p>
             <div class="stats-grid">
                 <div class="stat-box"><span>GELİŞTİRİCİ</span><strong class="brand-font">Ceylinsu Arslan</strong></div>
-                <div class="stat-box"><span>UZMANLIK</span><strong class="brand-font">Analitik Yazılım</strong></div>
-                <div class="stat-box"><span>VERSİYON</span><strong class="brand-font" style="color:var(--neon-blue)">v3.3.0 Stable</strong></div>
+                <div class="stat-box"><span>SİSTEM</span><strong class="brand-font" style="color:var(--neon-blue)">v3.4.0 Stable</strong></div>
             </div>
         </div>
     </section>
 
     <section id="games" class="section">
         <div id="game-selection" class="game-grid">
-            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm"></i><h3>CLASSIC SNAKE</h3><p>Hız optimize edildi.</p></div>
-            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes"></i><h3>ADVANCED TETRIS</h3><p>Renkli neon bloklar.</p></div>
-            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN AI</h3><p>Süper Zeki Hayalet.</p></div>
+            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm"></i><h3>CLASSIC SNAKE</h3><p>Hedef: 100 Puan!</p></div>
+            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes"></i><h3>ADVANCED TETRIS</h3><p>Neon Bloklar.</p></div>
+            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN AI</h3><p>Yavaşlatılmış Hayalet.</p></div>
         </div>
 
         <div id="arcade-container">
@@ -164,7 +178,7 @@
                 </div>
             </div>
 
-            <div id="score-display" style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--neon-blue); margin-bottom: 15px; text-shadow: 0 0 10px var(--neon-blue);">0</div>
+            <div id="score-display">0</div>
             <canvas id="stage"></canvas>
             
             <div class="mobile-controls">
@@ -199,14 +213,11 @@
             <table>
                 <thead><tr><th>Versiyon</th><th>Güncelleme Detayları</th></tr></thead>
                 <tbody>
-                    <tr><td class="v-cell">v3.3.0</td><td class="d-cell">Pac-Man hayalet zekası düzeltildi (donma sorunu giderildi). Başlat ekranı modernize edildi (Glassmorphism). Tipografi iyileştirildi.</td></tr>
-                    <tr><td class="v-cell">v3.2.0</td><td class="d-cell">Klavye yön tuşu bağlantı hatası düzeltildi. Snake hızı yavaşlatıldı. Tüm geçmiş günlüklere eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.1.0</td><td class="d-cell">Oyun öncesi "Başlat Ekranı" eklendi. Tetris 7 parça ve renklere kavuştu.</td></tr>
-                    <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Ana sayfa Ceylinsu'nun anlatımıyla kişiselleştirildi. Snake klasik tasarıma geçti.</td></tr>
-                    <tr><td class="v-cell">v2.9.0</td><td class="d-cell">Snake skor sıfırlama mekanizması ve Log tablosu düzeni.</td></tr>
-                    <tr><td class="v-cell">v2.8.0</td><td class="d-cell">Pac-Man temel AI ve Geliştirici Profili.</td></tr>
-                    <tr><td class="v-cell">v2.0.0</td><td class="d-cell">Akademik notlar ve film bölümleri.</td></tr>
-                    <tr><td class="v-cell">v1.0.0</td><td class="d-cell">Sistem başlangıcı.</td></tr>
+                    <tr><td class="v-cell">v3.4.0</td><td class="d-cell">Pac-Man hayalet hızı düşürüldü (oyuncu hızının yarısı). Snake kazanma skoru 100 oldu. Menü ve Versiyon yazıları büyütüldü. Skor fontu (0 rakamı) düzeltildi.</td></tr>
+                    <tr><td class="v-cell">v3.3.0</td><td class="d-cell">Pac-Man hayalet zekası düzeltildi. Başlat ekranı modernize edildi (Glassmorphism).</td></tr>
+                    <tr><td class="v-cell">v3.2.0</td><td class="d-cell">Klavye yön tuşu düzeltmesi ve Snake hız optimizasyonu.</td></tr>
+                    <tr><td class="v-cell">v3.1.0</td><td class="d-cell">Oyun öncesi "Başlat Ekranı" ve Gelişmiş Tetris.</td></tr>
+                    <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Kişisel profil ve klasik Snake.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -216,7 +227,6 @@
 <script>
     let loop = null, currentInput = null, activeGame = null;
 
-    // --- GENEL KONTROLLER ---
     window.addEventListener("keydown", (e) => {
         const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "];
         if(keys.includes(e.key) || keys.includes(e.code)) {
@@ -239,9 +249,9 @@
         document.getElementById('start-screen').style.display = 'flex';
         
         const details = { 
-            snake: { t: 'CLASSIC SNAKE', d: 'Elmaları topla, kuyruğunu ısırma!', i: 'fas fa-worm' },
-            tetris: { t: 'ADVANCED TETRIS', d: 'Satırları tamamla, yukarı taşma!', i: 'fas fa-shapes' }, 
-            pacman: { t: 'PAC-MAN AI', d: 'Yemleri topla, hayaletten kaç!', i: 'fas fa-ghost' }
+            snake: { t: 'CLASSIC SNAKE', d: 'Hedef: 100 Puan', i: 'fas fa-worm' },
+            tetris: { t: 'ADVANCED TETRIS', d: 'Satırları tamamla', i: 'fas fa-shapes' }, 
+            pacman: { t: 'PAC-MAN AI', d: 'Hayalet artık daha yavaş!', i: 'fas fa-ghost' }
         };
         
         document.getElementById('start-title').innerText = details[type].t;
@@ -272,9 +282,7 @@
         currentInput = null;
     }
 
-    // --- OYUN MOTORLARI ---
-
-    // 1. SNAKE (v3.2 Stable)
+    // --- SNAKE (v3.4 - Hedef: 100 Puan) ---
     function startSnake(cvs, ctx) {
         cvs.width = 320; cvs.height = 320;
         let snake = [{x:160, y:160}, {x:140, y:160}], dx=20, dy=0, food={x:60,y:60}, score=0;
@@ -293,6 +301,11 @@
             snake.unshift(head);
             if(head.x===food.x && head.y===food.y){
                 score+=10; document.getElementById('score-display').innerText=score;
+                // KAZANMA KONTROLÜ
+                if(score >= 100) {
+                    alert('TEBRİKLER CEYLİNSU! 100 PUANA ULAŞTIN! 🏆');
+                    exitGame(); return;
+                }
                 food={x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20};
             } else snake.pop();
             ctx.fillStyle='#ff0055'; ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, 7); ctx.fill();
@@ -300,7 +313,7 @@
         }, 180); 
     }
 
-    // 2. TETRIS (v3.1 Stable)
+    // --- TETRIS (v3.1) ---
     function startTetris(cvs, ctx) {
         cvs.width = 240; cvs.height = 400;
         const rows = 20, cols = 12;
@@ -341,11 +354,12 @@
         }, 350);
     }
 
-    // 3. PAC-MAN (v3.3 SMART AI FIX)
+    // --- PAC-MAN (v3.4 - Yavaşlatılmış Hayalet) ---
     function startPacman(cvs, ctx) {
         cvs.width=320; cvs.height=320;
         let px=40, py=40, gx=240, gy=240, score=0, dir=0;
-        // 1=Duvar, 0=Yol
+        let ghostTick = 0; // Hayalet hız sayacı
+        
         const maze = [
             [1,1,1,1,1,1,1,1], [1,0,0,0,1,0,0,1], [1,0,1,0,1,0,1,1], [1,0,0,0,0,0,0,1],
             [1,1,0,1,1,1,0,1], [1,0,0,0,0,1,0,1], [1,0,1,1,0,0,0,1], [1,1,1,1,1,1,1,1]
@@ -357,26 +371,22 @@
             let nx=px, ny=py;
             if(e.key==='ArrowRight') {nx+=40; dir=0} if(e.key==='ArrowLeft') {nx-=40; dir=Math.PI}
             if(e.key==='ArrowUp') {ny-=40; dir=1.5*Math.PI} if(e.key==='ArrowDown') {ny+=40; dir=0.5*Math.PI}
-            // Duvar kontrolü
             if(maze[Math.floor(ny/40)][Math.floor(nx/40)]===0){px=nx; py=ny}
         };
 
         loop = setInterval(() => {
-            // Çizim
             ctx.fillStyle='black'; ctx.fillRect(0,0,320,320);
-            ctx.fillStyle='#240046'; // Duvar rengi
+            ctx.fillStyle='#240046'; 
             for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===1) {
                 ctx.fillRect(c*40,r*40,40,40); 
                 ctx.strokeStyle='#4a148c'; ctx.strokeRect(c*40,r*40,40,40);
             }
             
-            // Yemler
             ctx.fillStyle='#ffeb3b'; 
             let remaining = 0;
             dots.forEach(d=>{
                 if(d.e){
                     remaining++; ctx.beginPath(); ctx.arc(d.x,d.y,4,0,7); ctx.fill();
-                    // Yeme kontrolü
                     if(Math.abs(px+20-d.x)<10 && Math.abs(py+20-d.y)<10){
                         d.e=false; score+=10; document.getElementById('score-display').innerText=score;
                     }
@@ -384,53 +394,39 @@
             });
             if(remaining===0){ alert('TEBRİKLER! KAZANDIN!'); exitGame(); return; }
 
-            // --- ZEKİ HAYALET (v3.3 Fix) ---
-            // 4 yönü kontrol et: [dx, dy]
-            let moves = [{x:0, y:-40}, {x:0, y:40}, {x:-40, y:0}, {x:40, y:0}];
-            let bestMove = null;
-            let minDist = 99999;
+            // --- HAYALET MANTIĞI (HIZ LİMİTLİ) ---
+            ghostTick++;
+            if(ghostTick % 2 !== 0) { // Hayalet sadece TEK sayılarda hareket eder (Yarı hız)
+                let moves = [{x:0, y:-40}, {x:0, y:40}, {x:-40, y:0}, {x:40, y:0}];
+                let bestMove = null;
+                let minDist = 99999;
 
-            moves.forEach(m => {
-                let checkX = gx + m.x;
-                let checkY = gy + m.y;
-                // Sınır ve Duvar kontrolü
-                if(checkX >= 0 && checkX < 320 && checkY >= 0 && checkY < 320) {
-                    let r = Math.floor(checkY / 40);
-                    let c = Math.floor(checkX / 40);
-                    if(maze[r][c] === 0) { // Eğer yol ise
-                        // Pacman'e olan mesafeyi ölç (Pythagoras)
-                        let dist = Math.sqrt(Math.pow(px - checkX, 2) + Math.pow(py - checkY, 2));
-                        if(dist < minDist) {
-                            minDist = dist;
-                            bestMove = m;
+                moves.forEach(m => {
+                    let checkX = gx + m.x;
+                    let checkY = gy + m.y;
+                    if(checkX >= 0 && checkX < 320 && checkY >= 0 && checkY < 320) {
+                        let r = Math.floor(checkY / 40);
+                        let c = Math.floor(checkX / 40);
+                        if(maze[r][c] === 0) { 
+                            let dist = Math.sqrt(Math.pow(px - checkX, 2) + Math.pow(py - checkY, 2));
+                            if(dist < minDist) { minDist = dist; bestMove = m; }
                         }
                     }
-                }
-            });
-
-            // En iyi hamleyi yap (Hız kontrolü için her tickte hareket ettirmiyoruz, 
-            // ama burada grid bazlı basit hareket var, o yüzden direkt atıyoruz)
-            if(bestMove) {
-                gx += bestMove.x;
-                gy += bestMove.y;
+                });
+                if(bestMove) { gx += bestMove.x; gy += bestMove.y; }
             }
 
-            // Hayalet Çiz
+            // Çizim
             ctx.fillStyle='#ff0055'; 
             ctx.beginPath(); ctx.arc(gx+20, gy+20, 16, 0, 7); ctx.fill();
-            // Gözler
             ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(gx+14, gy+16, 4, 0, 7); ctx.arc(gx+26, gy+16, 4, 0, 7); ctx.fill();
             ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(gx+14, gy+16, 2, 0, 7); ctx.arc(gx+26, gy+16, 2, 0, 7); ctx.fill();
 
-            // Çarpışma
             if(Math.abs(px-gx)<20 && Math.abs(py-gy)<20){ alert('YAKALANDIN! Skor: ' + score); exitGame(); }
-
-            // Pac-Man Çiz
             ctx.fillStyle='#ffeb3b'; ctx.beginPath(); ctx.arc(px+20,py+20,16,dir+0.2,dir+6.1); ctx.lineTo(px+20,py+20); ctx.fill();
 
-        }, 250); // Hız biraz daha yavaş ki taktik yapılabilsin
+        }, 220);
     }
 </script>
 </body>
 </html>
-
