@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v3.0.0</title>
+    <title>Ceylinsu Arslan Arcade v3.1.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
@@ -30,33 +29,36 @@
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Geliştirilmiş Ana Sayfa (Ceylinsu'nun Ağzından) */
+        /* Ana Sayfa */
         .profile-card {
             background: linear-gradient(135deg, var(--panel), #2b0052);
             border: 2px solid var(--neon-blue); border-radius: 20px; padding: 30px;
             margin-top: 20px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
         }
-        .profile-card h1 { color: #fff; margin-bottom: 10px; font-size: 1.8rem; }
-        .profile-card p { font-family: 'Rajdhani'; font-size: 1.2rem; line-height: 1.6; font-weight: 500; }
-
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px; }
         .stat-box { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid var(--accent); }
-        .stat-box span { display: block; font-size: 0.75rem; color: var(--accent); margin-bottom: 5px; }
-        .stat-box strong { font-size: 1rem; color: #fff; letter-spacing: 1px; }
 
-        .game-grid, .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .card { 
             background: var(--panel); border: 2px solid var(--neon-blue); padding: 25px; 
             border-radius: 15px; text-align: center; cursor: pointer; transition: 0.3s;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--neon-blue); }
-        .card i { font-size: 3rem; color: var(--accent); margin-bottom: 15px; display: block; }
 
+        /* Arcade & Start Screen */
         #arcade-container { 
             display: none; flex-direction: column; align-items: center; 
             background: #000; padding: 20px; border-radius: 15px; border: 3px solid var(--accent);
+            position: relative;
         }
-        canvas { background: #000; border: 2px solid #333; max-width: 100%; height: auto; box-shadow: 0 0 15px rgba(255,255,255,0.1); }
+        #start-screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 0, 26, 0.95); z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-radius: 12px; text-align: center; padding: 20px; box-sizing: border-box;
+        }
+        canvas { background: #000; border: 2px solid #333; max-width: 100%; height: auto; }
+        
         .mobile-controls { display: grid; grid-template-areas: ". up ." "left . right" ". down ."; gap: 12px; margin-top: 20px; }
         .control-btn {
             width: 65px; height: 65px; background: rgba(0, 229, 255, 0.1); border: 2px solid var(--neon-blue);
@@ -66,11 +68,9 @@
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 10px; border: 2px solid var(--accent); margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 18px; border-bottom: 1px solid #3d0066; text-align: left; }
-        th { background: #2b0052; color: var(--neon-blue); text-transform: uppercase; font-size: 0.8rem; }
-        .v-cell { color: var(--accent); font-weight: bold; min-width: 100px; font-size: 1rem; }
-        .d-cell { font-family: 'Rajdhani'; font-size: 1.1rem; color: #e1bee7; }
-
-        .btn { background: var(--neon-blue); border: none; padding: 12px 24px; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; width: 100%; margin-top: 15px; }
+        
+        .btn { background: var(--neon-blue); border: none; padding: 15px 30px; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; font-family: 'Orbitron'; }
+        .exit-btn { background: #ff0055; color: #fff; margin-top: 15px; width: 100%; padding: 10px; border: none; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -85,35 +85,38 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v3.0.0</span>
+    <span class="v-badge">v3.1.0</span>
 </header>
 
 <main>
     <section id="home" class="section active">
         <div class="profile-card">
             <h1>Merhaba, Ben Ceylinsu Arslan! 👾</h1>
-            <p>
-                Dijital dünyaya ve oyun mekaniklerine olan tutkumla inşa ettiğim kişisel arcade salonuma hoş geldiniz. 
-                Burada gördüğünüz her oyun ve tasarım detayı, titizlikle üzerinde çalıştığım bir geliştirme sürecinin ürünüdür.
-                Matematik ve Fizik bilimlerine olan ilgimi, yazılımın mantıksal derinliğiyle birleştirerek hatalardan arındırılmış, 
-                akıcı bir kullanıcı deneyimi sunmayı hedefliyorum. Versiyonlar ilerledikçe bu platformu daha da zekileştirmeye devam edeceğim.
+            <p style="font-family: 'Rajdhani'; font-size: 1.2rem;">
+                Dijital dünyaya olan tutkumla inşa ettiğim kişisel arcade salonuma hoş geldiniz. 
+                Burada gördüğünüz her oyun, titizlikle geliştirdiğim bir sürecin ürünüdür. 
+                Analitik bakış açımı neon estetiğiyle birleştirerek size en iyi deneyimi sunmaya çalışıyorum.
             </p>
             <div class="stats-grid">
                 <div class="stat-box"><span>GELİŞTİRİCİ</span><strong>Ceylinsu Arslan</strong></div>
-                <div class="stat-box"><span>TEKNOLOJİ</span><strong>HTML5 / JS / Neon</strong></div>
-                <div class="stat-box"><span>SİSTEM</span><strong>v3.0.0 Stable</strong></div>
-                <div class="stat-box"><span>HEDEF</span><strong>Full Optimization</strong></div>
+                <div class="stat-box"><span>SİSTEM</span><strong>v3.1.0 Stable</strong></div>
             </div>
         </div>
     </section>
 
     <section id="games" class="section">
         <div id="game-selection" class="game-grid">
-            <div class="card" onclick="initGame('snake')"><i class="fas fa-worm"></i><h3>CLASSIC SNAKE</h3><p>Gerçek yılan deneyimi.</p></div>
-            <div class="card" onclick="initGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS</h3><p>Yukarı ok ile döndür.</p></div>
-            <div class="card" onclick="initGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN</h3><p>Zeki hayaletten kaç.</p></div>
+            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm" style="font-size:3rem; color:var(--accent)"></i><h3>CLASSIC SNAKE</h3><p>Gerçek elmalı yılan.</p></div>
+            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes" style="font-size:3rem; color:var(--accent)"></i><h3>ADVANCED TETRIS</h3><p>Renkli ve tam sürüm.</p></div>
+            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost" style="font-size:3rem; color:var(--accent)"></i><h3>PAC-MAN AI</h3><p>Zeki kovalayıcı.</p></div>
         </div>
+
         <div id="arcade-container">
+            <div id="start-screen">
+                <h2 id="start-title" style="color:var(--neon-blue)">OYUN ADI</h2>
+                <p id="start-desc" style="font-family:'Rajdhani'">Kontroller: Ok tuşları veya butonlar.</p>
+                <button class="btn" id="actual-start-btn">OYUNU BAŞLAT</button>
+            </div>
             <div id="score-display" style="font-size: 1.5rem; color: var(--neon-blue); margin-bottom: 10px;">Skor: 0</div>
             <canvas id="stage"></canvas>
             <div class="mobile-controls">
@@ -122,38 +125,22 @@
                 <div class="control-btn" style="grid-area: right" onclick="handleInput('ArrowRight')"><i class="fas fa-chevron-right"></i></div>
                 <div class="control-btn" style="grid-area: down" onclick="handleInput('ArrowDown')"><i class="fas fa-chevron-down"></i></div>
             </div>
-            <button class="btn" onclick="exitGame()" style="background:#ff0055; color:#fff">OYUNDAN ÇIK</button>
+            <button class="exit-btn" onclick="exitGame()">OYUNDAN ÇIK</button>
         </div>
     </section>
 
-    <section id="notes" class="section">
-        <h2>📚 Akademik Arşivim</h2>
-        <div class="info-grid">
-            <div class="card"><h3>Matematik</h3><p>Diziler, Limit ve Türev</p></div>
-            <div class="card"><h3>Fizik</h3><p>Elektromanyetizma ve Modern Fizik</p></div>
-        </div>
-    </section>
-
-    <section id="movies" class="section">
-        <h2>🎬 Favori Filmlerim</h2>
-        <div class="info-grid">
-            <div class="card"><h3>Inception</h3><p>Katmanlı Gerçeklik</p></div>
-            <div class="card"><h3>Interstellar</h3><p>Zamanın Göreliliği</p></div>
-        </div>
-    </section>
-
+    <section id="notes" class="section"><h2>📚 Akademik Arşiv</h2><div class="game-grid"><div class="card"><h3>Matematik</h3><p>Diziler & Limit</p></div><div class="card"><h3>Fizik</h3><p>Optik & Dalgalar</p></div></div></section>
+    <section id="movies" class="section"><h2>🎬 Favorilerim</h2><div class="game-grid"><div class="card"><h3>Interstellar</h3><p>Bilim Kurgu</p></div><div class="card"><h3>Inception</h3><p>Rüya Katmanları</p></div></div></section>
+    
     <section id="logs" class="section">
         <h2>📜 Geliştirme Günlükleri</h2>
         <div class="log-container">
             <table>
-                <thead><tr><th>Versiyon</th><th>Yapılan İyileştirmeler</th></tr></thead>
+                <thead><tr><th>Versiyon</th><th>Detay</th></tr></thead>
                 <tbody>
-                    <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Ana sayfa metni 1. şahıs ağzına çevrildi. Snake oyunu görsel olarak modernize edildi ve klasik yapıya büründü.</td></tr>
-                    <tr><td class="v-cell">v2.9.0</td><td class="d-cell">Snake skoru her başlangıçta sıfırlandı. Günlükler tablosu simetrik hale getirildi.</td></tr>
-                    <tr><td class="v-cell">v2.8.0</td><td class="d-cell">Pac-Man hayalet AI (Yol bulma) eklendi. Ana sayfaya geliştirici profili eklendi.</td></tr>
-                    <tr><td class="v-cell">v2.7.0</td><td class="d-cell">Pac-Man zafer mesajı ve yem toplama sistemi tamamlandı.</td></tr>
-                    <tr><td class="v-cell">v2.6.0</td><td class="d-cell">Tetris yukarı ok döndürme işlevi eklendi. Oyunlara ikonlar yerleştirildi.</td></tr>
-                    <tr><td class="v-cell">v1.0 - v2.5</td><td class="d-cell">Arcade çekirdek motoru, Tetris tamiri ve mobil uyumluluk çalışmaları.</td></tr>
+                    <tr><td style="color:var(--accent)">v3.1.0</td><td>Oyun öncesi "BAŞLA" butonu eklendi. Tetris 7 şekil ve renkli neon bloklarla geliştirildi.</td></tr>
+                    <tr><td style="color:var(--accent)">v3.0.0</td><td>Ana sayfa Ceylinsu'nun ağzından yazıldı. Snake klasik elmalı görünüme kavuştu.</td></tr>
+                    <tr><td style="color:var(--accent)">v2.9.0</td><td>Snake skoru sıfırlama fix ve Log tablosu düzeni.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -161,16 +148,35 @@
 </main>
 
 <script>
-    let loop = null, currentInput = null;
-    window.addEventListener("keydown", (e) => {
-        if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code)) e.preventDefault();
-        if(currentInput) currentInput({key: e.key});
-    });
+    let loop = null, currentInput = null, activeGame = null;
 
     function showPage(id) {
         exitGame();
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
+    }
+
+    function prepareGame(type) {
+        activeGame = type;
+        document.getElementById('game-selection').style.display = 'none';
+        document.getElementById('arcade-container').style.display = 'flex';
+        document.getElementById('start-screen').style.display = 'flex';
+        
+        const titles = { snake: 'CLASSIC SNAKE', tetris: 'ADVANCED TETRIS', pacman: 'PAC-MAN AI' };
+        document.getElementById('start-title').innerText = titles[type];
+        document.getElementById('up-icon').className = (type === 'tetris') ? 'fas fa-rotate' : 'fas fa-chevron-up';
+
+        document.getElementById('actual-start-btn').onclick = () => {
+            document.getElementById('start-screen').style.display = 'none';
+            initGame(type);
+        };
+    }
+
+    function initGame(type) {
+        const cvs = document.getElementById('stage'), ctx = cvs.getContext('2d');
+        if(type === 'snake') startSnake(cvs, ctx);
+        if(type === 'tetris') startTetris(cvs, ctx);
+        if(type === 'pacman') startPacman(cvs, ctx);
     }
 
     function handleInput(k) { if(currentInput) currentInput({key: k}); }
@@ -182,72 +188,34 @@
         currentInput = null;
     }
 
-    function initGame(type) {
-        document.getElementById('game-selection').style.display = 'none';
-        document.getElementById('arcade-container').style.display = 'flex';
-        document.getElementById('score-display').innerText = 'Skor: 0';
-        const cvs = document.getElementById('stage'), ctx = cvs.getContext('2d');
-        document.getElementById('up-icon').className = (type === 'tetris') ? 'fas fa-rotate' : 'fas fa-chevron-up';
-        if(type === 'snake') startSnake(cvs, ctx);
-        if(type === 'tetris') startTetris(cvs, ctx);
-        if(type === 'pacman') startPacman(cvs, ctx);
-    }
-
-    // --- GELİŞMİŞ CLASSIC SNAKE ---
-    function startSnake(cvs, ctx) {
-        cvs.width = 320; cvs.height = 320;
-        let snake = [{x:160, y:160}, {x:140, y:160}, {x:120, y:160}];
-        let dx=20, dy=0, food={x:60,y:60}, score=0; 
-        currentInput = (e) => {
-            if(e.key==='ArrowUp' && dy===0){dx=0; dy=-20}
-            else if(e.key==='ArrowDown' && dy===0){dx=0; dy=20}
-            else if(e.key==='ArrowLeft' && dx===0){dx=-20; dy=0}
-            else if(e.key==='ArrowRight' && dx===0){dx=20; dy=0}
-        };
-        loop = setInterval(() => {
-            ctx.fillStyle='#000'; ctx.fillRect(0,0,320,320);
-            
-            // Izgara Çizimi (Hafif)
-            ctx.strokeStyle = '#111';
-            for(let i=0; i<320; i+=20) { ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,320); ctx.stroke(); ctx.moveTo(0,i); ctx.lineTo(320,i); ctx.stroke(); }
-
-            let head = {x: snake[0].x+dx, y: snake[0].y+dy};
-            if(head.x<0||head.x>=320||head.y<0||head.y>=320||snake.some(s=>s.x===head.x && s.y===head.y)){
-                alert('Oyun Bitti! Skorunuz: ' + score); exitGame(); return;
-            }
-            snake.unshift(head);
-            if(head.x===food.x && head.y===food.y){
-                score+=10; document.getElementById('score-display').innerText='Skor: '+score;
-                food={x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20};
-            } else snake.pop();
-
-            // Food (Apple)
-            ctx.fillStyle='#ff0000'; ctx.beginPath();
-            ctx.arc(food.x+10, food.y+10, 8, 0, 6.28); ctx.fill();
-
-            // Snake
-            snake.forEach((s, i) => {
-                ctx.fillStyle = (i === 0) ? '#00e5ff' : '#0097a7';
-                ctx.fillRect(s.x+1, s.y+1, 18, 18);
-                if(i===0) { // Head eyes
-                    ctx.fillStyle='black'; ctx.fillRect(s.x+4, s.y+4, 3, 3); ctx.fillRect(s.x+12, s.y+4, 3, 3);
-                }
-            });
-        }, 120);
-    }
-
-    // --- TETRIS (v2.9 Stable) ---
+    // --- GELİŞMİŞ TETRİS (v3.1.0) ---
     function startTetris(cvs, ctx) {
         cvs.width = 240; cvs.height = 400;
         const grid = 20, rows = 20, cols = 12;
-        let board = Array.from({length: rows}, () => Array(cols).fill(0)), score=0;
-        const shapes = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]]];
-        let cur = { x: 4, y: 0, s: shapes[Math.floor(Math.random()*shapes.length)] };
+        let board = Array.from({length: rows}, () => Array(cols).fill(0)), score = 0;
+        
+        const PIECES = [
+            { s: [[1,1,1,1]], c: '#00e5ff' }, // I
+            { s: [[1,1],[1,1]], c: '#ffff00' }, // O
+            { s: [[0,1,0],[1,1,1]], c: '#a020f0' }, // T
+            { s: [[0,1,1],[1,1,0]], c: '#00ff00' }, // S
+            { s: [[1,1,0],[0,1,1]], c: '#ff0000' }, // Z
+            { s: [[1,0,0],[1,1,1]], c: '#0000ff' }, // J
+            { s: [[0,0,1],[1,1,1]], c: '#ffa500' }  // L
+        ];
+
+        let cur = createPiece();
+        function createPiece() {
+            const p = PIECES[Math.floor(Math.random()*PIECES.length)];
+            return { x: 4, y: 0, s: p.s, c: p.c };
+        }
+
         function collide(nx, ny, ns) {
             for(let r=0; r<ns.length; r++) for(let c=0; c<ns[r].length; c++)
                 if(ns[r][c] && (ny+r>=rows || nx+c<0 || nx+c>=cols || board[ny+r][nx+c])) return true;
             return false;
         }
+
         currentInput = (e) => {
             if(e.key==='ArrowLeft' && !collide(cur.x-1, cur.y, cur.s)) cur.x--;
             if(e.key==='ArrowRight' && !collide(cur.x+1, cur.y, cur.s)) cur.x++;
@@ -257,56 +225,68 @@
                 if(!collide(cur.x, cur.y, r)) cur.s = r;
             }
         };
+
         loop = setInterval(() => {
             ctx.fillStyle='black'; ctx.fillRect(0,0,240,400);
             if(!collide(cur.x, cur.y+1, cur.s)) cur.y++;
             else {
-                cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) board[cur.y+dy][cur.x+dx]=1; }));
+                cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) board[cur.y+dy][cur.x+dx]=cur.c; }));
                 board = board.filter(r => r.some(v=>v===0));
                 while(board.length < rows){ board.unshift(Array(cols).fill(0)); score+=100; document.getElementById('score-display').innerText='Skor: '+score;}
-                cur = { x: 4, y: 0, s: shapes[Math.floor(Math.random()*shapes.length)] };
-                if(collide(cur.x, cur.y, cur.s)) exitGame();
+                cur = createPiece();
+                if(collide(cur.x, cur.y, cur.s)) { alert('Oyun Bitti! Skor: ' + score); exitGame(); }
             }
-            board.forEach((r,y)=>r.forEach((v,x)=>{ if(v){ctx.fillStyle='#333'; ctx.fillRect(x*20,y*20,19,19);} }));
-            ctx.fillStyle='#00e5ff'; cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) ctx.fillRect((cur.x+dx)*20,(cur.y+dy)*20,19,19); }));
-        }, 400);
+            board.forEach((r,y)=>r.forEach((v,x)=>{ if(v){ctx.fillStyle=v; ctx.fillRect(x*20,y*20,19,19); ctx.strokeStyle='rgba(255,255,255,0.1)'; ctx.strokeRect(x*20,y*20,19,19);} }));
+            ctx.fillStyle=cur.c; cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) ctx.fillRect((cur.x+dx)*20,(cur.y+dy)*20,19,19); }));
+        }, 300);
     }
 
-    // --- PAC-MAN (v2.9 Stable) ---
-    function startPacman(cvs, ctx) {
+    // --- SNAKE & PACMAN (v3.0'dan Korundu) ---
+    function startSnake(cvs, ctx) {
         cvs.width = 320; cvs.height = 320;
+        let snake = [{x:160, y:160}, {x:140, y:160}], dx=20, dy=0, food={x:60,y:60}, score=0;
+        currentInput = (e) => {
+            if(e.key==='ArrowUp' && dy===0){dx=0; dy=-20} else if(e.key==='ArrowDown' && dy===0){dx=0; dy=20}
+            else if(e.key==='ArrowLeft' && dx===0){dx=-20; dy=0} else if(e.key==='ArrowRight' && dx===0){dx=20; dy=0}
+        };
+        loop = setInterval(() => {
+            ctx.fillStyle='#000'; ctx.fillRect(0,0,320,320);
+            let head = {x: snake[0].x+dx, y: snake[0].y+dy};
+            if(head.x<0||head.x>=320||head.y<0||head.y>=320||snake.some(s=>s.x===head.x && s.y===head.y)){ exitGame(); return; }
+            snake.unshift(head);
+            if(head.x===food.x && head.y===food.y){
+                score+=10; document.getElementById('score-display').innerText='Skor: '+score;
+                food={x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20};
+            } else snake.pop();
+            ctx.fillStyle='red'; ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, 7); ctx.fill();
+            snake.forEach((s,i)=>{ ctx.fillStyle=(i===0)?'#00e5ff':'#0097a7'; ctx.fillRect(s.x+1,s.y+1,18,18); });
+        }, 120);
+    }
+
+    function startPacman(cvs, ctx) {
+        cvs.width=320; cvs.height=320;
         let px=40, py=40, gx=240, gy=240, score=0, dir=0;
-        const maze = [
-            [1,1,1,1,1,1,1,1], [1,0,0,0,1,0,0,1], [1,0,1,0,1,0,1,1], [1,0,0,0,0,0,0,1],
-            [1,1,0,1,1,1,0,1], [1,0,0,0,0,1,0,1], [1,0,1,1,0,0,0,1], [1,1,1,1,1,1,1,1]
-        ];
-        let dots = [];
-        for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===0) dots.push({x: c*40+20, y: r*40+20, e: true});
+        const maze = [[1,1,1,1,1,1,1,1],[1,0,0,0,1,0,0,1],[1,0,1,0,1,0,1,1],[1,0,0,0,0,0,0,1],[1,1,0,1,1,1,0,1],[1,0,0,0,0,1,0,1],[1,0,1,1,0,0,0,1],[1,1,1,1,1,1,1,1]];
+        let dots = []; for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===0) dots.push({x:c*40+20, y:r*40+20, e:true});
         currentInput = (e) => {
             let nx=px, ny=py;
-            if(e.key==='ArrowRight'){nx+=40; dir=0}
-            if(e.key==='ArrowLeft'){nx-=40; dir=Math.PI}
-            if(e.key==='ArrowUp'){ny-=40; dir=1.5*Math.PI}
-            if(e.key==='ArrowDown'){ny+=40; dir=0.5*Math.PI}
+            if(e.key==='ArrowRight'){nx+=40; dir=0} if(e.key==='ArrowLeft'){nx-=40; dir=Math.PI}
+            if(e.key==='ArrowUp'){ny-=40; dir=1.5*Math.PI} if(e.key==='ArrowDown'){ny+=40; dir=0.5*Math.PI}
             if(maze[Math.floor(ny/40)][Math.floor(nx/40)]===0){px=nx; py=ny}
         };
         loop = setInterval(() => {
             ctx.fillStyle='black'; ctx.fillRect(0,0,320,320);
-            ctx.fillStyle='blue';
-            for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===1) ctx.fillRect(c*40, r*40, 39, 39);
-            ctx.fillStyle='white';
-            let remaining = 0;
-            dots.forEach(d => { if(d.e){ remaining++; ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.28); ctx.fill(); if(Math.abs(px+20-d.x)<15 && Math.abs(py+20-d.y)<15){d.e=false; score+=10; document.getElementById('score-display').innerText='Skor: '+score;} }});
-            if(remaining === 0) { alert('TEBRİKLER CEYLİNSU! KAZANDIN!'); exitGame(); return; }
-            let gNextX = gx, gNextY = gy;
-            if(Math.abs(px - gx) > Math.abs(py - gy)) { gNextX += (gx < px) ? 2 : -2; } else { gNextY += (gy < py) ? 2 : -2; }
-            if(maze[Math.floor((gNextY + 20) / 40)][Math.floor((gNextX + 20) / 40)] === 0) { gx = gNextX; gy = gNextY; }
-            else { if(gx < px) gx += 1; else if(gx > px) gx -= 1; if(gy < py) gy += 1; else if (gy > py) gy -= 1; }
-            ctx.fillStyle='red'; ctx.fillRect(gx+5, gy+5, 30, 30);
-            if(Math.abs(px-gx)<25 && Math.abs(py-gy)<25){alert('HAYALET YAKALADI!'); exitGame();}
-            ctx.fillStyle='yellow'; ctx.beginPath(); ctx.arc(px+20, py+20, 15, dir+0.2, dir+6.1); ctx.lineTo(px+20, py+20); ctx.fill();
+            ctx.fillStyle='blue'; for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===1) ctx.fillRect(c*40,r*40,39,39);
+            ctx.fillStyle='white'; let rem=0; dots.forEach(d=>{if(d.e){rem++; ctx.beginPath(); ctx.arc(d.x,d.y,3,0,7); ctx.fill(); if(Math.abs(px+20-d.x)<15 && Math.abs(py+20-d.y)<15){d.e=false; score+=10; document.getElementById('score-display').innerText='Skor: '+score;}}});
+            if(rem===0){alert('KAZANDIN!'); exitGame();}
+            let gX=gx, gY=gy; if(Math.abs(px-gx)>Math.abs(py-gy)) gX+=(gx<px)?2:-2; else gY+=(gy<py)?2:-2;
+            if(maze[Math.floor((gY+20)/40)][Math.floor((gX+20)/40)]===0){gx=gX; gy=gY;}
+            ctx.fillStyle='red'; ctx.fillRect(gx+5,gy+5,30,30);
+            if(Math.abs(px-gx)<25 && Math.abs(py-gy)<25){alert('YAKALANDIN!'); exitGame();}
+            ctx.fillStyle='yellow'; ctx.beginPath(); ctx.arc(px+20,py+20,15,dir+0.2,dir+6.1); ctx.lineTo(px+20,py+20); ctx.fill();
         }, 60);
     }
 </script>
 </body>
 </html>
+
