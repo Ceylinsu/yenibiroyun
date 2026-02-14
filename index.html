@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v4.1.0</title>
+    <title>Ceylinsu Arslan Arcade v4.2.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&family=Verdana:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -28,9 +28,15 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
         nav ul { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
-        nav a { color: white; text-decoration: none; cursor: pointer; font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; transition: 0.3s; font-family: 'Orbitron', sans-serif; }
+        nav a { 
+            color: white; text-decoration: none; cursor: pointer; font-weight: 800; 
+            font-size: 1.1rem; letter-spacing: 1px; transition: 0.3s; font-family: 'Orbitron', sans-serif;
+        }
         nav a:hover { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
-        .v-badge { background: var(--accent); color: #000; padding: 6px 15px; border-radius: 6px; font-weight: 900; font-family: 'Orbitron'; font-size: 1.2rem; box-shadow: 0 0 10px var(--accent); }
+        .v-badge { 
+            background: var(--accent); color: #000; padding: 6px 15px; border-radius: 6px;
+            font-weight: 900; font-family: 'Orbitron'; font-size: 1.2rem; box-shadow: 0 0 10px var(--accent);
+        }
         
         main { padding: 40px 5%; max-width: 1200px; margin: auto; }
         .section { display: none; animation: fadeIn 0.5s ease; }
@@ -38,23 +44,50 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ANA SAYFA */
-        .profile-card { background: linear-gradient(135deg, rgba(43,0,82,0.9), rgba(20,0,40,0.95)); border: 1px solid var(--neon-blue); border-radius: 20px; padding: 40px; margin-top: 20px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); backdrop-filter: blur(5px); }
-        .profile-card h1 { color: #fff; margin-bottom: 10px; font-size: 2.5rem; text-shadow: 0 0 15px rgba(0,229,255,0.5); }
+        .profile-card { 
+            background: linear-gradient(135deg, rgba(43,0,82,0.9), rgba(20,0,40,0.95));
+            border: 1px solid var(--neon-blue); border-radius: 20px; padding: 40px; margin-top: 20px; 
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); backdrop-filter: blur(5px);
+        }
+        .profile-card h1 { 
+            color: #fff; margin-bottom: 10px; font-size: 2.5rem; text-shadow: 0 0 15px rgba(0,229,255,0.5); 
+        }
         .profile-card p { font-size: 1.25rem; line-height: 1.8; color: #d1c4e9; margin-bottom: 25px; }
         .skills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
-        .skill-badge { background: rgba(0,229,255,0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); padding: 8px 15px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
+        .skill-badge { 
+            background: rgba(0,229,255,0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue);
+            padding: 8px 15px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; 
+        }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .stat-box { background: rgba(0, 0, 0, 0.4); padding: 25px; border-radius: 12px; text-align: center; border-left: 4px solid var(--accent); }
+        .stat-box { 
+            background: rgba(0, 0, 0, 0.4); padding: 25px; border-radius: 12px; 
+            text-align: center; border-left: 4px solid var(--accent);
+        }
 
-        /* KARTLAR (OYUN & NOT) */
+        /* KARTLAR */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: var(--panel); border: 2px solid rgba(0, 229, 255, 0.3); padding: 30px; border-radius: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); border-color: var(--neon-blue); }
-        .card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 5px var(--accent)); }
+        .card { 
+            background: var(--panel); border: 2px solid rgba(0, 229, 255, 0.3); 
+            padding: 30px; border-radius: 16px; text-align: center; cursor: pointer; 
+            transition: all 0.3s ease; position: relative; overflow: hidden; 
+        }
+        .card:hover { 
+            transform: translateY(-8px); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); border-color: var(--neon-blue);
+        }
+        .card i { 
+            font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; 
+            filter: drop-shadow(0 0 5px var(--accent)); 
+        }
         
         /* FİLM KARTLARI */
-        .movie-card { padding: 0; height: 350px; display: flex; flex-direction: column; justify-content: flex-end; background-size: cover; background-position: center; position: relative; border: 2px solid #444; }
-        .movie-overlay { background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2)); width: 100%; padding: 20px; box-sizing: border-box; }
+        .movie-card { 
+            padding: 0; height: 350px; display: flex; flex-direction: column; justify-content: flex-end; 
+            background-size: cover; background-position: center; position: relative; border: 2px solid #444;
+        }
+        .movie-overlay { 
+            background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2)); width: 100%; 
+            padding: 20px; box-sizing: border-box; 
+        }
         .movie-card h3 { color: #fff; margin: 0; text-shadow: 0 2px 4px #000; font-size: 1.4rem; }
         .movie-card:hover { border-color: var(--accent); }
 
@@ -63,60 +96,116 @@
         .note-card h3 { color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.5rem; }
         .note-card ul { padding-left: 20px; margin-top: 15px; flex-grow: 1; }
         .note-card li { margin-bottom: 10px; font-size: 1.05rem; line-height: 1.5; color: #e1bee7; }
-        .yt-link { display: inline-block; margin-top: 15px; padding: 10px 15px; background: rgba(255,0,0,0.1); color: #ff4d4d; text-decoration: none; border-radius: 8px; border: 1px solid #ff4d4d; font-weight: bold; transition: 0.3s; text-align: center; }
+        .yt-link { 
+            display: inline-block; margin-top: 15px; padding: 10px 15px; background: rgba(255,0,0,0.1);
+            color: #ff4d4d; text-decoration: none; border-radius: 8px; border: 1px solid #ff4d4d; 
+            font-weight: bold; transition: 0.3s; text-align: center;
+        }
         .yt-link:hover { background: #ff4d4d; color: white; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
 
-        /* YENİ MEB LİNKLERİ STİLİ */
+        /* MEB Linkleri */
         details > summary { list-style: none; outline: none; transition: 0.3s; }
         details > summary::-webkit-details-marker { display: none; }
-        .meb-link { display: inline-block; padding: 10px; border-radius: 6px; font-weight: bold; text-align: center; text-decoration: none; transition: 0.3s; font-size: 0.95rem; flex: 1; }
+        .meb-link { 
+            display: inline-block; padding: 10px; border-radius: 6px; font-weight: bold; 
+            text-align: center; text-decoration: none; transition: 0.3s; font-size: 0.95rem; flex: 1; 
+        }
         .meb-tyt { border: 1px solid var(--neon-blue); color: var(--neon-blue); background: rgba(0, 229, 255, 0.1); }
         .meb-tyt:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 10px var(--neon-blue); }
         .meb-ayt { border: 1px solid var(--accent); color: var(--accent); background: rgba(255, 109, 0, 0.1); }
         .meb-ayt:hover { background: var(--accent); color: #000; box-shadow: 0 0 10px var(--accent); }
 
-        /* ARCADE KONTEYNERİ & SKOR TABLOSU */
-        #arcade-container { display: none; flex-direction: column; align-items: center; background: #000; padding: 20px; border-radius: 20px; border: 4px solid var(--panel); position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.8); min-height: 500px; }
-        .game-wrapper { display: flex; gap: 30px; align-items: flex-start; justify-content: center; flex-wrap: wrap; transition: all 0.3s ease; }
+        /* ARCADE KONTEYNERİ */
+        #arcade-container { 
+            display: none; flex-direction: column; align-items: center; background: #000; 
+            padding: 20px; border-radius: 20px; border: 4px solid var(--panel); position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8); min-height: 500px; 
+        }
+        .game-wrapper { display: flex; gap: 30px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
         
-        .score-board { text-align: center; margin-bottom: 15px; background: rgba(0, 229, 255, 0.1); padding: 10px 30px; border-radius: 10px; border: 1px solid var(--neon-blue); }
+        .score-board { 
+            text-align: center; margin-bottom: 15px; background: rgba(0, 229, 255, 0.1); 
+            padding: 10px 30px; border-radius: 10px; border: 1px solid var(--neon-blue);
+        }
         #score-display { font-family: 'Verdana', sans-serif; font-weight: bold; font-size: 2.5rem; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); margin:0;}
         #high-score-display { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--accent); margin-top: 5px; font-weight: bold; }
         
-        canvas { background: #000; border: 2px solid #333; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.9); max-width: 100%; height: auto; }
-        #tetris-ui { display: none; flex-direction: column; gap: 20px; background: var(--panel); padding: 20px; border-radius: 12px; border: 1px solid #333; }
+        canvas { 
+            background: #000; border: 2px solid #333; border-radius: 8px; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.9); max-width: 100%; height: auto;
+        }
+        #tetris-ui { 
+            display: none; flex-direction: column; gap: 20px; background: var(--panel); 
+            padding: 20px; border-radius: 12px; border: 1px solid #333; 
+        }
         #tetris-ui h3 { margin: 0; color: var(--accent); font-size: 1.2rem; text-align: center; }
 
-        /* MODALLAR (FİLM & OYUN CİHAZ SEÇİMİ) */
-        #movie-modal, #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 0, 26, 0.9); z-index: 10000; backdrop-filter: blur(8px); display: none; flex-direction: column; align-items: center; justify-content: center; }
-        .modal-box { background: linear-gradient(145deg, #1a0033, #0d001a); padding: 40px; border-radius: 20px; border: 2px solid var(--neon-blue); text-align: center; max-width: 80%; width: 450px; overflow: hidden; }
+        /* MODALLAR */
+        #movie-modal, #start-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(13, 0, 26, 0.9); z-index: 10000; backdrop-filter: blur(8px); 
+            display: none; flex-direction: column; align-items: center; justify-content: center; 
+        }
+        .modal-box { 
+            background: linear-gradient(145deg, #1a0033, #0d001a); padding: 40px; 
+            border-radius: 20px; border: 2px solid var(--neon-blue); text-align: center; 
+            max-width: 80%; width: 450px; overflow: hidden;
+        }
         .modal-box h2 { color: var(--neon-blue); font-size: 2rem; margin: 0 0 15px 0; }
         
         .movie-img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 2px solid #333; }
-        .platform-badge { display: inline-block; background: var(--primary); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: bold; border: 1px solid var(--neon-pink); margin-bottom: 15px; }
+        .platform-badge { 
+            display: inline-block; background: var(--primary); color: white; padding: 5px 15px;
+            border-radius: 50px; font-size: 0.9rem; font-weight: bold; border: 1px solid var(--neon-pink); margin-bottom: 15px;
+        }
         .modal-box ul { list-style: none; padding: 0; text-align: left; max-height: 200px; overflow-y: auto;}
         .modal-box li { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem; }
         
         .device-selector { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-        .device-btn { flex: 1; padding: 15px 10px; font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; border-radius: 12px; cursor: pointer; transition: 0.3s; border: none; min-width: 140px; }
+        .device-btn { 
+            flex: 1; padding: 15px 10px; font-family: 'Orbitron'; font-weight: 900; 
+            font-size: 1.1rem; border-radius: 12px; cursor: pointer; transition: 0.3s; border: none; min-width: 140px;
+        }
         .desktop-btn { background: rgba(0, 229, 255, 0.1); color: var(--neon-blue); border: 2px solid var(--neon-blue); }
         .desktop-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
         .mobile-btn { background: rgba(255, 0, 85, 0.1); color: var(--neon-pink); border: 2px solid var(--neon-pink); }
         .mobile-btn:hover { background: var(--neon-pink); color: #000; box-shadow: 0 0 15px var(--neon-pink); }
 
-        .play-btn { background: var(--neon-blue); color: #000; border: none; padding: 15px 40px; font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        .exit-btn { background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 15px; width: 100%; max-width: 300px; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Orbitron'; }
+        .play-btn { 
+            background: var(--neon-blue); color: #000; border: none; padding: 15px 40px; 
+            font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 50px; 
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
+        }
+        .exit-btn { 
+            background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 15px;
+            width: 100%; max-width: 300px; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Orbitron';
+        }
 
         /* Mobil Kontroller */
-        .mobile-controls { display: none; grid-template-areas: ". up ." "left . right" ". down ."; gap: 10px; margin-top: 15px; }
-        .control-btn { width: 60px; height: 60px; background: rgba(255, 255, 255, 0.1); border: 2px solid var(--neon-blue); color: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; -webkit-tap-highlight-color: transparent; }
+        .mobile-controls { 
+            display: none; grid-template-areas: ". up ." "left . right" ". down ."; 
+            gap: 10px; margin-top: 10px; margin-bottom: 20px; /* Boşluklar ayarlandı */
+        }
+        .control-btn { 
+            width: 60px; height: 60px; background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--neon-blue); color: var(--neon-blue); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem; 
+            -webkit-tap-highlight-color: transparent;
+        }
         .control-btn:active { background: var(--neon-blue); color: #000; }
 
-        /* MOBİL OYUN MODU */
-        .mobile-active #arcade-container { padding: 10px; min-height: auto; height: 100vh; border: none; border-radius: 0; box-shadow: none; justify-content: center; }
-        .mobile-active #stage { max-height: 45vh; width: auto; max-width: 95%; }
+        /* MOBİL OYUN MODU - DÜZENLEME BURADA YAPILDI */
+        .mobile-active #arcade-container { 
+            padding: 10px; min-height: auto; height: 100vh; border: none; border-radius: 0; box-shadow: none; 
+            justify-content: flex-start; /* Okların yukarı çıkması için */
+            padding-top: 40px;
+        }
+        .mobile-active #stage { 
+            max-height: 40vh; /* Ekranı domine etmemesi için küçültüldü */
+            width: auto; max-width: 95%; 
+        }
         .mobile-active .score-board { padding: 5px 15px; margin-bottom: 10px; }
-        .mobile-active .exit-btn { padding: 8px; font-size: 0.9rem; margin-top: 10px; }
+        .mobile-active .exit-btn { padding: 8px; font-size: 0.9rem; margin-top: 5px; }
 
         /* Günlük Tablosu */
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; }
@@ -138,7 +227,7 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v4.1.0</span>
+    <span class="v-badge">v4.2.0</span>
 </header>
 
 <main>
@@ -152,12 +241,12 @@
             </div>
             <p>
                 Kendi kurduğum dijital arcade salonuna hoş geldin!
-                Bu sürümde özellikle <b>mobil oyun deneyimi</b> baştan aşağı yenilendi.
-                Artık telefondan Tetris ve Pac-Man oynamak çok daha rahat.
-                Ayrıca film arşivim görsel şölene dönüştü.
+                Bu sürümde özellikle <b>mobil oyun deneyimi</b> iyileştirildi.
+                Artık telefondan oynarken kontroller parmağının tam altında!
+                Ayrıca film arşivim gerçek posterlerle güncellendi.
             </p>
             <div class="stats-grid">
-                <div class="stat-box"><span>SÜRÜM</span><br><strong class="brand-font" style="color:var(--neon-blue); font-size:1.5rem;">v4.1.0</strong></div>
+                <div class="stat-box"><span>SÜRÜM</span><br><strong class="brand-font" style="color:var(--neon-blue); font-size:1.5rem;">v4.2.0</strong></div>
                 <div class="stat-box"><span>CİHAZ DESTEĞİ</span><br><strong class="brand-font" style="color:var(--accent); font-size:1.5rem;">%100 Mobil Uyumlu</strong></div>
             </div>
         </div>
@@ -263,22 +352,22 @@
                     <h3>Narnia Günlükleri</h3>
                 </div>
             </div>
-            <div class="card movie-card" onclick="openMovieModal('avengers')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtYzdiOS00ETA0LThjY2UtNzkyNWY2VmEwOWMwXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg');">
+            <div class="card movie-card" onclick="openMovieModal('spykids')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BMjA1MTQ3NzU1MF5BMl5BanBnXkFtZTcwMTc5MTY3MQ@@._V1_.jpg');">
                 <div class="movie-overlay">
-                    <i class="fas fa-shield-halved" style="font-size:1.5rem; margin-bottom:5px;"></i>
-                    <h3>Avengers</h3>
+                    <i class="fas fa-user-secret" style="font-size:1.5rem; margin-bottom:5px;"></i>
+                    <h3>Çılgın Çocuklar</h3>
                 </div>
             </div>
-            <div class="card movie-card" onclick="openMovieModal('spiderman')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxNWVkYjhiMjYxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg');">
+            <div class="card movie-card" onclick="openMovieModal('upsidedown')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BN2IyMGYwZTktMDI2MS00MmI1LTgyZTgtODRiYWI2MzQ4YzQ2XkEyXkFqcGdeQXVyODQ4MjU1NjM@._V1_.jpg');">
                 <div class="movie-overlay">
-                    <i class="fas fa-spider" style="font-size:1.5rem; margin-bottom:5px;"></i>
-                    <h3>Spiderman</h3>
+                    <i class="fas fa-wand-magic-sparkles" style="font-size:1.5rem; margin-bottom:5px;"></i>
+                    <h3>Ters Yüz Sihir</h3>
                 </div>
             </div>
-            <div class="card movie-card" onclick="openMovieModal('harrypotter')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNmQ0ODBhMjUtNDRhOC00MGQzLTk5NDAtZDliODZmMjFlZWI5XkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_.jpg');">
+             <div class="card movie-card" onclick="openMovieModal('princess')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNjU3N2QxNzgtMGUyNy00Nzk3LTg0MmQtMTgxYzMzNjRlY2E4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg');">
                 <div class="movie-overlay">
-                    <i class="fas fa-hat-wizard" style="font-size:1.5rem; margin-bottom:5px;"></i>
-                    <h3>Harry Potter</h3>
+                    <i class="fas fa-crown" style="font-size:1.5rem; margin-bottom:5px;"></i>
+                    <h3>Acemi Prenses</h3>
                 </div>
             </div>
         </div>
@@ -290,19 +379,11 @@
             <table>
                 <thead><tr><th>Versiyon</th><th>Güncelleme Detayları</th></tr></thead>
                 <tbody>
-                    <tr><td class="v-cell">v4.1.0</td><td class="d-cell">Notlar sayfasına EBA OGM Materyal detaylı TYT-AYT çalışma butonları eklendi.<br>Filmler bölümüne gerçek film afişleri yerleştirildi ve Harry Potter serisi eklendi.</td></tr>
-                    <tr><td class="v-cell">v4.0.0</td><td class="d-cell">MOBİL DEVRİMİ! Telefondan oynarken oyun ekranı küçültüldü ve tuşlar parmak hizasına getirildi. Artık oynamak çok kolay.<br>Filmler sayfasına görsel afiş tasarımı eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.9.0</td><td class="d-cell">Oyun öncesi "Bilgisayar" veya "Telefon" seçimi eklendi. Cihaz seçimine göre oyun düzeni otomatik ayarlanabilir hale getirildi.</td></tr>
-                    <tr><td class="v-cell">v3.8.0</td><td class="d-cell">Local Storage ile High Score (En yüksek skor) kayıt sistemi eklendi. Pac-Man oyununa ekstra meyveler eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.7.0</td><td class="d-cell">Ana sayfa portfolyo mantığına geçirildi. Notlar açıklayıcı hale getirilip YouTube linkleri eklendi. Tetris'e "Sıradaki Blok" eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.6.0</td><td class="d-cell">Lise düzeyinde kısa ders notları (Matematik, Fizik, Kimya, Biyoloji) eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.5.0</td><td class="d-cell">Pac-Man hayalet hızı 1/3 oranına düşürüldü. Film modülü interaktif hale getirildi.</td></tr>
-                    <tr><td class="v-cell">v3.4.0</td><td class="d-cell">Menü ve Versiyon yazıları büyütüldü. Snake kazanma limiti 100 oldu.</td></tr>
-                    <tr><td class="v-cell">v3.3.0</td><td class="d-cell">Pac-Man yapay zeka (duvar takılma) sorunu çözüldü. Başlat ekranı yenilendi.</td></tr>
-                    <tr><td class="v-cell">v3.2.0</td><td class="d-cell">Klavye yön tuşları algılama sorunu (keydown) giderildi.</td></tr>
-                    <tr><td class="v-cell">v3.1.0</td><td class="d-cell">Oyun öncesi "Start Screen" eklendi. Neon bloklar eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Ana sayfa Ceylinsu'nun profil yazısıyla güncellendi. Snake klasik gövde yapısına döndü.</td></tr>
-                    <tr><td class="v-cell">v2.0.0</td><td class="d-cell">Sisteme Notlar ve Filmler sekmeleri ilk defa eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.2.0</td><td class="d-cell">Mobil kontrol butonları yukarı taşındı ve ekran düzeni sıkılaştırıldı.<br>Film görselleri otomatik internet bağlantılı hale getirildi.</td></tr>
+                    <tr><td class="v-cell">v4.1.0</td><td class="d-cell">Notlar sayfasına EBA OGM Materyal detaylı TYT-AYT çalışma butonları eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.0.0</td><td class="d-cell">MOBİL DEVRİMİ! Telefondan oynarken oyun ekranı küçültüldü.</td></tr>
+                    <tr><td class="v-cell">v3.8.0</td><td class="d-cell">Local Storage ile High Score (En yüksek skor) kayıt sistemi eklendi.</td></tr>
+                    <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Ana sayfa Ceylinsu'nun profil yazısıyla güncellendi.</td></tr>
                     <tr><td class="v-cell">v1.0.0</td><td class="d-cell">İlk sürüm. Arcade motorunun temeli atıldı.</td></tr>
                 </tbody>
             </table>
@@ -345,16 +426,37 @@
     function getHighScore(gameName) { try { return parseInt(localStorage.getItem('ceylinsu_hs_' + gameName)) || 0; } catch(e) { return localHighScores[gameName]; } }
     function updateHighScore(gameName, currentScore) { let hs = getHighScore(gameName); if(currentScore > hs) { hs = currentScore; try { localStorage.setItem('ceylinsu_hs_' + gameName, hs); } catch(e) { localHighScores[gameName] = hs; } } return hs; }
 
-    window.addEventListener("keydown", (e) => { const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "]; if(keys.includes(e.key) || keys.includes(e.code)) { e.preventDefault(); if(currentInput) currentInput({key: e.key || e.code}); } }, { passive: false });
+    window.addEventListener("keydown", (e) => { 
+        const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "]; if(keys.includes(e.key) || keys.includes(e.code)) { e.preventDefault(); if(currentInput) currentInput({key: e.key || e.code}); } }, { passive: false });
 
     function showPage(id) { exitGame(); document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
 
-    // Film Veritabanı GÜNCELLENDİ (YENİ LİNKLER VE HARRY POTTER)
+    // Film Veritabanı (İnternet Bağlantılı)
     const movieDatabase = {
-        narnia: { title: "Narnia Günlükleri", platform: "Nereden İzlenir: Disney+ / Apple TV", img: "https://m.media-amazon.com/images/M/MV5BMTc0NTUwMTU5OV5BMl5BanBnXkFtZTcwNjAwNzQzMw@@._V1_.jpg", list: ["Aslan, Cadı ve Dolap", "Prens Kaspiyan", "Şafak Yıldızı'nın Yolculuğu"] },
-        avengers: { title: "The Avengers Saga", platform: "Nereden İzlenir: Disney+", img: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtYzdiOS00ETA0LThjY2UtNzkyNWY2VmEwOWMwXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", list: ["The Avengers (2012)", "Age of Ultron", "Infinity War", "Endgame"] },
-        spiderman: { title: "Spider-Man Koleksiyonu", platform: "Nereden İzlenir: Netflix / Prime Video", img: "https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxNWVkYjhiMjYxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg", list: ["Spider-Man 1, 2, 3", "The Amazing Spider-Man 1, 2", "Homecoming", "Far From Home", "No Way Home"] },
-        harrypotter: { title: "Harry Potter Serisi", platform: "Nereden İzlenir: BluTV / Prime Video", img: "https://m.media-amazon.com/images/M/MV5BNmQ0ODBhMjUtNDRhOC00MGQzLTk5NDAtZDliODZmMjFlZWI5XkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_.jpg", list: ["Felsefe Taşı", "Sırlar Odası", "Azkaban Tutsağı", "Ateş Kadehi", "Zümrüdüanka Yoldaşlığı", "Melez Prens", "Ölüm Yadigârları: Bölüm 1", "Ölüm Yadigârları: Bölüm 2"] }
+        narnia: { 
+            title: "Narnia Günlükleri", 
+            platform: "Nereden İzlenir: Disney+ / Apple TV", 
+            img: "https://m.media-amazon.com/images/M/MV5BMTc0NTUwMTU5OV5BMl5BanBnXkFtZTcwNjAwNzQzMw@@._V1_.jpg", 
+            list: ["Aslan, Cadı ve Dolap", "Prens Kaspiyan", "Şafak Yıldızı'nın Yolculuğu"] 
+        },
+        spykids: { 
+            title: "Çılgın Çocuklar (Spy Kids)", 
+            platform: "Nereden İzlenir: Netflix / Prime Video", 
+            img: "https://m.media-amazon.com/images/M/MV5BMjA1MTQ3NzU1MF5BMl5BanBnXkFtZTcwMTc5MTY3MQ@@._V1_.jpg", 
+            list: ["Spy Kids 1", "Spy Kids 2: Kayıp Düşler Adası", "Spy Kids 3-D: Oyun Bitti"] 
+        },
+        upsidedown: { 
+            title: "Ters Yüz Sihir (Upside-Down Magic)", 
+            platform: "Nereden İzlenir: Disney Channel / Disney+", 
+            img: "https://m.media-amazon.com/images/M/MV5BN2IyMGYwZTktMDI2MS00MmI1LTgyZTgtODRiYWI2MzQ4YzQ2XkEyXkFqcGdeQXVyODQ4MjU1NjM@._V1_.jpg", 
+            list: ["Upside-Down Magic (2020)"] 
+        },
+        princess: { 
+            title: "Acemi Prenses", 
+            platform: "Nereden İzlenir: Disney+", 
+            img: "https://m.media-amazon.com/images/M/MV5BNjU3N2QxNzgtMGUyNy00Nzk3LTg0MmQtMTgxYzMzNjRlY2E4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg", 
+            list: ["Acemi Prenses 1", "Acemi Prenses 2: Kraliyet Nişanı"] 
+        }
     };
 
     function openMovieModal(key) {
@@ -377,14 +479,15 @@
         document.getElementById('start-screen').style.display = 'none'; document.getElementById('game-selection').style.display = 'none';
         const container = document.getElementById('arcade-container'); container.style.display = 'flex';
         const layoutWrapper = document.getElementById('game-layout-wrapper'); const touchControls = document.getElementById('touch-controls'); const tetrisUi = document.getElementById('tetris-ui');
-
         if(deviceType === 'mobile') {
             document.body.classList.add('mobile-active');
-            touchControls.style.display = 'grid'; layoutWrapper.style.flexDirection = 'column'; layoutWrapper.style.alignItems = 'center';
+            touchControls.style.display = 'grid';
+            layoutWrapper.style.flexDirection = 'column'; layoutWrapper.style.alignItems = 'center';
             if(activeGame === 'tetris') tetrisUi.style.display = 'none';
         } else {
             document.body.classList.remove('mobile-active');
-            touchControls.style.display = 'none'; layoutWrapper.style.flexDirection = 'row'; layoutWrapper.style.alignItems = 'flex-start';
+            touchControls.style.display = 'none';
+            layoutWrapper.style.flexDirection = 'row'; layoutWrapper.style.alignItems = 'flex-start';
             if(activeGame === 'tetris') tetrisUi.style.display = 'flex';
         }
 
@@ -429,7 +532,8 @@
     // TETRIS
     function startTetris(cvs, ctx) {
         cvs.width = 250; cvs.height = 500; const ctxNext = document.getElementById('next-stage').getContext('2d');
-        const rows = 20, cols = 10, size = 25; let board = Array.from({length: rows}, () => Array(cols).fill(0)), score = 0;
+        const rows = 20, cols = 10, size = 25;
+        let board = Array.from({length: rows}, () => Array(cols).fill(0)), score = 0;
         const PIECES = [{s:[[1,1,1,1]], c:'#00e5ff'}, {s:[[1,1],[1,1]], c:'#ffff00'}, {s:[[0,1,0],[1,1,1]], c:'#a020f0'}, {s:[[0,1,1],[1,1,0]], c:'#00ff00'}, {s:[[1,1,0],[0,1,1]], c:'#ff0000'}, {s:[[1,0,0],[1,1,1]], c:'#0000ff'}, {s:[[0,0,1],[1,1,1]], c:'#ffa500'}];
         function getRandomPiece() { return {...PIECES[Math.floor(Math.random()*PIECES.length)], x:3, y:0}; }
         let cur = getRandomPiece(), nextP = getRandomPiece();
