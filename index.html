@@ -27,10 +27,10 @@
             border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 9999;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-        nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
-        nav a { color: white; text-decoration: none; cursor: pointer; font-weight: 800; font-size: 1rem; letter-spacing: 1px; transition: 0.3s; font-family: 'Orbitron', sans-serif; }
+        nav ul { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
+        nav a { color: white; text-decoration: none; cursor: pointer; font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; transition: 0.3s; font-family: 'Orbitron', sans-serif; }
         nav a:hover { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
-        .v-badge { background: var(--accent); color: #000; padding: 6px 15px; border-radius: 6px; font-weight: 900; font-family: 'Orbitron'; font-size: 1.1rem; box-shadow: 0 0 10px var(--accent); }
+        .v-badge { background: var(--accent); color: #000; padding: 6px 15px; border-radius: 6px; font-weight: 900; font-family: 'Orbitron'; font-size: 1.2rem; box-shadow: 0 0 10px var(--accent); }
         
         main { padding: 40px 5%; max-width: 1200px; margin: auto; }
         .section { display: none; animation: fadeIn 0.5s ease; }
@@ -39,39 +39,31 @@
 
         /* ANA SAYFA */
         .profile-card { background: linear-gradient(135deg, rgba(43,0,82,0.9), rgba(20,0,40,0.95)); border: 1px solid var(--neon-blue); border-radius: 20px; padding: 40px; margin-top: 20px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); backdrop-filter: blur(5px); }
-        .profile-card h1 { color: #fff; margin-bottom: 10px; font-size: 2.2rem; text-shadow: 0 0 15px rgba(0,229,255,0.5); }
-        .profile-card p { font-size: 1.2rem; line-height: 1.7; color: #d1c4e9; }
-        
-        /* GENEL KARTLAR */
+        .profile-card h1 { color: #fff; margin-bottom: 10px; font-size: 2.5rem; text-shadow: 0 0 15px rgba(0,229,255,0.5); }
+        .profile-card p { font-size: 1.25rem; line-height: 1.8; color: #d1c4e9; margin-bottom: 25px; }
+        .skills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .skill-badge { background: rgba(0,229,255,0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); padding: 8px 15px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-box { background: rgba(0, 0, 0, 0.4); padding: 25px; border-radius: 12px; text-align: center; border-left: 4px solid var(--accent); }
+
+        /* KARTLAR (OYUN & NOT) */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .card { background: var(--panel); border: 2px solid rgba(0, 229, 255, 0.3); padding: 30px; border-radius: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); border-color: var(--neon-blue); }
-        .card i { font-size: 3rem; color: var(--accent); margin-bottom: 15px; display: block; }
-
-        /* NOTLAR STİLİ (İSTENİLEN FORMAT) */
-        .note-card { text-align: left; cursor: default; padding: 25px; }
-        .note-card h3 { color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-top: 0; }
-        .note-card ul { padding-left: 18px; color: #d1c4e9; margin-bottom: 15px; }
-        .yt-suggest { display: block; margin-top: 10px; color: #ff4d4d; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; }
+        .card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 5px var(--accent)); }
         
-        /* Detaylı Notlar Butonları */
-        .detailed-btn { 
-            background: rgba(0, 229, 255, 0.1); border: 1px solid var(--neon-blue); 
-            color: var(--neon-blue); padding: 10px; border-radius: 5px; 
-            text-align: center; cursor: pointer; font-weight: bold; transition: 0.3s;
-        }
-        .detailed-btn:hover { background: var(--neon-blue); color: black; }
+        .note-card { text-align: left; padding: 25px; cursor: default; display: flex; flex-direction: column; }
+        .note-card:hover { transform: none; box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
+        .note-card h3 { color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.5rem; }
+        .note-card ul { padding-left: 20px; margin-top: 15px; flex-grow: 1; }
+        .note-card li { margin-bottom: 10px; font-size: 1.05rem; line-height: 1.5; color: #e1bee7; }
         
-        .detailed-options { display: none; margin-top: 10px; gap: 10px; justify-content: center; }
-        .opt-link { 
-            background: var(--accent); color: black; padding: 8px 15px; 
-            border-radius: 4px; text-decoration: none; font-weight: bold; 
-            font-size: 0.9rem; flex: 1; text-align: center;
-        }
+        .yt-link { display: inline-block; margin-top: 10px; padding: 8px 12px; background: rgba(255,0,0,0.1); color: #ff4d4d; text-decoration: none; border-radius: 8px; border: 1px solid #ff4d4d; font-weight: bold; transition: 0.3s; text-align: center; font-size: 0.9rem; }
+        .yt-link:hover { background: #ff4d4d; color: white; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
 
         /* FİLM KARTLARI */
         .movie-card {
-            padding: 0; height: 380px; display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 0; height: 350px; display: flex; flex-direction: column; justify-content: flex-end;
             background-size: cover; background-position: center; border: 2px solid #444;
         }
         .movie-overlay {
@@ -80,30 +72,60 @@
         }
         .movie-card h3 { margin: 0; color: white; text-shadow: 0 2px 4px black; }
 
-        /* OYUN ALANI */
-        #arcade-container { display: none; flex-direction: column; align-items: center; background: #000; padding: 20px; border-radius: 20px; border: 4px solid var(--panel); position: relative; }
-        .mobile-active #arcade-container { padding: 10px; height: 95vh; border: none; }
-        .mobile-active canvas { max-height: 45vh; width: auto; max-width: 90vw; }
-        .mobile-controls { display: none; grid-template-areas: ". up ." "left . right" ". down ."; gap: 15px; margin-top: 20px; }
-        .control-btn { width: 65px; height: 65px; background: rgba(255,255,255,0.1); border: 2px solid var(--neon-blue); color: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .exit-btn { background: var(--neon-pink); color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 15px; font-family: 'Orbitron'; cursor: pointer; }
+        /* ARCADE KONTEYNERİ & SKOR TABLOSU */
+        #arcade-container { display: none; flex-direction: column; align-items: center; background: #000; padding: 30px; border-radius: 20px; border: 4px solid var(--panel); position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.8); min-height: 500px; }
+        .game-wrapper { display: flex; gap: 30px; align-items: flex-start; justify-content: center; flex-wrap: wrap; transition: all 0.3s ease; }
+        
+        .score-board { text-align: center; margin-bottom: 15px; background: rgba(0, 229, 255, 0.1); padding: 10px 30px; border-radius: 10px; border: 1px solid var(--neon-blue); }
+        #score-display { font-family: 'Verdana', sans-serif; font-weight: bold; font-size: 2.5rem; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); margin:0;}
+        #high-score-display { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--accent); margin-top: 5px; font-weight: bold; }
+        
+        canvas { background: #000; border: 2px solid #333; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.9); max-width: 100%; height: auto; }
+        #tetris-ui { display: none; flex-direction: column; gap: 20px; background: var(--panel); padding: 20px; border-radius: 12px; border: 1px solid #333; }
+        #tetris-ui h3 { margin: 0; color: var(--accent); font-size: 1.2rem; text-align: center; }
 
-        /* GÜNLÜK TABLOSU */
-        .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        /* MODALLAR (FİLM & OYUN CİHAZ SEÇİMİ) */
+        #movie-modal, #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 0, 26, 0.9); z-index: 10000; backdrop-filter: blur(8px); display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .modal-box { background: linear-gradient(145deg, #1a0033, #0d001a); padding: 40px; border-radius: 20px; border: 2px solid var(--neon-blue); text-align: center; max-width: 80%; width: 450px; overflow: hidden; }
+        .modal-box h2 { color: var(--neon-blue); font-size: 2rem; margin: 0 0 15px 0; }
+        
+        .movie-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 2px solid #333; }
+        .platform-badge { display: inline-block; background: var(--primary); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: bold; border: 1px solid var(--neon-pink); margin-bottom: 15px; }
+        .modal-box ul { list-style: none; padding: 0; text-align: left; }
+        .modal-box li { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem; }
+        
+        .device-selector { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
+        .device-btn { flex: 1; padding: 15px 10px; font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; border-radius: 12px; cursor: pointer; transition: 0.3s; border: none; min-width: 140px; }
+        .desktop-btn { background: rgba(0, 229, 255, 0.1); color: var(--neon-blue); border: 2px solid var(--neon-blue); }
+        .desktop-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
+        .mobile-btn { background: rgba(255, 0, 85, 0.1); color: var(--neon-pink); border: 2px solid var(--neon-pink); }
+        .mobile-btn:hover { background: var(--neon-pink); color: #000; box-shadow: 0 0 15px var(--neon-pink); }
+
+        .play-btn { background: var(--neon-blue); color: #000; border: none; padding: 15px 40px; font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .exit-btn { background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 25px; width: 100%; max-width: 300px; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Orbitron'; }
+
+        /* Mobil Kontroller */
+        .mobile-controls { display: none; grid-template-areas: ". up ." "left . right" ". down ."; gap: 15px; margin-top: 25px; }
+        .control-btn { width: 65px; height: 65px; background: rgba(255, 255, 255, 0.05); border: 2px solid var(--neon-blue); color: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .control-btn:active { background: var(--neon-blue); color: #000; }
+
+        /* Mobil Aktif Modu */
+        .mobile-active #arcade-container { padding: 10px; height: 95vh; border: none; justify-content: center; min-height: auto; }
+        .mobile-active canvas { max-height: 45vh; width: auto; max-width: 90vw; }
+
+        /* Günlük Tablosu */
+        .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th, td { padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: left; }
         th { background: #240046; color: var(--neon-blue); font-family: 'Orbitron'; }
-        .v-cell { color: var(--accent); font-weight: 700; font-family: 'Orbitron'; }
+        .v-cell { color: var(--accent); font-weight: 700; font-family: 'Orbitron'; font-size: 1.1rem; }
 
-        /* MODAL */
-        #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
-        .modal-box { background: var(--panel); padding: 30px; border-radius: 20px; border: 2px solid var(--neon-blue); max-width: 450px; width: 90%; text-align: center; }
-        .modal-box h2 { color: var(--neon-blue); margin-top: 0; }
-        .modal-box ul { text-align: left; color: white; line-height: 1.8; padding-left: 20px; }
-        
-        #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 0, 26, 0.95); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .device-btn { padding: 15px; margin: 10px; border-radius: 10px; border: 2px solid var(--neon-blue); background: none; color: white; font-family: 'Orbitron'; cursor: pointer; width: 80%; max-width: 300px; }
-        .device-btn:hover { background: var(--neon-blue); color: black; }
+        /* Detaylı Notlar Butonları */
+        .detailed-btn { margin-top: 15px; background: rgba(0, 229, 255, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); padding: 10px; border-radius: 5px; text-align: center; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .detailed-btn:hover { background: var(--neon-blue); color: black; }
+        .detailed-options { display: none; margin-top: 10px; gap: 10px; justify-content: center; }
+        .opt-link { background: var(--accent); color: black; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem; flex: 1; text-align: center; }
+        .opt-link:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -125,48 +147,59 @@
     <section id="home" class="section active">
         <div class="profile-card">
             <h1>Ceylinsu Arslan 👾</h1>
-            <p>Arcade salonuma hoş geldin! Bu sürümde Yılan oyunu hedefi 200'e çıkarıldı, film arşivi güncellendi ve tüm ders notları MEB kaynaklarıyla güçlendirildi.</p>
+            <div class="skills">
+                <span class="skill-badge"><i class="fas fa-desktop"></i> Bilgisayar Uyumu</span>
+                <span class="skill-badge"><i class="fas fa-mobile-alt"></i> Telefon Uyumu (YENİ)</span>
+                <span class="skill-badge"><i class="fas fa-trophy"></i> Skor Kayıt Sistemi</span>
+            </div>
+            <p>
+                Kendi kurduğum dijital arcade salonuna hoş geldin!
+                Bu yeni sürümde oyunları telefonda mı yoksa bilgisayarda mı oynamak istediğini seçebilir, ekranın cihazına göre mükemmel bir şekilde ayarlanmasının keyfini çıkarabilirsin.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-box"><span>SÜRÜM</span><br><strong class="brand-font" style="color:var(--neon-blue); font-size:1.5rem;">v4.2.0 Stable</strong></div>
+                <div class="stat-box"><span>CİHAZ DESTEĞİ</span><br><strong class="brand-font" style="color:var(--accent); font-size:1.5rem;">Çapraz Platform Aktif</strong></div>
+            </div>
         </div>
     </section>
 
     <section id="games" class="section">
         <div id="game-selection" class="game-grid">
-            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm"></i><h3>SNAKE</h3></div>
-            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS</h3></div>
-            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN</h3></div>
+            <div class="card" onclick="prepareGame('snake')"><i class="fas fa-worm"></i><h3>CLASSIC SNAKE</h3><p>Hedef: 200 Puan!</p></div>
+            <div class="card" onclick="prepareGame('tetris')"><i class="fas fa-shapes"></i><h3>TETRIS REMASTERED</h3><p>Sıradaki Blok & Neon</p></div>
+            <div class="card" onclick="prepareGame('pacman')"><i class="fas fa-ghost"></i><h3>PAC-MAN AI</h3><p>Meyve Toplama!</p></div>
         </div>
 
         <div id="arcade-container">
-            <div class="score-board" style="text-align: center; margin-bottom: 10px;">
-                <div id="score-display" style="font-size: 2rem; color: var(--neon-blue); font-weight: bold;">0</div>
+            <div class="score-board">
+                <div id="score-display">0</div>
+                <div id="high-score-display"><i class="fas fa-crown"></i> En Yüksek: 0</div>
             </div>
-            <div id="game-layout-wrapper" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div class="game-wrapper" id="game-layout-wrapper">
                 <canvas id="stage"></canvas>
-                <div id="tetris-ui" style="display:none; background: #222; padding: 10px; border-radius: 10px;">
-                    <div style="color: var(--accent); margin-bottom: 5px;">Sıradaki</div>
-                    <canvas id="next-stage" width="80" height="80"></canvas>
+                <div id="tetris-ui">
+                    <h3>Sıradaki Blok</h3>
+                    <canvas id="next-stage" width="100" height="100"></canvas>
                 </div>
             </div>
             
             <div class="mobile-controls" id="touch-controls">
-                <div class="control-btn" style="grid-area: up" onclick="handleInput('ArrowUp')"><i class="fas fa-chevron-up"></i></div>
+                <div class="control-btn" style="grid-area: up" onclick="handleInput('ArrowUp')"><i id="up-icon" class="fas fa-chevron-up"></i></div>
                 <div class="control-btn" style="grid-area: left" onclick="handleInput('ArrowLeft')"><i class="fas fa-chevron-left"></i></div>
                 <div class="control-btn" style="grid-area: right" onclick="handleInput('ArrowRight')"><i class="fas fa-chevron-right"></i></div>
                 <div class="control-btn" style="grid-area: down" onclick="handleInput('ArrowDown')"><i class="fas fa-chevron-down"></i></div>
             </div>
-            <button class="exit-btn" onclick="exitGame()">OYUNDAN ÇIK</button>
+            <button class="exit-btn" onclick="exitGame()">OYUNU KAPAT</button>
         </div>
     </section>
 
     <section id="notes" class="section">
+        <h2 class="brand-font">📚 Lise Ders Notları & Kaynaklar</h2>
         <div class="game-grid">
             <div class="card note-card">
                 <h3><i class="fas fa-calculator"></i> Matematik</h3>
-                <ul>
-                    <li><b>Mantık:</b> Önermeler, bağlaçlar ve doğruluk tabloları.</li>
-                    <li><b>Kümeler:</b> Birleşim, kesişim, fark işlemleri.</li>
-                </ul>
-                <a href="https://www.youtube.com/@RehberMatematik" target="_blank" class="yt-suggest"><i class="fab fa-youtube"></i> Rehber Matematik</a>
+                <ul><li><b>Mantık:</b> Önerme doğruluk değerleri ve bağlaç kuralları.</li><li><b>Kümeler:</b> Alt küme hesaplama ($2^n$), kesişim/birleşim.</li></ul>
+                <a href="https://www.youtube.com/@RehberMatematik" target="_blank" class="yt-link"><i class="fab fa-youtube"></i> Rehber Matematik İzle</a>
                 <div class="detailed-btn" onclick="toggleDetails('math')">Detaylı Notlar İçin Tıklayınız</div>
                 <div id="math-opt" class="detailed-options">
                     <a href="https://ogmmateryal.eba.gov.tr/kitap/mebi-konu-ozetleri/tyt-matematik/index.html" target="_blank" class="opt-link">TYT MEB</a>
@@ -175,11 +208,8 @@
             </div>
             <div class="card note-card">
                 <h3><i class="fas fa-atom"></i> Fizik</h3>
-                <ul>
-                    <li><b>Fizik Bilimi:</b> Temel ve türetilmiş büyüklükler (KISAMUZ).</li>
-                    <li><b>Madde:</b> Özkütle, dayanıklılık, adhezyon/kohezyon.</li>
-                </ul>
-                <a href="https://www.youtube.com/@VIPFIZIK" target="_blank" class="yt-suggest"><i class="fab fa-youtube"></i> VIP Fizik</a>
+                <ul><li><b>Fizik Bilimine Giriş:</b> KISAMUZ Temel büyüklükler.</li><li><b>Madde ve Özellikleri:</b> Özkütle ($d=m/V$), Dayanıklılık, Kohezyon.</li></ul>
+                <a href="https://www.youtube.com/@VIPFIZIK" target="_blank" class="yt-link"><i class="fab fa-youtube"></i> VIP Fizik İzle</a>
                 <div class="detailed-btn" onclick="toggleDetails('physics')">Detaylı Notlar İçin Tıklayınız</div>
                 <div id="physics-opt" class="detailed-options">
                     <a href="https://ogmmateryal.eba.gov.tr/kitap/mebi-konu-ozetleri/tyt-fizik/index.html" target="_blank" class="opt-link">TYT MEB</a>
@@ -188,11 +218,8 @@
             </div>
             <div class="card note-card">
                 <h3><i class="fas fa-flask"></i> Kimya</h3>
-                <ul>
-                    <li><b>Kimya Bilimi:</b> Güvenlik sembolleri ve laboratuvar kuralları.</li>
-                    <li><b>Atom:</b> Periyodik sistem, izotop atomlar.</li>
-                </ul>
-                <a href="https://www.youtube.com/@KimyaAdasi" target="_blank" class="yt-suggest"><i class="fab fa-youtube"></i> Kimya Adası</a>
+                <ul><li><b>Kimya Bilimi:</b> Simyadan kimyaya geçiş, güvenlik işaretleri.</li><li><b>Atom Yapısı:</b> İzotop, İzoton, İzobar. Katman dizilimi.</li></ul>
+                <a href="https://www.youtube.com/@KimyaAdasi" target="_blank" class="yt-link"><i class="fab fa-youtube"></i> Kimya Adası İzle</a>
                 <div class="detailed-btn" onclick="toggleDetails('chem')">Detaylı Notlar İçin Tıklayınız</div>
                 <div id="chem-opt" class="detailed-options">
                     <a href="https://ogmmateryal.eba.gov.tr/kitap/mebi-konu-ozetleri/tyt-kimya/index.html" target="_blank" class="opt-link">TYT MEB</a>
@@ -201,11 +228,8 @@
             </div>
             <div class="card note-card">
                 <h3><i class="fas fa-dna"></i> Biyoloji</h3>
-                <ul>
-                    <li><b>Canlıların Ortak Özellikleri:</b> Solunum, beslenme, üreme.</li>
-                    <li><b>Temel Bileşenler:</b> Karbonhidratlar, proteinler, yağlar.</li>
-                </ul>
-                <a href="https://www.youtube.com/@DrBiyoloji" target="_blank" class="yt-suggest"><i class="fab fa-youtube"></i> Dr. Biyoloji</a>
+                <ul><li><b>Canlıların Ortak Özellikleri:</b> Beslenme, solunum, hücre.</li><li><b>Organik Bileşikler:</b> Karbonhidrat, yağ, protein, vitaminler.</li></ul>
+                <a href="https://www.youtube.com/@DrBiyoloji" target="_blank" class="yt-link"><i class="fab fa-youtube"></i> Dr. Biyoloji İzle</a>
                 <div class="detailed-btn" onclick="toggleDetails('bio')">Detaylı Notlar İçin Tıklayınız</div>
                 <div id="bio-opt" class="detailed-options">
                     <a href="https://ogmmateryal.eba.gov.tr/kitap/mebi-konu-ozetleri/tyt-biyoloji/index.html" target="_blank" class="opt-link">TYT MEB</a>
@@ -216,298 +240,224 @@
     </section>
 
     <section id="movies" class="section">
+        <h2 class="brand-font">🎬 Favori Filmlerim</h2>
         <div class="game-grid">
-            <div class="card movie-card" onclick="openMovie('narnia')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BMjA4MDU0NTUyN15BMl5BanBnXkFtZTgwMzQxNzY4MjE@._V1_.jpg');">
+            <div class="card movie-card" onclick="openMovieModal('narnia')" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=400&q=80');">
                 <div class="movie-overlay"><h3>Narnia Günlükleri</h3></div>
             </div>
-            <div class="card movie-card" onclick="openMovie('harry')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg');">
+            <div class="card movie-card" onclick="openMovieModal('harry')" style="background-image: url('https://images.unsplash.com/photo-1547756536-cbe3673fa2e5?q=80&w=400&auto=format&fit=crop');">
                 <div class="movie-overlay"><h3>Harry Potter</h3></div>
             </div>
-            <div class="card movie-card" onclick="openMovie('avengers')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg');">
+            <div class="card movie-card" onclick="openMovieModal('avengers')" style="background-image: url('https://images.unsplash.com/photo-1608889175123-8ee362201f81?auto=format&fit=crop&w=400&q=80');">
                 <div class="movie-overlay"><h3>Avengers</h3></div>
             </div>
-            <div class="card movie-card" onclick="openMovie('spiderman')" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNTk4ODQ1MzgzNl5BMl5BanBnXkFtZTgwMTMyMzM4MTI@._V1_.jpg');">
+            <div class="card movie-card" onclick="openMovieModal('spiderman')" style="background-image: url('https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=400&q=80');">
                 <div class="movie-overlay"><h3>Spiderman</h3></div>
             </div>
         </div>
     </section>
 
     <section id="logs" class="section">
-        <h2 class="brand-font">📜 Güncelleme Geçmişi</h2>
+        <h2 class="brand-font">📜 Tam Sistem Geçmişi</h2>
         <div class="log-container">
             <table>
-                <thead><tr><th>Versiyon</th><th>Yenilikler</th></tr></thead>
+                <thead><tr><th>Versiyon</th><th>Güncelleme Detayları</th></tr></thead>
                 <tbody>
-                    <tr><td class="v-cell">v4.2.0</td><td>Yılan oyunu kazanma hedefi 200 oldu. Günlük geçmişi tamamlandı.</td></tr>
-                    <tr><td class="v-cell">v4.1.0</td><td>Ders notlarına MEB detayları eklendi. Harry Potter ve film listeleri eklendi.</td></tr>
-                    <tr><td class="v-cell">v4.0.0</td><td>Mobil cihazlarda oyun kontrolleri ve ekran yerleşimi optimize edildi.</td></tr>
-                    <tr><td class="v-cell">v3.9.0</td><td>Oyun öncesi cihaz seçimi (Bilgisayar/Telefon) eklendi.</td></tr>
-                    <tr><td class="v-cell">v1.0.0</td><td>Arcade sistemi kuruldu. Temel oyunlar eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.2.0</td><td class="d-cell">Yılan oyunu kazanma hedefi 200 puana yükseltildi. Film listeleri ve afişler güncellendi. Tüm geçmiş sürümler eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.1.0</td><td class="d-cell">Notlar kısmına MEB detayları ve açılır/kapanır buton yapısı eklendi. Harry Potter serisi eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.0.0</td><td class="d-cell">MOBİL DEVRİMİ! Telefondan oynarken oyun ekranı küçültüldü ve tuşlar parmak hizasına getirildi.</td></tr>
+                    <tr><td class="v-cell">v3.9.0</td><td class="d-cell">Oyun öncesi "Bilgisayar" veya "Telefon" seçimi eklendi. Otomatik düzenleme aktif.</td></tr>
+                    <tr><td class="v-cell">v3.8.0</td><td class="d-cell">Local Storage ile High Score eklendi. Pac-Man'e ekstra meyveler eklendi.</td></tr>
+                    <tr><td class="v-cell">v3.7.0</td><td class="d-cell">Ana sayfa portfolyo mantığına geçirildi. Tetris'e "Sıradaki Blok" eklendi.</td></tr>
+                    <tr><td class="v-cell">v3.6.0</td><td class="d-cell">Lise düzeyinde kısa ders notları eklendi.</td></tr>
+                    <tr><td class="v-cell">v3.5.0</td><td class="d-cell">Pac-Man hayalet hızı optimize edildi. Film modülü interaktif oldu.</td></tr>
+                    <tr><td class="v-cell">v3.4.0</td><td class="d-cell">Menü ve yazı fontları büyütüldü.</td></tr>
+                    <tr><td class="v-cell">v3.3.0</td><td class="d-cell">Pac-Man AI düzeltildi.</td></tr>
+                    <tr><td class="v-cell">v3.2.0</td><td class="d-cell">Klavye sorunları giderildi.</td></tr>
+                    <tr><td class="v-cell">v3.1.0</td><td class="d-cell">Başlangıç ekranı ve Tetris neon blokları eklendi.</td></tr>
+                    <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Ana sayfa profili eklendi.</td></tr>
+                    <tr><td class="v-cell">v2.0.0</td><td class="d-cell">Notlar ve Filmler sekmeleri eklendi.</td></tr>
+                    <tr><td class="v-cell">v1.0.0</td><td class="d-cell">İlk sürüm. Arcade motoru temeli.</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 </main>
 
-<div id="start-screen">
-    <div class="modal-box">
-        <h2 id="start-title">OYUN BAŞLIYOR</h2>
-        <p>Cihazınızı seçin:</p>
-        <button class="device-btn" onclick="startGame('desktop')"><i class="fas fa-desktop"></i> BİLGİSAYAR</button>
-        <button class="device-btn" onclick="startGame('mobile')"><i class="fas fa-mobile-alt"></i> TELEFON</button>
-        <br>
-        <button onclick="document.getElementById('start-screen').style.display='none'" style="color: grey; background: none; border: none; cursor: pointer; margin-top:10px;">İptal</button>
+<div id="movie-modal">
+    <div class="modal-box" style="padding:20px;">
+        <h2 id="movie-title"></h2>
+        <ul id="movie-list"></ul>
+        <button class="play-btn" onclick="document.getElementById('movie-modal').style.display='none'">KAPAT</button>
     </div>
 </div>
 
-<div id="modal-overlay" onclick="closeModal()">
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <h2 id="m-title"></h2>
-        <ul id="m-list"></ul>
-        <button class="exit-btn" onclick="closeModal()">KAPAT</button>
+<div id="start-screen">
+    <div class="modal-box">
+        <i id="game-icon-modal" class="fas fa-gamepad" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+        <h2 id="start-title">OYUN</h2>
+        <p id="start-desc" style="color: #d1c4e9;"></p>
+        
+        <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <h4 style="margin: 0 0 15px 0; color: #fff; font-size: 1.2rem;">Hangi cihazdan oynayacaksın?</h4>
+            <div class="device-selector">
+                <button class="device-btn desktop-btn" onclick="startGame('desktop')"><i class="fas fa-desktop"></i> BİLGİSAYAR</button>
+                <button class="device-btn mobile-btn" onclick="startGame('mobile')"><i class="fas fa-mobile-alt"></i> TELEFON</button>
+            </div>
+        </div>
+        
+        <button onclick="document.getElementById('start-screen').style.display='none'" style="background:none; border:none; color:#999; margin-top:20px; cursor:pointer; font-weight: bold;">İptal</button>
     </div>
 </div>
 
 <script>
-    let loop = null, activeGame = null, currentInput = null;
+    let loop = null, currentInput = null, activeGame = null;
+    let localHighScores = { snake: 0, tetris: 0, pacman: 0 };
 
-    // --- SAYFA GEÇİŞLERİ ---
-    function showPage(id) {
-        exitGame();
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
+    function getHighScore(gameName) { try { return parseInt(localStorage.getItem('ceylinsu_hs_' + gameName)) || 0; } catch(e) { return localHighScores[gameName]; } }
+    function updateHighScore(gameName, currentScore) { let hs = getHighScore(gameName); if(currentScore > hs) { hs = currentScore; try { localStorage.setItem('ceylinsu_hs_' + gameName, hs); } catch(e) { localHighScores[gameName] = hs; } } return hs; }
 
-    // --- NOTLAR DETAY ---
+    window.addEventListener("keydown", (e) => { const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "]; if(keys.includes(e.key) || keys.includes(e.code)) { e.preventDefault(); if(currentInput) currentInput({key: e.key || e.code}); } }, { passive: false });
+
+    function showPage(id) { exitGame(); document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+    
+    // NOTLAR DETAY
     function toggleDetails(id) {
         const el = document.getElementById(id + '-opt');
         el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // --- FİLM SİSTEMİ ---
-    const movieDB = {
-        narnia: { t: "Narnia Günlükleri", l: ["Aslan, Cadı ve Dolap", "Prens Kaspiyan", "Şafak Yıldızı'nın Yolculuğu"] },
-        harry: { t: "Harry Potter Serisi", l: ["Felsefe Taşı", "Sırlar Odası", "Azkaban Tutsağı", "Ateş Kadehi", "Zümrüdüanka Yoldaşlığı", "Melez Prens", "Ölüm Yadigarları B1", "Ölüm Yadigarları B2"] },
-        avengers: { t: "Avengers Serisi", l: ["The Avengers", "Age of Ultron", "Infinity War", "Endgame"] },
-        spiderman: { t: "Spiderman Serisi", l: ["Homecoming", "Far From Home", "No Way Home", "Into the Spider-Verse", "Across the Spider-Verse"] }
+    // FİLM VERİTABANI (İSTENİLEN LİSTE)
+    const movieDatabase = {
+        narnia: { title: "Narnia Günlükleri", list: ["Aslan, Cadı ve Dolap", "Prens Kaspiyan", "Şafak Yıldızı'nın Yolculuğu"] },
+        harry: { title: "Harry Potter Serisi", list: ["Felsefe Taşı", "Sırlar Odası", "Azkaban Tutsağı", "Ateş Kadehi", "Zümrüdüanka Yoldaşlığı", "Melez Prens", "Ölüm Yadigarları B1", "Ölüm Yadigarları B2"] },
+        avengers: { title: "The Avengers Saga", list: ["The Avengers (2012)", "Age of Ultron", "Infinity War", "Endgame"] },
+        spiderman: { title: "Spider-Man Koleksiyonu", list: ["Spider-Man 1, 2, 3", "The Amazing Spider-Man 1, 2", "Homecoming", "Far From Home", "No Way Home"] }
     };
-
-    function openMovie(id) {
-        const m = movieDB[id];
-        document.getElementById('m-title').innerText = m.t;
-        const list = document.getElementById('m-list');
-        list.innerHTML = m.l.map(f => `<li>${f}</li>`).join('');
-        document.getElementById('modal-overlay').style.display = 'flex';
+    function openMovieModal(key) {
+        const data = movieDatabase[key]; document.getElementById('movie-title').innerText = data.title;
+        const listEl = document.getElementById('movie-list'); listEl.innerHTML = "";
+        data.list.forEach(movie => { listEl.innerHTML += `<li><i class="fas fa-ticket" style="margin-right:8px; color:var(--accent)"></i> ${movie}</li>`; });
+        document.getElementById('movie-modal').style.display = 'flex';
     }
-    function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
 
-    // --- OYUN BAŞLATMA ---
     function prepareGame(type) {
         activeGame = type;
         document.getElementById('start-screen').style.display = 'flex';
-        document.getElementById('start-title').innerText = type.toUpperCase();
+        const details = { snake: { t: 'CLASSIC SNAKE', d: 'Hedef: 200 Puan', i: 'fas fa-worm' }, tetris: { t: 'TETRIS REMASTERED', d: 'Sıradaki Blok & Neon', i: 'fas fa-shapes' }, pacman: { t: 'PAC-MAN AI', d: 'Meyveleri Topla!', i: 'fas fa-ghost' } };
+        document.getElementById('start-title').innerText = details[type].t; document.getElementById('start-desc').innerText = details[type].d;
+        document.getElementById('game-icon-modal').className = details[type].i;
+        document.getElementById('up-icon').className = (type === 'tetris') ? 'fas fa-rotate' : 'fas fa-chevron-up';
     }
 
-    function startGame(device) {
+    function startGame(deviceType) {
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('game-selection').style.display = 'none';
         document.getElementById('arcade-container').style.display = 'flex';
         
-        const ui = document.getElementById('tetris-ui');
-        ui.style.display = (activeGame === 'tetris') ? 'block' : 'none';
+        const layoutWrapper = document.getElementById('game-layout-wrapper');
+        const touchControls = document.getElementById('touch-controls');
+        const tetrisUi = document.getElementById('tetris-ui');
 
-        if(device === 'mobile') {
+        if(deviceType === 'mobile') {
             document.body.classList.add('mobile-active');
-            document.getElementById('touch-controls').style.display = 'grid';
+            touchControls.style.display = 'grid';
+            layoutWrapper.style.flexDirection = 'column';
+            layoutWrapper.style.alignItems = 'center';
+            if(activeGame === 'tetris') tetrisUi.style.display = 'none'; 
         } else {
             document.body.classList.remove('mobile-active');
-            document.getElementById('touch-controls').style.display = 'none';
+            touchControls.style.display = 'none';
+            layoutWrapper.style.flexDirection = 'row';
+            layoutWrapper.style.alignItems = 'flex-start';
+            if(activeGame === 'tetris') tetrisUi.style.display = 'flex';
         }
 
-        const cvs = document.getElementById('stage');
-        const ctx = cvs.getContext('2d');
+        const cvs = document.getElementById('stage'), ctx = cvs.getContext('2d');
+        document.getElementById('score-display').innerText = '0';
+        document.getElementById('high-score-display').innerHTML = `<i class="fas fa-crown"></i> En Yüksek: ${getHighScore(activeGame)}`;
         
         if(activeGame === 'snake') startSnake(cvs, ctx);
         if(activeGame === 'tetris') startTetris(cvs, ctx);
         if(activeGame === 'pacman') startPacman(cvs, ctx);
     }
-
+    
+    function handleInput(k) { if(currentInput) currentInput({key: k}); }
+    
     function exitGame() {
         if(loop) clearInterval(loop);
         document.getElementById('arcade-container').style.display = 'none';
-        document.getElementById('game-selection').style.display = 'grid';
+        document.getElementById('tetris-ui').style.display = 'none'; document.getElementById('game-selection').style.display = 'grid'; 
         document.body.classList.remove('mobile-active');
+        currentInput = null;
     }
 
-    function handleInput(key) { if(currentInput) currentInput({key}); }
-    function triggerGameOver(score, msg="OYUN BİTTİ") {
-        clearInterval(loop);
-        alert(msg + " SKOR: " + score);
-        exitGame();
+    function triggerGameOver(score, msg) {
+        let hs = updateHighScore(activeGame, score);
+        alert(`${msg}\n\nSkorun: ${score}\nEn Yüksek Skor: ${hs}`); exitGame();
     }
 
-    // --- SNAKE OYUNU ---
+    // SNAKE
     function startSnake(cvs, ctx) {
-        cvs.width = 300; cvs.height = 300;
-        let s = [{x:140, y:140}], d = {x:20, y:0}, f = {x:40, y:40}, score = 0;
-        document.getElementById('score-display').innerText = 0;
-        
-        currentInput = (e) => {
-            if(e.key === 'ArrowUp' && d.y === 0) d = {x:0, y:-20};
-            if(e.key === 'ArrowDown' && d.y === 0) d = {x:0, y:20};
-            if(e.key === 'ArrowLeft' && d.x === 0) d = {x:-20, y:0};
-            if(e.key === 'ArrowRight' && d.x === 0) d = {x:20, y:0};
-        };
-        
+        cvs.width = 320; cvs.height = 320; let snake = [{x:160, y:160}, {x:140, y:160}], dx=20, dy=0, food={x:60,y:60}, score=0;
+        currentInput = (e) => { if((e.key==='ArrowUp'||e.key==='Up') && dy===0){dx=0; dy=-20} else if((e.key==='ArrowDown'||e.key==='Down') && dy===0){dx=0; dy=20} else if((e.key==='ArrowLeft'||e.key==='Left') && dx===0){dx=-20; dy=0} else if((e.key==='ArrowRight'||e.key==='Right') && dx===0){dx=20; dy=0} };
         loop = setInterval(() => {
-            ctx.fillStyle = 'black'; ctx.fillRect(0,0,300,300);
-            let h = {x: s[0].x + d.x, y: s[0].y + d.y};
-            
-            if(h.x<0 || h.x>=300 || h.y<0 || h.y>=300 || s.some(p => p.x===h.x && p.y===h.y)) {
-                triggerGameOver(score); return;
-            }
-            
-            s.unshift(h);
-            if(h.x === f.x && h.y === f.y) {
-                score += 10;
-                document.getElementById('score-display').innerText = score;
-                f = {x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20};
-                
-                // BURADA DEĞİŞİKLİK YAPILDI: KAZANMA SINIRI 200 OLDU
-                if(score >= 200) { triggerGameOver(score, "TEBRİKLER! KAZANDINIZ!"); return; }
-            } else {
-                s.pop();
-            }
-            
-            ctx.fillStyle = 'red'; ctx.fillRect(f.x, f.y, 18, 18);
-            ctx.fillStyle = '#00e5ff'; s.forEach(p => ctx.fillRect(p.x, p.y, 18, 18));
-        }, 150);
+            ctx.fillStyle='#000'; ctx.fillRect(0,0,320,320); let head = {x: snake[0].x+dx, y: snake[0].y+dy};
+            if(head.x<0||head.x>=320||head.y<0||head.y>=320||snake.some(s=>s.x===head.x && s.y===head.y)){ triggerGameOver(score, 'Yılan Duvara veya Kendine Çarptı!'); return; }
+            snake.unshift(head);
+            if(head.x===food.x && head.y===food.y){ score+=10; document.getElementById('score-display').innerText=score; if(score >= 200) { triggerGameOver(score, 'TEBRİKLER! 200 PUANLA KAZANDIN!'); return; } food={x: Math.floor(Math.random()*15)*20, y: Math.floor(Math.random()*15)*20}; } else snake.pop();
+            ctx.fillStyle='#ff0055'; ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, 7); ctx.fill();
+            snake.forEach((s,i)=>{ ctx.fillStyle=(i===0)?'#00e5ff':'#0097a7'; ctx.fillRect(s.x+1,s.y+1,18,18); });
+        }, 180);
     }
 
-    // --- TETRIS OYUNU (Dosyadaki Orijinal Kod) ---
+    // TETRIS
     function startTetris(cvs, ctx) {
-        cvs.width = 240; cvs.height = 400;
-        const nextCvs = document.getElementById('next-stage'), nextCtx = nextCvs.getContext('2d');
-        const ROW=20, COL=12, SQ=20; 
-        let board = Array(ROW).fill(null).map(()=>Array(COL).fill('black')), score=0;
-        
-        const SHAPES = [
-             [[1,1,1],[0,1,0]], [[1,1],[1,1]], [[1,1,1,1]], [[1,1,0],[0,1,1]], [[0,1,1],[1,1,0]], [[1,0,0],[1,1,1]], [[0,0,1],[1,1,1]]
-        ];
-        const COLORS = ['cyan','yellow','orange','blue','green','red','purple'];
-
-        function drawSquare(x,y,c, context=ctx) { context.fillStyle=c; context.fillRect(x*SQ,y*SQ,SQ,SQ); context.strokeStyle='black'; context.strokeRect(x*SQ,y*SQ,SQ,SQ); }
-        function drawBoard() { for(let r=0;r<ROW;r++) for(let c=0;c<COL;c++) drawSquare(c,r,board[r][c]); }
-
-        let p, nextP;
-        function randomPiece() { let r = Math.floor(Math.random()*SHAPES.length); return {t:SHAPES[r], c:COLORS[r], x:3, y:0}; }
-        
-        p = randomPiece(); nextP = randomPiece();
-
-        function drawNext() {
-            nextCtx.fillStyle='#222'; nextCtx.fillRect(0,0,80,80);
-            for(let r=0; r<nextP.t.length; r++) for(let c=0; c<nextP.t[r].length; c++) if(nextP.t[r][c]) drawSquare(c+1, r+1, nextP.c, nextCtx);
-        }
-        
-        function move(x,y) { if(!collide(x,y)) { p.x+=x; p.y+=y; draw(); } else if(y>0) lock(); }
-        function rotate() { let rot = p.t[0].map((_,i) => p.t.map(row => row[i]).reverse()); let old=p.t; p.t=rot; if(collide(0,0)) p.t=old; else draw(); }
-        function collide(ox,oy) {
-            for(let r=0;r<p.t.length;r++) for(let c=0;c<p.t[r].length;c++) {
-                if(!p.t[r][c]) continue;
-                let newX=p.x+c+ox, newY=p.y+r+oy;
-                if(newX<0||newX>=COL||newY>=ROW||board[newY] && board[newY][newX]!=='black') return true;
-            } return false;
-        }
-        function lock() {
-            for(let r=0;r<p.t.length;r++) for(let c=0;c<p.t[r].length;c++) if(p.t[r][c]) board[p.y+r][p.x+c]=p.c;
-            for(let r=0;r<ROW;r++) if(board[r].every(x=>x!=='black')) { score+=100; board.splice(r,1); board.unshift(Array(COL).fill('black')); }
-            document.getElementById('score-display').innerText=score;
-            p = nextP; nextP = randomPiece(); drawNext();
-            if(collide(0,0)) triggerGameOver(score);
-        }
-        function draw() { ctx.fillStyle='black'; ctx.fillRect(0,0,240,400); drawBoard(); for(let r=0;r<p.t.length;r++) for(let c=0;c<p.t[r].length;c++) if(p.t[r][c]) drawSquare(p.x+c,p.y+r,p.c); }
-
-        currentInput = (e) => {
-            if(e.key==='ArrowLeft') move(-1,0); else if(e.key==='ArrowRight') move(1,0);
-            else if(e.key==='ArrowUp') rotate(); else if(e.key==='ArrowDown') move(0,1);
-        };
-        drawNext();
-        loop = setInterval(() => move(0,1), 500);
+        cvs.width = 250; cvs.height = 500; const ctxNext = document.getElementById('next-stage').getContext('2d');
+        const rows = 20, cols = 10, size = 25;
+        let board = Array.from({length: rows}, () => Array(cols).fill(0)), score = 0;
+        const PIECES = [{s:[[1,1,1,1]], c:'#00e5ff'}, {s:[[1,1],[1,1]], c:'#ffff00'}, {s:[[0,1,0],[1,1,1]], c:'#a020f0'}, {s:[[0,1,1],[1,1,0]], c:'#00ff00'}, {s:[[1,1,0],[0,1,1]], c:'#ff0000'}, {s:[[1,0,0],[1,1,1]], c:'#0000ff'}, {s:[[0,0,1],[1,1,1]], c:'#ffa500'}];
+        function getRandomPiece() { return {...PIECES[Math.floor(Math.random()*PIECES.length)], x:3, y:0}; }
+        let cur = getRandomPiece(), nextP = getRandomPiece();
+        function drawBlock(cContext, x, y, color, blockSize) { cContext.fillStyle = color; cContext.fillRect(x * blockSize, y * blockSize, blockSize, blockSize); cContext.fillStyle = 'rgba(255,255,255,0.3)'; cContext.fillRect(x * blockSize, y * blockSize, blockSize, 4); cContext.fillRect(x * blockSize, y * blockSize, 4, blockSize); cContext.fillStyle = 'rgba(0,0,0,0.4)'; cContext.fillRect(x * blockSize, y * blockSize + blockSize - 4, blockSize, 4); cContext.fillRect(x * blockSize + blockSize - 4, y * blockSize, 4, blockSize); }
+        function drawNextPiece() { ctxNext.fillStyle = '#0a0014'; ctxNext.fillRect(0,0,100,100); const offsetX = (4 - nextP.s[0].length) / 2, offsetY = (4 - nextP.s.length) / 2; nextP.s.forEach((r,dy) => r.forEach((v,dx) => { if(v) drawBlock(ctxNext, dx + offsetX, dy + offsetY, nextP.c, 25); })); }
+        function drawGrid() { ctx.strokeStyle = 'rgba(0, 229, 255, 0.05)'; ctx.lineWidth = 1; for(let x=0; x<=cols; x++) { ctx.beginPath(); ctx.moveTo(x*size,0); ctx.lineTo(x*size, cvs.height); ctx.stroke(); } for(let y=0; y<=rows; y++) { ctx.beginPath(); ctx.moveTo(0,y*size); ctx.lineTo(cvs.width, y*size); ctx.stroke(); } }
+        function collide(nx, ny, ns) { for(let r=0; r<ns.length; r++) for(let c=0; c<ns[r].length; c++) if(ns[r][c] && (ny+r>=rows || nx+c<0 || nx+c>=cols || board[ny+r][nx+c])) return true; return false; }
+        drawNextPiece();
+        currentInput = (e) => { if(e.key==='ArrowLeft' && !collide(cur.x-1, cur.y, cur.s)) cur.x--; if(e.key==='ArrowRight' && !collide(cur.x+1, cur.y, cur.s)) cur.x++; if(e.key==='ArrowDown' && !collide(cur.x, cur.y+1, cur.s)) cur.y++; if(e.key==='ArrowUp'){ let r = cur.s[0].map((_,i)=>cur.s.map(row=>row[i]).reverse()); if(!collide(cur.x, cur.y, r)) cur.s = r; } };
+        loop = setInterval(() => {
+            ctx.fillStyle='rgba(10, 0, 20, 1)'; ctx.fillRect(0,0,250,500); drawGrid();
+            if(!collide(cur.x, cur.y+1, cur.s)) cur.y++;
+            else { cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) board[cur.y+dy][cur.x+dx]=cur.c; })); board = board.filter(r => r.some(v=>v===0)); while(board.length < rows){ board.unshift(Array(cols).fill(0)); score+=100; document.getElementById('score-display').innerText=score;} cur = nextP; nextP = getRandomPiece(); drawNextPiece(); if(collide(cur.x, cur.y, cur.s)) { triggerGameOver(score, 'Tetris: Bloklar Tepeye Ulaştı!'); return; } }
+            board.forEach((r,y)=>r.forEach((v,x)=>{ if(v) drawBlock(ctx, x, y, v, size); })); cur.s.forEach((r,dy)=>r.forEach((v,dx)=>{ if(v) drawBlock(ctx, cur.x+dx, cur.y+dy, cur.c, size); }));
+        }, 400);
     }
 
-    // --- PACMAN OYUNU (Dosyadaki Orijinal Kod) ---
+    // PAC-MAN
     function startPacman(cvs, ctx) {
-        cvs.width = 320; cvs.height = 320;
-        let score = 0, px=40, py=40, gx=240, gy=240, ghostTick=0;
-        document.getElementById('score-display').innerText = 0;
-        
-        // 8x8 Grid: 1=Duvar, 0=Yol
-        const map = [
-            [1,1,1,1,1,1,1,1],
-            [1,0,0,0,0,0,0,1],
-            [1,0,1,1,0,1,0,1],
-            [1,0,0,0,0,0,0,1],
-            [1,0,1,0,1,1,0,1],
-            [1,0,0,0,0,0,0,1],
-            [1,1,0,1,0,1,0,1],
-            [1,1,1,1,1,1,1,1]
-        ];
-        // Yemler (duvar olmayan yerlere yem koy)
-        let foods = [];
-        for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(map[r][c]===0) foods.push({x:c*40+20, y:r*40+20, active:true});
-
-        currentInput = (e) => {
-            let nx=px, ny=py;
-            if(e.key==='ArrowLeft') nx-=40; if(e.key==='ArrowRight') nx+=40;
-            if(e.key==='ArrowUp') ny-=40; if(e.key==='ArrowDown') ny+=40;
-            let c=Math.floor(nx/40), r=Math.floor(ny/40);
-            if(map[r] && map[r][c]===0) { px=nx; py=ny; }
-        };
-
+        cvs.width=320; cvs.height=320; let px=40, py=40, gx=240, gy=240, score=0, dir=0, ghostTick=0;
+        const maze = [[1,1,1,1,1,1,1,1], [1,0,0,0,1,0,0,1], [1,0,1,0,1,0,1,1], [1,0,0,0,0,0,0,1], [1,1,0,1,1,1,0,1], [1,0,0,0,0,1,0,1], [1,0,1,1,0,0,0,1], [1,1,1,1,1,1,1,1]];
+        let dots = []; for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===0) dots.push({x:c*40+20, y:r*40+20, e:true});
+        let fruits = [ { x: 4*40+20, y: 3*40+20, e: true, icon: '🍒', pts: 50 }, { x: 4*40+20, y: 6*40+20, e: true, icon: '🍓', pts: 50 } ];
+        currentInput = (e) => { let nx=px, ny=py; if(e.key==='ArrowRight') {nx+=40; dir=0} if(e.key==='ArrowLeft') {nx-=40; dir=Math.PI} if(e.key==='ArrowUp') {ny-=40; dir=1.5*Math.PI} if(e.key==='ArrowDown') {ny+=40; dir=0.5*Math.PI} if(maze[Math.floor(ny/40)][Math.floor(nx/40)]===0){px=nx; py=ny} };
         loop = setInterval(() => {
-            ctx.fillStyle = 'black'; ctx.fillRect(0,0,320,320);
-            
-            // Harita Çiz
-            for(let r=0; r<8; r++) for(let c=0; c<8; c++) {
-                if(map[r][c]===1) { ctx.fillStyle='#240046'; ctx.fillRect(c*40, r*40, 40, 40); ctx.strokeStyle='#00e5ff'; ctx.strokeRect(c*40,r*40,40,40); }
-            }
-
-            // Yemler ve Yeme Mantığı
-            let remaining = 0;
-            foods.forEach(f => { 
-                if(f.active) { 
-                    remaining++; 
-                    ctx.fillStyle='white'; ctx.beginPath(); ctx.arc(f.x,f.y,5,0,7); ctx.fill(); 
-                    if(Math.abs(px+20-f.x)<10 && Math.abs(py+20-f.y)<10) { 
-                        f.active=false; score+=10; document.getElementById('score-display').innerText=score; 
-                    }
-                } 
-            });
-            if(remaining===0) { triggerGameOver(score, 'TEBRİKLER! TÜM YEMLERİ TOPLADIN!'); return; }
-
-            // Hayalet Yapay Zeka (Basit Takip)
+            ctx.fillStyle='black'; ctx.fillRect(0,0,320,320); ctx.fillStyle='#240046'; 
+            for(let r=0; r<8; r++) for(let c=0; c<8; c++) if(maze[r][c]===1) { ctx.fillRect(c*40,r*40,40,40); ctx.strokeStyle='#4a148c'; ctx.strokeRect(c*40,r*40,40,40); }
+            ctx.font = "22px Arial"; fruits.forEach(f => { if(f.e) { ctx.fillText(f.icon, f.x - 11, f.y + 8); if(Math.abs(px+20-f.x)<15 && Math.abs(py+20-f.y)<15) { f.e = false; score += f.pts; document.getElementById('score-display').innerText = score; } } });
+            ctx.fillStyle='#ffeb3b'; let remaining = 0;
+            dots.forEach(d=>{ if(d.e){ remaining++; ctx.beginPath(); ctx.arc(d.x,d.y,4,0,7); ctx.fill(); if(Math.abs(px+20-d.x)<10 && Math.abs(py+20-d.y)<10){d.e=false; score+=10; document.getElementById('score-display').innerText=score;} } });
+            if(remaining===0){ triggerGameOver(score, 'TEBRİKLER! TÜM YEMLERİ TOPLADIN!'); return; }
             ghostTick++;
-            if(ghostTick % 4 === 0) { // Biraz yavaş hareket etsin
+            if(ghostTick % 3 === 0) {
                 let moves = [{x:0, y:-40}, {x:0, y:40}, {x:-40, y:0}, {x:40, y:0}], bestMove = null, minDist = 99999;
-                moves.forEach(m => { 
-                    let checkX = gx + m.x, checkY = gy + m.y; 
-                    let r = Math.floor(checkY / 40), c = Math.floor(checkX / 40); 
-                    if(map[r] && map[r][c] === 0) { 
-                        let dist = Math.sqrt(Math.pow(px - checkX, 2) + Math.pow(py - checkY, 2)); 
-                        if(dist < minDist) { minDist = dist; bestMove = m; } 
-                    } 
-                });
+                moves.forEach(m => { let checkX = gx + m.x, checkY = gy + m.y; if(checkX >= 0 && checkX < 320 && checkY >= 0 && checkY < 320) { let r = Math.floor(checkY / 40), c = Math.floor(checkX / 40); if(maze[r][c] === 0) { let dist = Math.sqrt(Math.pow(px - checkX, 2) + Math.pow(py - checkY, 2)); if(dist < minDist) { minDist = dist; bestMove = m; } } } });
                 if(bestMove) { gx += bestMove.x; gy += bestMove.y; }
             }
-
-            // Çizimler: Hayalet ve Pacman
-            ctx.fillStyle='#ff0055'; ctx.beginPath(); ctx.arc(gx+20, gy+20, 16, 0, 7); ctx.fill(); // Hayalet
-            ctx.fillStyle='yellow'; ctx.beginPath(); ctx.arc(px+20, py+20, 16, 0.2*Math.PI, 1.8*Math.PI); ctx.lineTo(px+20, py+20); ctx.fill(); // Pacman
-
-            // Çarpışma
-            if(Math.abs(px-gx)<10 && Math.abs(py-gy)<10) triggerGameOver(score);
-
-        }, 150);
+            ctx.fillStyle='#ff0055'; ctx.beginPath(); ctx.arc(gx+20, gy+20, 16, 0, 7); ctx.fill(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(gx+14, gy+16, 4, 0, 7); ctx.arc(gx+26, gy+16, 4, 0, 7); ctx.fill();
+            ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(gx+14, gy+16, 2, 0, 7); ctx.arc(gx+26, gy+16, 2, 0, 7); ctx.fill();
+            if(Math.abs(px-gx)<20 && Math.abs(py-gy)<20){ triggerGameOver(score, 'HAYALETE YAKALANDIN!'); return; }
+            ctx.fillStyle='#ffeb3b'; ctx.beginPath(); ctx.arc(px+20,py+20,16,dir+0.2,dir+6.1); ctx.lineTo(px+20,py+20); ctx.fill();
+        }, 220); 
     }
 </script>
 </body>
