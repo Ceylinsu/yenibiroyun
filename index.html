@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v3.5.0</title>
+    <title>Ceylinsu Arslan Arcade v3.6.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&family=Verdana:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -18,7 +17,7 @@
         }
         h1, h2, h3, .brand-font { font-family: 'Orbitron', sans-serif; }
         
-        /* HEADER */
+        /* HEADER - Büyük Yazılar (v3.5.0) */
         header {
             background: linear-gradient(90deg, #240046, #4a148c); padding: 1.2rem 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -41,7 +40,7 @@
         }
         
         main { padding: 40px 5%; max-width: 1200px; margin: auto; }
-        .section { display: none; animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .section { display: none; animation: fadeIn 0.5s ease; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -60,32 +59,44 @@
             border: 1px solid rgba(0, 229, 255, 0.3); transition: 0.3s;
         }
 
-        /* Kartlar (Oyun & Film) */
+        /* Grid & Kartlar */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .card { 
             background: var(--panel); border: 2px solid rgba(0, 229, 255, 0.3); padding: 30px; 
             border-radius: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease;
-            position: relative; overflow: hidden;
         }
         .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); border-color: var(--neon-blue); }
         .card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 5px var(--accent)); }
         .card h3 { margin: 10px 0; color: #fff; letter-spacing: 1px; }
 
-        /* Arcade & Start Screen */
+        /* Not Kartları için Özel Stil */
+        .note-card {
+            text-align: left; padding: 25px; cursor: default;
+        }
+        .note-card:hover { transform: none; box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
+        .note-card h3 { color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .note-card p { font-size: 1.05rem; line-height: 1.6; margin-top: 15px; }
+        .note-card i { font-size: 2.5rem; text-align: center; display: block; color: var(--accent); margin-bottom: 10px; }
+
+        /* Arcade & Skor (v3.5.0) */
         #arcade-container { 
             display: none; flex-direction: column; align-items: center; 
             background: #000; padding: 20px; border-radius: 20px; border: 4px solid var(--panel);
             position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.8);
             min-height: 500px; justify-content: center;
         }
-        
-        #start-screen, #movie-modal {
+        #score-display { 
+            font-family: 'Verdana', sans-serif; font-weight: bold; font-size: 2rem; 
+            color: var(--neon-blue); margin-bottom: 15px; text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Modallar (Film & Oyun Başlatma) */
+        #movie-modal, #start-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(13, 0, 26, 0.9); z-index: 10000;
             backdrop-filter: blur(8px);
             display: none; flex-direction: column; align-items: center; justify-content: center;
         }
-        
         .modal-box {
             background: linear-gradient(145deg, #1a0033, #0d001a);
             padding: 40px; border-radius: 20px; border: 2px solid var(--neon-blue);
@@ -96,7 +107,6 @@
         .modal-box ul { list-style: none; padding: 0; text-align: left; }
         .modal-box li { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem; }
         .modal-box li:last-child { border: none; }
-        
         .play-btn {
             background: var(--neon-blue); color: #000; border: none; padding: 15px 40px;
             font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 50px;
@@ -104,12 +114,6 @@
             text-transform: uppercase; letter-spacing: 2px; margin-top: 20px;
         }
         .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--neon-blue); background: #fff; }
-
-        /* Skor Font */
-        #score-display { 
-            font-family: 'Verdana', sans-serif; font-weight: bold; font-size: 2rem; 
-            color: var(--neon-blue); margin-bottom: 15px; text-shadow: 0 0 10px var(--neon-blue);
-        }
 
         canvas { background: #000; border: 2px solid #333; max-width: 100%; height: auto; border-radius: 4px; }
         
@@ -120,6 +124,7 @@
         }
         .control-btn:active { background: var(--neon-blue); color: #000; }
         
+        /* Log Tablosu (Tam Liste) */
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th, td { padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: left; }
@@ -141,7 +146,7 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v3.5.0</span>
+    <span class="v-badge">v3.6.0</span>
 </header>
 
 <main>
@@ -153,10 +158,11 @@
                 Burada gördüğünüz her oyun, titizlikle geliştirdiğim bir sürecin ürünüdür. 
                 Sistem her geçen gün daha stabil ve kullanıcı dostu hale geliyor.
                 Son güncellemeyle film arşivimi interaktif hale getirdim ve oyun dengelerini mükemmelleştirdim.
+                Ayrıca artık lise düzeyindeki akademik ders notlarıma da "Notlar" bölümünden erişebilirsiniz.
             </p>
             <div class="stats-grid">
                 <div class="stat-box"><span>GELİŞTİRİCİ</span><strong class="brand-font">Ceylinsu Arslan</strong></div>
-                <div class="stat-box"><span>DURUM</span><strong class="brand-font" style="color:var(--neon-blue)">v3.5.0 Stable</strong></div>
+                <div class="stat-box"><span>DURUM</span><strong class="brand-font" style="color:var(--neon-blue)">v3.6.0 Stable</strong></div>
             </div>
         </div>
     </section>
@@ -181,21 +187,45 @@
         </div>
     </section>
 
-    <div id="start-screen">
-        <div class="modal-box">
-            <i id="game-icon-modal" class="fas fa-gamepad" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
-            <h2 id="start-title">OYUN</h2>
-            <p id="start-desc">Hazır mısın?</p>
-            <button class="play-btn" id="actual-start-btn">BAŞLA</button>
-            <button onclick="document.getElementById('start-screen').style.display='none'" style="background:none; border:none; color:#666; margin-top:10px; cursor:pointer;">İptal</button>
-        </div>
-    </div>
-
     <section id="notes" class="section">
-        <h2 class="brand-font">📚 Akademik Arşivim</h2>
+        <h2 class="brand-font">📚 Lise Ders Notları</h2>
         <div class="game-grid">
-            <div class="card"><h3>Matematik</h3><p>Limit, Türev ve Diziler.</p></div>
-            <div class="card"><h3>Fizik</h3><p>Elektromanyetizma ve Optik.</p></div>
+            <div class="card note-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Matematik</h3>
+                <p>
+                    • <b>Mantık ve Kümeler:</b> Önermeler (p, q), bağlaçlar (∨, ∧), kümelerde birleşim/kesişim işlemleri.<br>
+                    • <b>Fonksiyonlar:</b> Tanım ve değer kümesi ilişkileri, birebir, örten, sabit ve birim fonksiyonlar.<br>
+                    • <b>Polinom & Denklem:</b> Derece hesabı, x'i yalnız bırakma (birinci/ikinci dereceden), parabol çizimleri.
+                </p>
+            </div>
+            <div class="card note-card">
+                <i class="fas fa-atom"></i>
+                <h3>Fizik</h3>
+                <p>
+                    • <b>Vektörler ve Hareket:</b> Yönlü büyüklükler (kuvvet, hız), tek ve iki boyutta hareket, ivme hesabı.<br>
+                    • <b>Dinamik (Newton):</b> Eylemsizlik, F = m.a (Temel Yasa) ve Etki-Tepki prensibi.<br>
+                    • <b>Optik ve Enerji:</b> Kırılma yasaları, yansıma açıları, İş-Güç-Enerji dönüşümleri.
+                </p>
+            </div>
+            <div class="card note-card">
+                <i class="fas fa-flask"></i>
+                <h3>Kimya</h3>
+                <p>
+                    • <b>Atom Modelleri:</b> Thomson (üzümlü kek), Rutherford (çekirdek), Bohr (yörünge) ve Modern Atom Teorisi.<br>
+                    • <b>Periyodik Sistem:</b> Metaller (solda/altta), ametaller (sağda/üstte), soygazlar (8A grubu) eğilimleri.<br>
+                    • <b>Kimyasal Türler:</b> İyonik ve kovalent bağlar, zayıf etkileşimler (Van der Waals, Hidrojen Bağı).
+                </p>
+            </div>
+            <div class="card note-card">
+                <i class="fas fa-dna"></i>
+                <h3>Biyoloji</h3>
+                <p>
+                    • <b>Hücre ve Organeller:</b> Ökaryot (çekirdekli) ve Prokaryot (çekirdeksiz), Mitokondri (ATP), Ribozom (protein).<br>
+                    • <b>Hücre Bölünmeleri:</b> Mitoz (büyüme, onarım, eşeysiz üreme) ve Mayoz (üreme hücreleri, genetik çeşitlilik).<br>
+                    • <b>Canlıların Sınıflandırılması:</b> Türden aleme sıralama, ikili (binomial) isimlendirme kuralları.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -229,12 +259,23 @@
         </div>
     </div>
 
+    <div id="start-screen">
+        <div class="modal-box">
+            <i id="game-icon-modal" class="fas fa-gamepad" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+            <h2 id="start-title">OYUN</h2>
+            <p id="start-desc">Hazır mısın?</p>
+            <button class="play-btn" id="actual-start-btn">BAŞLA</button>
+            <button onclick="document.getElementById('start-screen').style.display='none'" style="background:none; border:none; color:#666; margin-top:10px; cursor:pointer;">İptal</button>
+        </div>
+    </div>
+
     <section id="logs" class="section">
         <h2 class="brand-font">📜 Tam Sistem Geçmişi</h2>
         <div class="log-container">
             <table>
                 <thead><tr><th>Versiyon</th><th>Güncelleme Detayları</th></tr></thead>
                 <tbody>
+                    <tr><td class="v-cell">v3.6.0</td><td class="d-cell">Lise düzeyinde kısa ders notları (Matematik, Fizik, Kimya, Biyoloji) eklendi. v3.5.0 stabilitesi (yavaş Pac-Man hayaleti) korundu.</td></tr>
                     <tr><td class="v-cell">v3.5.0</td><td class="d-cell">Pac-Man hayalet hızı 1/3 oranına düşürüldü. Film modülü interaktif hale getirildi (Narnia, Avengers, Spiderman). Tüm versiyon geçmişi eklendi.</td></tr>
                     <tr><td class="v-cell">v3.4.0</td><td class="d-cell">Menü ve Versiyon yazıları büyütüldü. Snake kazanma limiti 100 oldu. Skor "0" fontu düzeltildi.</td></tr>
                     <tr><td class="v-cell">v3.3.0</td><td class="d-cell">Pac-Man yapay zeka (duvar takılma) sorunu çözüldü. Başlat ekranı Glassmorphism tasarımıyla yenilendi.</td></tr>
@@ -257,7 +298,7 @@
 <script>
     let loop = null, currentInput = null, activeGame = null;
 
-    // --- GENEL UI & NAVIGATION ---
+    // --- GENEL KONTROLLER ---
     window.addEventListener("keydown", (e) => {
         const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "];
         if(keys.includes(e.key) || keys.includes(e.code)) {
@@ -273,7 +314,7 @@
         window.scrollTo(0,0);
     }
 
-    // --- FİLM MODAL LOGIC ---
+    // --- FİLM LİSTESİ MODAL (v3.5.0'dan korundu) ---
     const movieDatabase = {
         narnia: { title: "Narnia Günlükleri", list: ["Aslan, Cadı ve Dolap", "Prens Kaspiyan", "Şafak Yıldızı'nın Yolculuğu"] },
         avengers: { title: "The Avengers Saga", list: ["The Avengers (2012)", "Age of Ultron", "Infinity War", "Endgame"] },
@@ -287,13 +328,13 @@
         listEl.innerHTML = "";
         data.list.forEach(movie => {
             const li = document.createElement('li');
-            li.innerText = movie;
+            li.innerHTML = `<i class="fas fa-ticket" style="margin-right:8px; color:var(--accent)"></i> ${movie}`;
             listEl.appendChild(li);
         });
         document.getElementById('movie-modal').style.display = 'flex';
     }
 
-    // --- OYUN BAŞLATMA ---
+    // --- OYUN BAŞLATMA EKRANI ---
     function prepareGame(type) {
         activeGame = type;
         document.getElementById('start-screen').style.display = 'flex';
@@ -334,7 +375,7 @@
         currentInput = null;
     }
 
-    // --- SNAKE ---
+    // --- SNAKE (180ms - 100 Puan) ---
     function startSnake(cvs, ctx) {
         cvs.width = 320; cvs.height = 320;
         let snake = [{x:160, y:160}, {x:140, y:160}], dx=20, dy=0, food={x:60,y:60}, score=0;
@@ -394,7 +435,7 @@
         }, 350);
     }
 
-    // --- PAC-MAN (v3.5 - ULTRA YAVAŞ HAYALET) ---
+    // --- PAC-MAN (v3.5.0 YAVAŞ HAYALET) ---
     function startPacman(cvs, ctx) {
         cvs.width=320; cvs.height=320;
         let px=40, py=40, gx=240, gy=240, score=0, dir=0;
@@ -429,9 +470,9 @@
             });
             if(remaining===0){ alert('TEBRİKLER! KAZANDIN!'); exitGame(); return; }
 
-            // --- HAYALET (3 TURDA 1 HAREKET) ---
+            // --- HAYALET (3 TURDA 1 HAREKET - v3.5.0 Yavaşlığı) ---
             ghostTick++;
-            if(ghostTick % 3 === 0) { // <-- HIZI BURADAN AYARLADIK (Daha Yavaş)
+            if(ghostTick % 3 === 0) {
                 let moves = [{x:0, y:-40}, {x:0, y:40}, {x:-40, y:0}, {x:40, y:0}];
                 let bestMove = null, minDist = 99999;
                 moves.forEach(m => {
@@ -453,7 +494,7 @@
 
             if(Math.abs(px-gx)<20 && Math.abs(py-gy)<20){ alert('YAKALANDIN!'); exitGame(); }
             ctx.fillStyle='#ffeb3b'; ctx.beginPath(); ctx.arc(px+20,py+20,16,dir+0.2,dir+6.1); ctx.lineTo(px+20,py+20); ctx.fill();
-        }, 220);
+        }, 220); // (v3.5.0 hızı 220ms)
     }
 </script>
 </body>
