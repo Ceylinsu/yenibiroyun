@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ceylinsu Arslan Arcade v4.5.0</title>
+    <title>Ceylinsu Arslan Arcade v4.6.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&family=Verdana:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -65,11 +65,11 @@
         .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); border-color: var(--neon-blue); }
         .card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; filter: drop-shadow(0 0 5px var(--accent)); }
         
-        /* FİLM KARTLARI */
-        .movie-card { padding: 0; height: 350px; display: flex; flex-direction: column; justify-content: flex-end; background-size: cover; background-position: center; position: relative; border: 2px solid #444; }
-        .movie-overlay { background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2)); width: 100%; padding: 20px; box-sizing: border-box; }
+        /* FİLM KARTLARI (YENİ: AFİŞ STANDARTLARI) */
+        .movie-card { padding: 0; aspect-ratio: 2 / 3; height: auto; display: flex; flex-direction: column; justify-content: flex-end; background-size: cover; background-position: center; position: relative; border: 2px solid #444; border-radius: 12px; overflow: hidden; }
+        .movie-overlay { background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.1)); width: 100%; padding: 20px; box-sizing: border-box; }
         .movie-card h3 { color: #fff; margin: 0; text-shadow: 0 2px 4px #000; font-size: 1.4rem; }
-        .movie-card:hover { border-color: var(--accent); }
+        .movie-card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 0 25px rgba(255, 109, 0, 0.4); }
         .random-movie-btn { background: linear-gradient(45deg, var(--neon-pink), var(--accent)); color: #fff; border: none; padding: 15px 30px; font-family: 'Orbitron'; font-weight: bold; font-size: 1.3rem; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-bottom: 30px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 0 20px rgba(255,0,85,0.5); }
         .random-movie-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,0,85,0.8); }
 
@@ -121,16 +121,30 @@
         .play-btn { background: var(--neon-blue); color: #000; border: none; padding: 15px 40px; font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
         .exit-btn { background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 15px; width: 100%; max-width: 300px; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Orbitron'; }
 
-        /* Mobil Kontroller */
-        .mobile-controls { display: none; grid-template-areas: ". up ." "left . right" ". down ."; gap: 10px; margin-top: 15px; }
-        .control-btn { width: 60px; height: 60px; background: rgba(255, 255, 255, 0.1); border: 2px solid var(--neon-blue); color: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; -webkit-tap-highlight-color: transparent; }
-        .control-btn:active { background: var(--neon-blue); color: #000; }
-
-        /* MOBİL OYUN MODU */
-        .mobile-active #arcade-container { padding: 10px; min-height: auto; height: 100vh; border: none; border-radius: 0; box-shadow: none; justify-content: center; }
-        .mobile-active #stage { max-height: 45vh; width: auto; max-width: 95%; }
-        .mobile-active .score-board { padding: 5px 15px; margin-bottom: 10px; }
-        .mobile-active .exit-btn { padding: 8px; font-size: 0.9rem; margin-top: 10px; }
+        /* MOBİL OYUN MODU - YENİ TAM EKRAN (FULL SCREEN) SİSTEMİ */
+        body.mobile-active { overflow: hidden; } /* Ekranın aşağı kaymasını önler */
+        .mobile-active #arcade-container { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            z-index: 10000; background: var(--bg); padding: 10px; 
+            box-sizing: border-box; border: none; border-radius: 0; 
+            box-shadow: none; justify-content: space-between; align-items: center;
+            display: flex; flex-direction: column;
+        }
+        .mobile-active .score-board { margin-top: 10px; padding: 5px 20px; width: auto; }
+        .mobile-active .game-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; }
+        .mobile-active #stage { max-width: 100%; max-height: 50vh; object-fit: contain; }
+        .mobile-active .mobile-controls { 
+            display: grid; grid-template-areas: ". up ." "left . right" ". down ."; gap: 15px; 
+            margin-bottom: 10px; margin-top: auto;
+        }
+        .mobile-active .control-btn { 
+            width: 65px; height: 65px; background: rgba(0, 229, 255, 0.1); 
+            border: 2px solid var(--neon-blue); color: var(--neon-blue); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 2rem; -webkit-tap-highlight-color: transparent; 
+        }
+        .mobile-active .control-btn:active { background: var(--neon-blue); color: #000; }
+        .mobile-active .exit-btn { margin-bottom: 20px; width: 80%; padding: 12px; font-size: 1.1rem; }
 
         /* Günlük Tablosu */
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; }
@@ -152,7 +166,7 @@
             <li><a onclick="showPage('logs')">GÜNLÜK</a></li>
         </ul>
     </nav>
-    <span class="v-badge">v4.5.0</span>
+    <span class="v-badge">v4.6.0</span>
 </header>
 
 <main>
@@ -161,7 +175,7 @@
             <h1>Ceylinsu Arslan 👾</h1>
             <div class="skills">
                 <span class="skill-badge"><i class="fas fa-desktop"></i> Bilgisayar Uyumu</span>
-                <span class="skill-badge"><i class="fas fa-mobile-alt"></i> Mobil Optimize</span>
+                <span class="skill-badge"><i class="fas fa-mobile-alt"></i> Mobil Tam Ekran Oyun</span>
                 <span class="skill-badge"><i class="fas fa-trophy"></i> Skor Kayıt Sistemi</span>
                 <span class="skill-badge" style="color:#ff0055; border-color:#ff0055;"><i class="fas fa-music"></i> Retro Ses Motoru!</span>
             </div>
@@ -173,8 +187,8 @@
             </div>
 
             <div class="stats-grid" style="margin-top: 25px;">
-                <div class="stat-box"><span>SÜRÜM</span><br><strong class="brand-font" style="color:var(--neon-blue); font-size:1.5rem;">v4.5.0</strong></div>
-                <div class="stat-box"><span>CİHAZ DESTEĞİ</span><br><strong class="brand-font" style="color:var(--accent); font-size:1.5rem;">%100 Mobil Uyumlu</strong></div>
+                <div class="stat-box"><span>SÜRÜM</span><br><strong class="brand-font" style="color:var(--neon-blue); font-size:1.5rem;">v4.6.0</strong></div>
+                <div class="stat-box"><span>CİHAZ DESTEĞİ</span><br><strong class="brand-font" style="color:var(--accent); font-size:1.5rem;">Kusursuz Mobil Uyum</strong></div>
             </div>
         </div>
         
@@ -185,7 +199,7 @@
             </div>
             <div class="extra-card">
                 <h3 style="color: var(--accent);"><i class="fas fa-bolt"></i> Güncel Durum</h3>
-                <p>Kupa Odası açıldı, "Tetris Ustası" başarımlara eklendi! Oyunlara retro ses efektleri ve kaybetme (Game Over) sesi dahil edildi. Harry Potter afişi düzeltildi.</p>
+                <p>Telefon oynanışı Full Screen (Tam Ekran) moduna geçirildi, dokunmatik kontroller hızlandırıldı. Tetris için Döndürme (Yukarı Ok) bilgilendirmesi eklendi ve Film Afişleri oranları sinema standartlarına getirildi!</p>
             </div>
         </div>
     </section>
@@ -207,14 +221,18 @@
                 <div id="tetris-ui">
                     <h3>Sıradaki Blok</h3>
                     <canvas id="next-stage" width="100" height="100"></canvas>
+                    <div id="tetris-pc-hint" style="text-align:center; margin-top:15px; border-top: 1px solid #444; padding-top: 15px;">
+                        <i class="fas fa-arrow-up" style="color:var(--neon-blue); font-size:1.5rem; margin-bottom:5px; display:block;"></i>
+                        <span style="color:#aaa; font-size: 0.95rem; font-weight: bold;">Blok Döndür</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="mobile-controls" id="touch-controls">
-                <div class="control-btn" style="grid-area: up" onclick="handleInput('ArrowUp')"><i id="up-icon" class="fas fa-chevron-up"></i></div>
-                <div class="control-btn" style="grid-area: left" onclick="handleInput('ArrowLeft')"><i class="fas fa-chevron-left"></i></div>
-                <div class="control-btn" style="grid-area: right" onclick="handleInput('ArrowRight')"><i class="fas fa-chevron-right"></i></div>
-                <div class="control-btn" style="grid-area: down" onclick="handleInput('ArrowDown')"><i class="fas fa-chevron-down"></i></div>
+            <div class="mobile-controls" id="touch-controls" style="display: none;">
+                <div class="control-btn" style="grid-area: up" ontouchstart="handleInput('ArrowUp'); event.preventDefault()" onmousedown="handleInput('ArrowUp')"><i id="up-icon" class="fas fa-chevron-up"></i></div>
+                <div class="control-btn" style="grid-area: left" ontouchstart="handleInput('ArrowLeft'); event.preventDefault()" onmousedown="handleInput('ArrowLeft')"><i class="fas fa-chevron-left"></i></div>
+                <div class="control-btn" style="grid-area: right" ontouchstart="handleInput('ArrowRight'); event.preventDefault()" onmousedown="handleInput('ArrowRight')"><i class="fas fa-chevron-right"></i></div>
+                <div class="control-btn" style="grid-area: down" ontouchstart="handleInput('ArrowDown'); event.preventDefault()" onmousedown="handleInput('ArrowDown')"><i class="fas fa-chevron-down"></i></div>
             </div>
             <button class="exit-btn" onclick="exitGame()">OYUNU KAPAT</button>
         </div>
@@ -322,23 +340,18 @@
             <table>
                 <thead><tr><th>Versiyon</th><th>Güncelleme Detayları</th></tr></thead>
                 <tbody>
-                    <tr><td class="v-cell">v4.5.0</td><td class="d-cell">Oyunlara kaybetme (Game Over) ses efekti eklendi. Harry Potter film afişi bağlantısı IMDB kaynaklı çok güvenilir bir resimle düzeltildi. 'Tetris Ustası' (Tetris'te 500 Puan) başarımı eklendi.</td></tr>
-                    <tr><td class="v-cell">v4.4.0</td><td class="d-cell">Kupa Odası (Başarımlar) ve Oyun içi retro ses efektleri eklendi! Filmler sekmesine "Şansımı Dene" butonu koyuldu ve afişler daha kararlı bağlantılarla güncellendi.</td></tr>
+                    <tr><td class="v-cell">v4.6.0</td><td class="d-cell">Oyunların telefon ekranı için "Tam Ekran (Full Screen)" modu geliştirildi ve tuşlar gecikmesiz hale getirildi. Tetris bilgisayar sürümüne 'Yukarı Ok: Döndür' uyarısı eklendi. Filmler kısmı fotoğraf oranlarına (afiş standartlarına) uygun hale getirildi.</td></tr>
+                    <tr><td class="v-cell">v4.5.0</td><td class="d-cell">Oyunlara kaybetme (Game Over) ses efekti eklendi. Harry Potter film afişi bağlantısı onarıldı. 'Tetris Ustası' (Tetris'te 500 Puan) başarımı eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.4.0</td><td class="d-cell">Kupa Odası (Başarımlar) ve Oyun içi retro ses efektleri eklendi! Filmler sekmesine "Şansımı Dene" butonu koyuldu.</td></tr>
                     <tr><td class="v-cell">v4.3.0</td><td class="d-cell">Snake hedefi 200 puana çıkarıldı. Pac-Man büyütüldü ve 5 seviyeli sisteme geçildi.</td></tr>
                     <tr><td class="v-cell">v4.2.0</td><td class="d-cell">Film afişleri ve ana sayfa düzenlemesi yapıldı.</td></tr>
-                    <tr><td class="v-cell">v4.1.0</td><td class="d-cell">Notlar sayfasına EBA OGM Materyal detaylı TYT-AYT çalışma butonları ve Harry Potter serisi eklendi.</td></tr>
+                    <tr><td class="v-cell">v4.1.0</td><td class="d-cell">Notlar sayfasına EBA OGM Materyal detaylı çalışma butonları ve Harry Potter serisi eklendi.</td></tr>
                     <tr><td class="v-cell">v4.0.0</td><td class="d-cell">MOBİL DEVRİMİ! Telefondan oynarken oyun ekranı küçültüldü ve tuşlar parmak hizasına getirildi.</td></tr>
                     <tr><td class="v-cell">v3.9.0</td><td class="d-cell">Oyun öncesi "Bilgisayar" veya "Telefon" seçimi eklendi.</td></tr>
                     <tr><td class="v-cell">v3.8.0</td><td class="d-cell">Local Storage ile High Score kayıt sistemi eklendi.</td></tr>
                     <tr><td class="v-cell">v3.7.0</td><td class="d-cell">Ana sayfa portfolyo mantığına geçirildi. Tetris'e "Sıradaki Blok" eklendi.</td></tr>
                     <tr><td class="v-cell">v3.6.0</td><td class="d-cell">Lise düzeyinde kısa ders notları eklendi.</td></tr>
-                    <tr><td class="v-cell">v3.5.0</td><td class="d-cell">Pac-Man hayalet hızı 1/3 oranına düşürüldü. Film modülü interaktif hale getirildi.</td></tr>
-                    <tr><td class="v-cell">v3.4.0</td><td class="d-cell">Menü ve Versiyon yazıları büyütüldü.</td></tr>
-                    <tr><td class="v-cell">v3.3.0</td><td class="d-cell">Pac-Man yapay zeka sorunu çözüldü. Başlat ekranı yenilendi.</td></tr>
-                    <tr><td class="v-cell">v3.2.0</td><td class="d-cell">Klavye yön tuşları algılama sorunu giderildi.</td></tr>
-                    <tr><td class="v-cell">v3.1.0</td><td class="d-cell">Oyun öncesi "Start Screen" eklendi.</td></tr>
                     <tr><td class="v-cell">v3.0.0</td><td class="d-cell">Ana sayfa Ceylinsu'nun profil yazısıyla güncellendi.</td></tr>
-                    <tr><td class="v-cell">v2.0.0</td><td class="d-cell">Sisteme Notlar ve Filmler sekmeleri ilk defa eklendi.</td></tr>
                     <tr><td class="v-cell">v1.0.0</td><td class="d-cell">İlk sürüm. Arcade motorunun temeli atıldı.</td></tr>
                 </tbody>
             </table>
@@ -413,7 +426,7 @@
             gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.4); 
             osc.start(); osc.stop(audioCtx.currentTime + 0.4); 
         }
-        else if(type === 'gameover') { // YENİ: Game Over Sesi
+        else if(type === 'gameover') { 
             osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, audioCtx.currentTime);
             osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.5);
             gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
@@ -426,7 +439,7 @@
     const achievementsDB = {
         snake100: { title: "Yılan Terbiyecisi", desc: "Snake'te 100 puana ulaş!", icon: "fas fa-worm" },
         pacman3: { title: "Hayalet Avcısı", desc: "Pac-Man'de 3. seviyeye geç!", icon: "fas fa-ghost" },
-        tetris500: { title: "Tetris Ustası", desc: "Tetris'te 500 puana ulaş!", icon: "fas fa-cubes" }, // YENİ
+        tetris500: { title: "Tetris Ustası", desc: "Tetris'te 500 puana ulaş!", icon: "fas fa-cubes" },
         nightowl: { title: "Gece Kuşu", desc: "Gece 12'den sonra siteye gir!", icon: "fas fa-moon" }
     };
 
@@ -540,10 +553,10 @@
     }
 
     function triggerGameOver(score, msg) {
-        if(loop) clearInterval(loop); // Çoklu tetiklemeyi önlemek için anında durduruyoruz
-        playSound('gameover'); // Kaybetme sesini oynat
+        if(loop) clearInterval(loop); 
+        playSound('gameover');
         let hs = updateHighScore(activeGame, score);
-        setTimeout(() => { // Sesin oynatılmasına zaman tanımak için 200ms gecikme
+        setTimeout(() => {
             alert(`${msg}\n\nSkorun: ${score}\nEn Yüksek Skor: ${hs}`); 
             exitGame();
         }, 200); 
@@ -591,7 +604,7 @@
                 while(board.length < rows){ 
                     board.unshift(Array(cols).fill(0)); score+=100; 
                     document.getElementById('score-display').innerText=score;
-                    if(score >= 500) unlockAchievement('tetris500'); // YENİ BAŞARIM
+                    if(score >= 500) unlockAchievement('tetris500'); 
                 } 
                 cur = nextP; nextP = getRandomPiece(); drawNextPiece(); 
                 if(collide(cur.x, cur.y, cur.s)) { triggerGameOver(score, 'Tetris: Bloklar Tepeye Ulaştı!'); return; } 
