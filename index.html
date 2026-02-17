@@ -137,20 +137,14 @@
             display: grid; grid-template-areas: ". up ." "left . right" ". down ."; gap: 15px; 
             margin-bottom: 10px; margin-top: auto;
         }
-       .mobile-active .control-btn { 
-    width: 70px; height: 70px; /* Hedefi biraz büyüttük, daha rahat basılır */
-    background: rgba(0, 229, 255, 0.1); 
-    border: 2px solid var(--neon-blue); color: var(--neon-blue); 
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-    font-size: 2.2rem; 
-    -webkit-tap-highlight-color: transparent; 
-    user-select: none; /* Metin seçimi gibi algılanmasını engeller */
-    touch-action: none; /* Tarayıcının zoom/scroll yapmasını ENGELLER (ÇOK ÖNEMLİ) */
-    cursor: pointer;
-    outline: none;
-}
-.mobile-active .control-btn:active { background: var(--neon-blue); color: #000; transform: scale(0.95); }
-.mobile-active .control-btn i { pointer-events: none; } /* İkona tıklanmasını yoksayar, direkt butonu tetikler */
+        .mobile-active .control-btn { 
+            width: 65px; height: 65px; background: rgba(0, 229, 255, 0.1); 
+            border: 2px solid var(--neon-blue); color: var(--neon-blue); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 2rem; -webkit-tap-highlight-color: transparent; 
+        }
+        .mobile-active .control-btn:active { background: var(--neon-blue); color: #000; }
+        .mobile-active .exit-btn { margin-bottom: 20px; width: 80%; padding: 12px; font-size: 1.1rem; }
 
         /* Günlük Tablosu */
         .log-container { overflow-x: auto; background: var(--panel); border-radius: 15px; border: 1px solid #3d0066; margin-top: 20px; }
@@ -234,12 +228,12 @@
                 </div>
             </div>
             
-           <div class="mobile-controls" id="touch-controls" style="display: none;">
-    <button class="control-btn" style="grid-area: up" onpointerdown="handleMobileInput('ArrowUp')"><i id="up-icon" class="fas fa-chevron-up"></i></button>
-    <button class="control-btn" style="grid-area: left" onpointerdown="handleMobileInput('ArrowLeft')"><i class="fas fa-chevron-left"></i></button>
-    <button class="control-btn" style="grid-area: right" onpointerdown="handleMobileInput('ArrowRight')"><i class="fas fa-chevron-right"></i></button>
-    <button class="control-btn" style="grid-area: down" onpointerdown="handleMobileInput('ArrowDown')"><i class="fas fa-chevron-down"></i></button>
-</div>
+            <div class="mobile-controls" id="touch-controls" style="display: none;">
+                <div class="control-btn" style="grid-area: up" ontouchstart="handleInput('ArrowUp'); event.preventDefault()" onmousedown="handleInput('ArrowUp')"><i id="up-icon" class="fas fa-chevron-up"></i></div>
+                <div class="control-btn" style="grid-area: left" ontouchstart="handleInput('ArrowLeft'); event.preventDefault()" onmousedown="handleInput('ArrowLeft')"><i class="fas fa-chevron-left"></i></div>
+                <div class="control-btn" style="grid-area: right" ontouchstart="handleInput('ArrowRight'); event.preventDefault()" onmousedown="handleInput('ArrowRight')"><i class="fas fa-chevron-right"></i></div>
+                <div class="control-btn" style="grid-area: down" ontouchstart="handleInput('ArrowDown'); event.preventDefault()" onmousedown="handleInput('ArrowDown')"><i class="fas fa-chevron-down"></i></div>
+            </div>
             <button class="exit-btn" onclick="exitGame()">OYUNU KAPAT</button>
         </div>
     </section>
